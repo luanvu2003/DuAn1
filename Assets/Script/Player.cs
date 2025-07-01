@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         Debug.Log("....");
-
+        Debug.Log("cccccc");
     }
 
     // Update is called once per frame
