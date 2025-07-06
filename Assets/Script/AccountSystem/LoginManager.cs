@@ -28,18 +28,14 @@ public class LoginManager : MonoBehaviour
         Debug.Log("✅ Đăng ký thành công!");
     }
 
-    public void Login(string username, string password)
+    public bool Login(string username, string password)
     {
         Account acc = accountList.accounts.Find(a => a.username == username && a.password == password);
-
-        if (acc != null)
-        {
-            Debug.Log("✅ Đăng nhập thành công!");
-        }
-        else
-        {
-            Debug.Log("❌ Sai tài khoản hoặc mật khẩu.");
-        }
+        return acc != null;
+    }
+    public bool IsUsernameTaken(string username)
+    {
+        return accountList.accounts.Exists(acc => acc.username == username);
     }
 
     void SaveAccounts()
