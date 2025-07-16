@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isClimbing = false;
     private bool isBlocking = false;
-
+    private float ScalePlayer = 0.6125f;
     private float inputHorizontal;
     private float inputVertical;
 
@@ -52,8 +52,10 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-        if (inputHorizontal != 0)
-            transform.localScale = new Vector3(Mathf.Sign(inputHorizontal), 1, 1);
+        if (inputHorizontal > 0)
+            transform.localScale = new Vector3(ScalePlayer, ScalePlayer, ScalePlayer);
+        if (inputHorizontal < 0)
+            transform.localScale = new Vector3(ScalePlayer * (-1), ScalePlayer, ScalePlayer);
     }
 
     void Jump()
