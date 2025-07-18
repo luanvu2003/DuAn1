@@ -1,0 +1,830 @@
+fileFormatVersion: 2
+guid: c048d4ac7630fb34b886ebfe3316d524
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Head_01
+  - first:
+      213: 21300002
+    second: Head_02
+  - first:
+      213: 21300004
+    second: Head_03
+  - first:
+      213: 21300006
+    second: Head_04
+  - first:
+      213: 21300008
+    second: Cap_01
+  - first:
+      213: 21300010
+    second: Torso_01
+  - first:
+      213: 21300012
+    second: Torso_02
+  - first:
+      213: 21300014
+    second: Torso_03
+  - first:
+      213: 21300016
+    second: Torso_04
+  - first:
+      213: 21300018
+    second: Cap_02
+  - first:
+      213: 21300020
+    second: Camp_03
+  - first:
+      213: 21300022
+    second: Torso_05
+  - first:
+      213: 21300024
+    second: Torso_06
+  - first:
+      213: 21300026
+    second: Torso_07
+  - first:
+      213: 21300028
+    second: Torso_08
+  - first:
+      213: 21300030
+    second: Hair_01
+  - first:
+      213: 21300032
+    second: Hair_02
+  - first:
+      213: 21300034
+    second: Torso_09
+  - first:
+      213: 21300036
+    second: Torso_10
+  - first:
+      213: 21300038
+    second: Torso_11
+  - first:
+      213: 21300040
+    second: Torso_12
+  - first:
+      213: 21300042
+    second: Shin2L
+  - first:
+      213: 21300044
+    second: Shin3R
+  - first:
+      213: 21300046
+    second: Shin3L
+  - first:
+      213: 21300048
+    second: Arm6L
+  - first:
+      213: 21300050
+    second: Arm6R
+  - first:
+      213: 21300052
+    second: FootR
+  - first:
+      213: 21300054
+    second: FootL
+  - first:
+      213: 21300056
+    second: Sprites_ZombieChibi_34
+  - first:
+      213: 21300058
+    second: Sprites_ZombieChibi_35
+  - first:
+      213: 21300060
+    second: Sprites_ZombieChibi_36
+  - first:
+      213: 21300062
+    second: Sprites_ZombieChibi_37
+  - first:
+      213: 21300064
+    second: Sprites_ZombieChibi_38
+  - first:
+      213: 21300066
+    second: Sprites_ZombieChibi_39
+  - first:
+      213: 21300068
+    second: Sprites_ZombieChibi_40
+  - first:
+      213: 21300070
+    second: Sprites_ZombieChibi_41
+  - first:
+      213: 21300072
+    second: Sprites_ZombieChibi_42
+  - first:
+      213: 21300074
+    second: Sprites_ZombieChibi_43
+  - first:
+      213: 21300076
+    second: Sprites_ZombieChibi_44
+  - first:
+      213: 21300078
+    second: Sprites_ZombieChibi_45
+  - first:
+      213: 21300080
+    second: Sprites_ZombieChibi_46
+  - first:
+      213: 21300082
+    second: Sprites_ZombieChibi_47
+  - first:
+      213: 21300084
+    second: Sprites_ZombieChibi_48
+  - first:
+      213: 21300086
+    second: Sprites_ZombieChibi_49
+  - first:
+      213: 21300088
+    second: Sprites_ZombieChibi_50
+  - first:
+      213: 21300090
+    second: Sprites_ZombieChibi_51
+  - first:
+      213: 21300092
+    second: Sprites_ZombieChibi_52
+  - first:
+      213: 21300094
+    second: Sprites_ZombieChibi_53
+  - first:
+      213: 21300096
+    second: Sprites_ZombieChibi_54
+  - first:
+      213: 21300098
+    second: Hair_01
+  - first:
+      213: 21300100
+    second: Hair_02
+  - first:
+      213: 21300102
+    second: Hair_03
+  - first:
+      213: 21300104
+    second: Hair_04
+  - first:
+      213: 21300106
+    second: Hair_05
+  - first:
+      213: 21300108
+    second: Hair_06
+  - first:
+      213: 21300110
+    second: Arm1L
+  - first:
+      213: 21300112
+    second: Arm1R
+  - first:
+      213: 21300114
+    second: HandR
+  - first:
+      213: 21300116
+    second: HandL
+  - first:
+      213: 21300118
+    second: Leg3R
+  - first:
+      213: 21300120
+    second: Leg3L
+  - first:
+      213: 21300122
+    second: Arm2L
+  - first:
+      213: 21300124
+    second: Arm2R
+  - first:
+      213: 21300126
+    second: ElbowR
+  - first:
+      213: 21300128
+    second: ElbowL
+  - first:
+      213: 21300130
+    second: Leg2R
+  - first:
+      213: 21300132
+    second: Leg2L
+  - first:
+      213: 21300134
+    second: Arm3L
+  - first:
+      213: 21300136
+    second: Arm3R
+  - first:
+      213: 21300138
+    second: Arm4L
+  - first:
+      213: 21300140
+    second: Arm4R
+  - first:
+      213: 21300142
+    second: Leg1R
+  - first:
+      213: 21300144
+    second: Leg1L
+  - first:
+      213: 21300146
+    second: Leg4R
+  - first:
+      213: 21300148
+    second: Leg4L
+  - first:
+      213: 21300150
+    second: Leg5R
+  - first:
+      213: 21300152
+    second: Leg5L
+  - first:
+      213: 21300154
+    second: Arm5L
+  - first:
+      213: 21300156
+    second: Arm5R
+  - first:
+      213: 21300158
+    second: Shin1R
+  - first:
+      213: 21300160
+    second: Shin1L
+  - first:
+      213: 21300162
+    second: Shin2R
+  - first:
+      213: 21300164
+    second: Foot1R
+  - first:
+      213: 21300166
+    second: Foot1L
+  - first:
+      213: 21300168
+    second: Foot2R
+  - first:
+      213: 21300170
+    second: Foot2L
+  - first:
+      213: 21300172
+    second: Foot3R
+  - first:
+      213: 21300174
+    second: Foot3L
+  - first:
+      213: 21300176
+    second: Neck
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 16
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Head_01
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1659
+        width: 306
+        height: 369
+      alignment: 9
+      pivot: {x: 0.72, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Head_02
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 1659
+        width: 306
+        height: 369
+      alignment: 9
+      pivot: {x: 0.72, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Head_03
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 1659
+        width: 305
+        height: 369
+      alignment: 9
+      pivot: {x: 0.72, y: 0.03}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Head_04
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 1649
+        width: 305
+        height: 379
+      alignment: 9
+      pivot: {x: 0.7157879, y: 0.060506936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torso_01
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1376
+        width: 154
+        height: 226
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Camp_03
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 1366
+        width: 355
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair_06
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 47
+        width: 410
+        height: 355
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8305410000000000800000000000000
+      internalID: 21300108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arm1L
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 495
+        width: 93
+        height: 65
+      alignment: 9
+      pivot: {x: 0.75, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8305410000000000800000000000000
+      internalID: 21300110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arm1R
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 490
+        width: 93
+        height: 65
+      alignment: 9
+      pivot: {x: 0.75, y: 0.65}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09305410000000000800000000000000
+      internalID: 21300112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HandR
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 452
+        width: 106
+        height: 95
+      alignment: 9
+      pivot: {x: 0.9751846, y: 0.45653045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29305410000000000800000000000000
+      internalID: 21300114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HandL
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 468
+        width: 109
+        height: 79
+      alignment: 9
+      pivot: {x: 0.9817684, y: 0.39629623}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49305410000000000800000000000000
+      internalID: 21300116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElbowR
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 360
+        width: 105
+        height: 61
+      alignment: 9
+      pivot: {x: 0.95, y: 0.76454985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9305410000000000800000000000000
+      internalID: 21300126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ElbowL
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 371
+        width: 105
+        height: 61
+      alignment: 9
+      pivot: {x: 0.95, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a305410000000000800000000000000
+      internalID: 21300128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leg1R
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 174
+        width: 90
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea305410000000000800000000000000
+      internalID: 21300142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leg1L
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 174
+        width: 90
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b305410000000000800000000000000
+      internalID: 21300144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shin1R
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 67
+        width: 48
+        height: 78
+      alignment: 9
+      pivot: {x: 0.4, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb305410000000000800000000000000
+      internalID: 21300158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shin1L
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 66
+        width: 48
+        height: 78
+      alignment: 9
+      pivot: {x: 0.4, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c305410000000000800000000000000
+      internalID: 21300160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Foot1R
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 15
+        width: 83
+        height: 26
+      alignment: 9
+      pivot: {x: 0.7, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c305410000000000800000000000000
+      internalID: 21300164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Foot1L
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 15
+        width: 82
+        height: 26
+      alignment: 9
+      pivot: {x: 0.7, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c305410000000000800000000000000
+      internalID: 21300166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neck
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 501
+        width: 71
+        height: 44
+      alignment: 9
+      pivot: {x: 0.46359727, y: 0.16668978}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d305410000000000800000000000000
+      internalID: 21300176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Arm1L: 21300110
+      Arm1R: 21300112
+      Camp_03: 21300020
+      ElbowL: 21300128
+      ElbowR: 21300126
+      Foot1L: 21300166
+      Foot1R: 21300164
+      Hair_06: 21300108
+      HandL: 21300116
+      HandR: 21300114
+      Head_01: 21300000
+      Head_02: 21300002
+      Head_03: 21300004
+      Head_04: 21300006
+      Leg1L: 21300144
+      Leg1R: 21300142
+      Neck: 21300176
+      Shin1L: 21300160
+      Shin1R: 21300158
+      Torso_01: 21300010
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
