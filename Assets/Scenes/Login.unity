@@ -785,8 +785,8 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.84705883, g: 0.90588236, b: 0.14117648, a: 1}
-    topRight: {r: 0.84705883, g: 0.90588236, b: 0.14117648, a: 1}
+    topLeft: {r: 0.24705882, g: 0.26666668, b: 0, a: 1}
+    topRight: {r: 0.24705882, g: 0.26666668, b: 0, a: 1}
     bottomLeft: {r: 0.90588236, g: 0.65882355, b: 0.14117648, a: 1}
     bottomRight: {r: 0.90588236, g: 0.65882355, b: 0.14117648, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
@@ -1724,8 +1724,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27, y: 0.000030518}
-  m_SizeDelta: {x: 1194.9541, y: 1130.2}
+  m_AnchoredPosition: {x: 30.3016, y: 12.8503}
+  m_SizeDelta: {x: 1366.6333, y: 1315.7974}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1187580024
 MonoBehaviour:
@@ -1747,7 +1747,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 55639015dd10b624491d7a1b58505607, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6642328fce0c3094c86e58427ceef58d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2605,8 +2605,8 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.84705883, g: 0.90588236, b: 0.14117648, a: 1}
-    topRight: {r: 0.84705883, g: 0.90588236, b: 0.14117648, a: 1}
+    topLeft: {r: 0.24705882, g: 0.26666668, b: 0, a: 1}
+    topRight: {r: 0.24705882, g: 0.26666668, b: 0, a: 1}
     bottomLeft: {r: 0.90588236, g: 0.65882355, b: 0.14117648, a: 1}
     bottomRight: {r: 0.90588236, g: 0.65882355, b: 0.14117648, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
@@ -2891,7 +2891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000019078, y: -209}
+  m_AnchoredPosition: {x: 30, y: -217}
   m_SizeDelta: {x: 671.2546, y: 163.0097}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1881763258
@@ -2928,8 +2928,8 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.8463476, g: 0.9056604, b: 0.13955125, a: 1}
-    topRight: {r: 0.8463476, g: 0.9056604, b: 0.13955125, a: 1}
+    topLeft: {r: 0.24705882, g: 0.26666668, b: 0, a: 1}
+    topRight: {r: 0.24705882, g: 0.26666668, b: 0, a: 1}
     bottomLeft: {r: 0.90588236, g: 0.65838236, b: 0.14117646, a: 1}
     bottomRight: {r: 0.90588236, g: 0.65838236, b: 0.14117646, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
