@@ -11,4 +11,12 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene("Login");
     }
+    public void Play()
+    {
+        SceneManager.LoadScene("main");
+    }
+    // public void Exit()
+    // {
+        
+    // }
 }

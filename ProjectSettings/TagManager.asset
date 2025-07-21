@@ -47,3 +47,6 @@ TagManager:
   - name: player
     uniqueID: 3480818881
     locked: 0
+  - name: enermy
+    uniqueID: 1277457133
+    locked: 0
