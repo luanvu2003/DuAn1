@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Climb();
-        HandleBlock();
+        //HandleBlock();
         HandleAnimation();
 
         if (Input.GetMouseButtonDown(0) && !isBlocking)
@@ -82,24 +82,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleBlock()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            isBlocking = true;
-        }
-        else
-        {
-            isBlocking = false;
-        }
-    }
+    // void HandleBlock()
+    // {
+    //     if (Input.GetMouseButton(1))
+    //     {
+    //         isBlocking = true;
+    //     }
+    //     else
+    //     {
+    //         isBlocking = false;
+    //     }
+    // }
 
     void HandleAnimation()
     {
         animator.SetBool("isRunning", inputHorizontal != 0);
         animator.SetBool("isJumping", !IsGrounded());
         animator.SetBool("isClimbing", isClimbing);
-        animator.SetBool("isBlocking", isBlocking);
+        //animator.SetBool("isBlocking", isBlocking);
     }
 
     void Attack()
