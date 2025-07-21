@@ -205,11 +205,6 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-      value0: 3014404519
-      value1: 0
-      value2: 0
-      value3: 0
     guid: -1280562777
     name: Jump-Start
     layerFlags: 0
