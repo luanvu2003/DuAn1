@@ -1,17 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    [Header("Loading")]
-    public string targetSceneName = "";
-
-    [Header("Loading")]
+    [Header("UI Loading")]
     public GameObject loadingPanel;
     public Slider progressBar;
+
+    private string targetSceneName;
+
+    void Start()
+    {
+        targetSceneName = PlayerPrefs.GetString("NextScene", "");
+
+        if (string.IsNullOrEmpty(targetSceneName))
+        {
+            Debug.LogError("Scene cần load không được thiết lập!");
+            return;
+        }
+
+        LoadTargetScene();
+    }
 
     public void LoadTargetScene()
     {
@@ -20,11 +31,13 @@ public class Loading : MonoBehaviour
 
     IEnumerator LoadAsyncScene()
     {
-        // Bật panel loading
-        if (loadingPanel != null) loadingPanel.SetActive(true);
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(targetSceneName);
         operation.allowSceneActivation = false;
+
+        float timer = 0f;
 
         while (!operation.isDone)
         {
@@ -32,35 +45,15 @@ public class Loading : MonoBehaviour
             if (progressBar != null)
                 progressBar.value = progress;
 
-            // Khi gần hoàn tất (90%), cho phép load qua scene mới
-            if (operation.progress >= 0.9f)
+            timer += Time.deltaTime;
+
+            // Delay ít nhất 7s để nhìn thấy loading
+            if (operation.progress >= 0.9f && timer >= 7f)
             {
-                yield return new WaitForSeconds(1f); // thời gian đợi ảo
                 operation.allowSceneActivation = true;
             }
 
             yield return null;
         }
-
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        if (currentScene == "Login")
-            targetSceneName = "MainMenu";
-        else if (currentScene == "MainMenu")
-            targetSceneName = "main";
-
-        LoadTargetScene();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
 }
