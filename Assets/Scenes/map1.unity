@@ -187,6 +187,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1068752415}
     m_Modifications:
+    - target: {fileID: 4142715627474073102, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142715627474073102, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Chest Golden (1)
@@ -500,6 +508,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5684634973922905886, guid: bb67ae3035abce24aa87122c96acac22, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684634973922905886, guid: bb67ae3035abce24aa87122c96acac22, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684634973922905886, guid: bb67ae3035abce24aa87122c96acac22, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
+      objectReference: {fileID: 0}
     - target: {fileID: 5684634973922906080, guid: bb67ae3035abce24aa87122c96acac22, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Chair
@@ -557,6 +577,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4895714900813831759, guid: 5fd9ed34f1f755643b41c4b41d7077e5, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895714900813831759, guid: 5fd9ed34f1f755643b41c4b41d7077e5, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
+      objectReference: {fileID: 0}
     - target: {fileID: 8369383532742148375, guid: 5fd9ed34f1f755643b41c4b41d7077e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.28
@@ -4105,6 +4133,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4142715627474073102, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142715627474073102, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: cea950ff3b9b0804f967eaec919f19f7, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Chest Golden
@@ -4179,6 +4215,14 @@ PrefabInstance:
     - target: {fileID: 6309599118117444192, guid: e8bae36b607017047ace9061609051d9, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Campfire 01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309599118117444193, guid: e8bae36b607017047ace9061609051d9, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309599118117444193, guid: e8bae36b607017047ace9061609051d9, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
       objectReference: {fileID: 0}
     - target: {fileID: 6309599118117444222, guid: e8bae36b607017047ace9061609051d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10769,6 +10813,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1068752415}
     m_Modifications:
+    - target: {fileID: 4142715627474073102, guid: f98d0f39fcc67a34f844abd8a50f2c03, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142715627474073102, guid: f98d0f39fcc67a34f844abd8a50f2c03, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: f98d0f39fcc67a34f844abd8a50f2c03, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Chest Wooden
@@ -11216,8 +11268,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -276163785
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 809f0cf25429f3542849d4b246b9e209, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11633,6 +11685,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1068752415}
     m_Modifications:
+    - target: {fileID: 4142715627474073102, guid: f98d0f39fcc67a34f844abd8a50f2c03, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142715627474073102, guid: f98d0f39fcc67a34f844abd8a50f2c03, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -276163785
+      objectReference: {fileID: 0}
     - target: {fileID: 6930122694965717508, guid: f98d0f39fcc67a34f844abd8a50f2c03, type: 3}
       propertyPath: m_Name
       value: PF Village Props - Chest Wooden (1)
