@@ -8,12 +8,16 @@ public class Loading : MonoBehaviour
     [Header("UI Loading")]
     public GameObject loadingPanel;
     public Slider progressBar;
+    public RectTransform characterImage; // Drag Image của nhân vật vào đây
+    public RectTransform sliderFillArea; // Fill Area của Slider
 
     private string targetSceneName;
 
     void Start()
     {
         targetSceneName = PlayerPrefs.GetString("NextScene", "");
+
+        Debug.Log("Target scene: " + targetSceneName);
 
         if (string.IsNullOrEmpty(targetSceneName))
         {
@@ -37,23 +41,32 @@ public class Loading : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(targetSceneName);
         operation.allowSceneActivation = false;
 
+        float loadingTime = 7f;
         float timer = 0f;
 
-        while (!operation.isDone)
+        while (timer < loadingTime)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            if (progressBar != null)
-                progressBar.value = progress;
-
             timer += Time.deltaTime;
+            float progress = Mathf.Clamp01(timer / loadingTime);
 
-            // Delay ít nhất 7s để nhìn thấy loading
-            if (operation.progress >= 0.9f && timer >= 7f)
+            if (progressBar != null)
             {
-                operation.allowSceneActivation = true;
+                progressBar.value = progress;
+                if (characterImage != null && sliderFillArea != null)
+                {
+                    float moveX = progress * sliderFillArea.rect.width;
+                    Vector2 anchoredPos = characterImage.anchoredPosition;
+                    anchoredPos.x = moveX;
+                    characterImage.anchoredPosition = anchoredPos;
+                }
+                Debug.Log("Slider value = " + progress);
             }
 
             yield return null;
         }
+
+        // Sau 7 giây mới kích hoạt scene
+        operation.allowSceneActivation = true;
     }
+
 }
