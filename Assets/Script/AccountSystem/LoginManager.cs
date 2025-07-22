@@ -52,4 +52,20 @@ public class LoginManager : MonoBehaviour
             accountList = JsonUtility.FromJson<AccountList>(json);
         }
     }
+    public Account GetAccount(string username)
+    {
+        return accountList.accounts.Find(acc => acc.username == username);
+    }
+
+    public void SetCharacterForAccount(string username, string characterClass)
+    {
+        var acc = GetAccount(username);
+        if (acc != null && string.IsNullOrEmpty(acc.characterClass))
+        {
+            acc.characterClass = characterClass;
+            SaveAccounts();
+            Debug.Log($"✅ Nhân vật {characterClass} đã lưu cho tài khoản {username}");
+        }
+    }
+
 }

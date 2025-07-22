@@ -5,28 +5,31 @@ public class CharacterSpawner : MonoBehaviour
     public GameObject warriorPrefab;
     public GameObject magePrefab;
     public GameObject archerPrefab;
+    public LoginManager loginManager;
+
+    public Transform spawnPoint;
 
     void Start()
     {
-        string selectedCharacter = PlayerPrefs.GetString("SelectedCharacter", "Warrior");
+        string username = PlayerPrefs.GetString("LoggedInUsername", "");
+        string selectedCharacter = "";
 
-        GameObject prefabToSpawn = null;
-        switch (selectedCharacter)
+        if (!string.IsNullOrEmpty(username))
         {
-            case "Warrior":
-                prefabToSpawn = warriorPrefab;
-                break;
-            case "Mage":
-                prefabToSpawn = magePrefab;
-                break;
-            case "Archer":
-                prefabToSpawn = archerPrefab;
-                break;
+            Account acc = loginManager.GetAccount(username);
+            selectedCharacter = acc.characterClass;
         }
 
-        if (prefabToSpawn != null)
+        GameObject prefab = selectedCharacter switch
         {
-            Instantiate(prefabToSpawn, Vector3.zero, Quaternion.identity); // hoặc vị trí spawn tùy ý
+            "Mage" => magePrefab,
+            "Archer" => archerPrefab,
+            _ => warriorPrefab
+        };
+
+        if (prefab != null)
+        {
+            Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
         }
     }
 }

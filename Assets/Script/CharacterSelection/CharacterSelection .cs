@@ -3,24 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelection : MonoBehaviour
 {
-    public void SelectWarrior()
-    {
-        PlayerPrefs.SetString("SelectedCharacter", "Warrior");
-        PlayerPrefs.SetString("NextScene", "main");
-        SceneManager.LoadScene("Loading");
-    }
+    public LoginManager loginManager;
 
-    public void SelectMage()
+    public void SelectCharacter(string characterClass)
     {
-        PlayerPrefs.SetString("SelectedCharacter", "Mage");
-        PlayerPrefs.SetString("NextScene", "main");
-        SceneManager.LoadScene("Loading");
-    }
-
-    public void SelectArcher()
-    {
-        PlayerPrefs.SetString("SelectedCharacter", "Archer");
-        PlayerPrefs.SetString("NextScene", "main");
-        SceneManager.LoadScene("Loading");
+        string username = PlayerPrefs.GetString("LoggedInUsername", "");
+        if (!string.IsNullOrEmpty(username))
+        {
+            loginManager.SetCharacterForAccount(username, characterClass);
+            PlayerPrefs.SetString("NextScene", "MainMenu");
+            SceneManager.LoadScene("Loading");
+        }
     }
 }

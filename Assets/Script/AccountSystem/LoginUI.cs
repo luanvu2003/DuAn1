@@ -72,12 +72,18 @@ public class LoginUI : MonoBehaviour
         if (success)
         {
             generalMessageText.text = "✅ Đăng nhập thành công!";
-            PlayerPrefs.SetString("NextScene", "MainMenu");
-            SceneManager.LoadScene("Loading");
+            PlayerPrefs.SetString("LoggedInUsername", username);
+
+            // Vào thẳng MainMenu
+            SceneManager.LoadScene("MainMenu");
         }
         else
+        {
             generalMessageText.text = "❌ Sai tài khoản hoặc mật khẩu.";
+        }
     }
+
+
 
     private bool IsPasswordValid(string password)
     {
