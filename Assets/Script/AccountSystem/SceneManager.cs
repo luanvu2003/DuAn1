@@ -13,7 +13,8 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene("main");
+        PlayerPrefs.SetString("NextScene", "main"); // lưu tên scene cần load
+        SceneManager.LoadScene("Loading");          // chuyển sang scene Loading
     }
     // public void Exit()
     // {
