@@ -18,7 +18,7 @@ public class PlayerAudio : MonoBehaviour
     void Update()
     {
         // Kiểm tra animation "Run"
-        bool isRunning = animator.GetCurrentAnimatorStateInfo(0).IsName("Run");
+        bool isRunning = animator.GetCurrentAnimatorStateInfo(0).IsName("run");
 
         // PHÁT hoặc DỪNG tiếng bước chân
         if (isRunning)
