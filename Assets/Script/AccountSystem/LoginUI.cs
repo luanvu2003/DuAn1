@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-
+using UnityEngine.SceneManagement;
 public class LoginUI : MonoBehaviour
 {
     public InputField usernameInput;
@@ -58,6 +58,7 @@ public class LoginUI : MonoBehaviour
         // Đăng ký nếu hợp lệ
         loginManager.Register(username, password);
         generalMessageText.text = "✅ Đăng ký thành công!";
+        SceneManager.LoadScene("Login");
     }
 
     public void OnLoginButton()
@@ -69,10 +70,20 @@ public class LoginUI : MonoBehaviour
         bool success = loginManager.Login(username, password);
 
         if (success)
+        {
             generalMessageText.text = "✅ Đăng nhập thành công!";
+            PlayerPrefs.SetString("LoggedInUsername", username);
+
+            // Vào thẳng MainMenu
+            SceneManager.LoadScene("MainMenu");
+        }
         else
+        {
             generalMessageText.text = "❌ Sai tài khoản hoặc mật khẩu.";
+        }
     }
+
+
 
     private bool IsPasswordValid(string password)
     {

@@ -1,17 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    [Header("Loading")]
-    public string targetSceneName = "";
-
-    [Header("Loading")]
+    [Header("UI Loading")]
     public GameObject loadingPanel;
     public Slider progressBar;
+    public RectTransform characterImage; // Drag Image của nhân vật vào đây
+    public RectTransform sliderFillArea; // Fill Area của Slider
+
+    private string targetSceneName;
+
+    void Start()
+    {
+        targetSceneName = PlayerPrefs.GetString("NextScene", "");
+
+        Debug.Log("Target scene: " + targetSceneName);
+
+        if (string.IsNullOrEmpty(targetSceneName))
+        {
+            Debug.LogError("Scene cần load không được thiết lập!");
+            return;
+        }
+
+        LoadTargetScene();
+    }
 
     public void LoadTargetScene()
     {
@@ -20,47 +35,38 @@ public class Loading : MonoBehaviour
 
     IEnumerator LoadAsyncScene()
     {
-        // Bật panel loading
-        if (loadingPanel != null) loadingPanel.SetActive(true);
+        if (loadingPanel != null)
+            loadingPanel.SetActive(true);
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(targetSceneName);
         operation.allowSceneActivation = false;
 
-        while (!operation.isDone)
-        {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            if (progressBar != null)
-                progressBar.value = progress;
+        float loadingTime = 7f;
+        float timer = 0f;
 
-            // Khi gần hoàn tất (90%), cho phép load qua scene mới
-            if (operation.progress >= 0.9f)
+        while (timer < loadingTime)
+        {
+            timer += Time.deltaTime;
+            float progress = Mathf.Clamp01(timer / loadingTime);
+
+            if (progressBar != null)
             {
-                yield return new WaitForSeconds(1f); // thời gian đợi ảo
-                operation.allowSceneActivation = true;
+                progressBar.value = progress;
+                if (characterImage != null && sliderFillArea != null)
+                {
+                    float moveX = progress * sliderFillArea.rect.width;
+                    Vector2 anchoredPos = characterImage.anchoredPosition;
+                    anchoredPos.x = moveX;
+                    characterImage.anchoredPosition = anchoredPos;
+                }
+                Debug.Log("Slider value = " + progress);
             }
 
             yield return null;
         }
 
+        // Sau 7 giây mới kích hoạt scene
+        operation.allowSceneActivation = true;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        string currentScene = SceneManager.GetActiveScene().name;
-
-        if (currentScene == "Login")
-            targetSceneName = "MainMenu";
-        else if (currentScene == "MainMenu")
-            targetSceneName = "main";
-
-        LoadTargetScene();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
 }
