@@ -95,9 +95,23 @@ public class PlayerController : MonoBehaviour
 
     void HandleAnimation()
     {
-        animator.SetBool("isRunning", inputHorizontal != 0);
-        animator.SetBool("isJumping", !IsGrounded());
+        bool grounded = IsGrounded();
+        bool running = inputHorizontal != 0;
+
+        // Ưu tiên leo thang
         animator.SetBool("isClimbing", isClimbing);
+
+        if (!grounded)
+        {
+            // Ưu tiên animation nhảy
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isRunning", false);
+        }
+        else
+        {
+            animator.SetBool("isJumping", false);
+            animator.SetBool("isRunning", running);
+        }
     }
 
     void Attack()
