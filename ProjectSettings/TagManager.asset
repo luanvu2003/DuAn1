@@ -50,3 +50,6 @@ TagManager:
   - name: enermy
     uniqueID: 1277457133
     locked: 0
+  - name: UI
+    uniqueID: 2394269045
+    locked: 0
