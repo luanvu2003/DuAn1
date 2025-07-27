@@ -13,11 +13,21 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void Play()
     {
-        PlayerPrefs.SetString("NextScene", "CharacterSelection"); 
+        PlayerPrefs.SetString("NextScene", "CharacterSelection");
+        SceneManager.LoadScene("Loading");
+    }
+    public void PlayAgain()
+    {
+        PlayerPrefs.SetString("NextScene", "main");
+        SceneManager.LoadScene("Loading");
+    }
+    public void MainMenu()
+    {
+        PlayerPrefs.SetString("NextScene", "MainMenu"); 
         SceneManager.LoadScene("Loading");
     }
     // public void Exit()
     // {
-    
+
     // }
 }
