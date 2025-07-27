@@ -117,6 +117,18 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         animator.SetTrigger("Attack");
+        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
+
+    if (hit.collider != null)
+    {
+        EnemyPatrol enemy = hit.collider.GetComponent<EnemyPatrol>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(1);
+            AddScore(50);
+        }
+    }
     }
 
     void UseSkill()
