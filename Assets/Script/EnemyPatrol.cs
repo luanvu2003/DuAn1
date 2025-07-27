@@ -186,7 +186,7 @@ public class EnemyPatrol : MonoBehaviour
 
     // ========================= Health =========================
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (isDead) return;
 
