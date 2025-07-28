@@ -125,7 +125,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void ChasePlayer()
     {
-        animator.Play("Chase");
+        animator.SetBool("Chase", true);
         float direction = player.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -134,6 +134,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void ReturnToStart()
     {
+        animator.SetBool("Chase", false);
         animator.Play("Return");
         float direction = initialPosition.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * patrolSpeed, rb.velocity.y);
@@ -197,7 +198,7 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-            animator.Play("Hurt");
+            animator.SetTrigger("Hurt");
         }
     }
 
@@ -232,7 +233,7 @@ public class EnemyPatrol : MonoBehaviour
         animator.Play("Attack");
         float damage = Random.Range(damageRange.x, damageRange.y);
         Debug.Log($"Enemy attacked player for {damage} damage");
-        // player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+         //player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
     }
 
     void OnCollisionEnter2D(Collision2D other)

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,14 +10,23 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
 
+    public Slider healthBar;
+    public TMP_Text scoreText;
+    public TMP_Text coinText;
+
     private int currentHP;
+    private int score = 0;
+    private int coin = 0;
+
     private Rigidbody2D rb;
     private Animator animator;
     private BoxCollider2D boxCollider;
 
     private bool isClimbing = false;
     private bool isBlocking = false;
+    private bool isDead = false;
 
+    private float ScalePlayer = 0.6125f;
     private float inputHorizontal;
     private float inputVertical;
 
@@ -25,17 +36,21 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
+
+        if (healthBar != null) healthBar.maxValue = maxHP;
+        UpdateUI();
     }
 
     void Update()
     {
+        if (isDead) return;
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
         Move();
         Jump();
         Climb();
-        HandleBlock();
         HandleAnimation();
 
         if (Input.GetMouseButtonDown(0) && !isBlocking)
@@ -47,13 +62,21 @@ public class PlayerController : MonoBehaviour
         {
             UseSkill();
         }
+
+        // Test phím L để giảm máu
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            TakeDamage(10);
+        }
     }
 
     void Move()
     {
         rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-        if (inputHorizontal != 0)
-            transform.localScale = new Vector3(Mathf.Sign(inputHorizontal), 1, 1);
+        if (inputHorizontal > 0)
+            transform.localScale = new Vector3(ScalePlayer, ScalePlayer, ScalePlayer);
+        if (inputHorizontal < 0)
+            transform.localScale = new Vector3(-ScalePlayer, ScalePlayer, ScalePlayer);
     }
 
     void Jump()
@@ -80,24 +103,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleBlock()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            isBlocking = true;
-        }
-        else
-        {
-            isBlocking = false;
-        }
-    }
-
     void HandleAnimation()
     {
-        animator.SetBool("isRunning", inputHorizontal != 0);
-        animator.SetBool("isJumping", !IsGrounded());
+        bool grounded = IsGrounded();
+        bool running = inputHorizontal != 0;
+
         animator.SetBool("isClimbing", isClimbing);
-        animator.SetBool("isBlocking", isBlocking);
+
+        if (!grounded)
+        {
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isRunning", false);
+        }
+        else
+        {animator.SetBool("isJumping", false);
+            animator.SetBool("isRunning", running);
+        }
     }
 
     void Attack()
@@ -136,7 +157,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void UseSkill()
     {
         animator.SetTrigger("Skill");
@@ -144,6 +164,8 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         if (isBlocking)
         {
             Debug.Log("Blocked damage!");
@@ -151,20 +173,26 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHP -= damage;
-        animator.SetTrigger("Hurt");
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
+        animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
-        if (currentHP <= 0)
-        {
-            Die();
-        }
+        UpdateUI();
     }
 
     void Die()
     {
-        Debug.Log("Player died.");
-        // TODO: Gọi animation chết, disable điều khiển, reload scene,...
+        if (isDead) return;
+        isDead = true;
+
+        Debug.Log("Player is now DEAD");
+
+        // Optional: hiệu ứng, âm thanh, v.v.
+        // GetComponent<Animator>().SetTrigger("Die");
+
+        // ✅ Biến mất khỏi màn hình sau 0.5 giây (có thể điều chỉnh)
+        Destroy(gameObject, 0.5f);
     }
 
     bool IsGrounded()
@@ -172,4 +200,35 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
         return hit.collider != null;
     }
+
+    void UpdateUI()
+    {
+        if (healthBar != null)
+        {
+            healthBar.value = currentHP;
+            if (currentHP <= 0)
+            {
+                Die();
+            }
+        }
+
+        if (scoreText != null) scoreText.text = "Score: " + score;
+        if (coinText != null) coinText.text = "Coins: " + coin;
+    }
+
+    public void AddScore(int amount)
+    {
+        score += amount;
+        UpdateUI();
+    }
+
+    public void AddCoin(int amount)
+    {
+        coin += amount;
+        UpdateUI();
+    }
+    public int GetCurrentHP()
+{
+    return currentHP;
+}
 }
