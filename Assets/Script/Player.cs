@@ -115,21 +115,41 @@ public class PlayerController : MonoBehaviour
     }
 
     void Attack()
-    {
-        animator.SetTrigger("Attack");
-        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+{
+    animator.SetTrigger("Attack");
+
+    // Xác định hướng tấn công
+    Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+    // Tạo raycast để kiểm tra kẻ địch
     RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
 
-    if (hit.collider != null)
-    {
-        EnemyPatrol enemy = hit.collider.GetComponent<EnemyPatrol>();
-        if (enemy != null)
+        if (hit.collider != null)
         {
-            enemy.TakeDamage(1);
+            // Kiểm tra xem có phải Enemy hay không
+        EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
+        if (enemyPatrol != null)
+        {
+            float damage = Random.Range(15f, 25f);
+            enemyPatrol.TakeDamage(damage);
             AddScore(50);
+            Debug.Log($"Hit enemy patrol for {damage} damage.");
+        }
+
+
+
+        EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
+        if (enemyNormal != null)
+        {
+            float damage = Random.Range(15f, 25f);
+            enemyNormal.TakeDamage(damage);
+            AddScore(50);
+            Debug.Log($"Hit enemy normal for {damage} damage.");
+        }
+
         }
     }
-    }
+
 
     void UseSkill()
     {
