@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // dùng cho Slider và Text
-using TMPro; // nếu dùng TextMeshPro
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
 
-    public Slider healthBar;           // Gán trong Inspector
-    public TMP_Text scoreText;         // Gán trong Inspector
-    public TMP_Text coinText;          // Gán trong Inspector
+    public Slider healthBar;
+    public TMP_Text scoreText;
+    public TMP_Text coinText;
 
     private int currentHP;
     private int score = 0;
@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isClimbing = false;
     private bool isBlocking = false;
+    private bool isDead = false;
+
     private float ScalePlayer = 0.6125f;
     private float inputHorizontal;
     private float inputVertical;
@@ -41,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return;
+
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
@@ -58,6 +62,12 @@ public class PlayerController : MonoBehaviour
         {
             UseSkill();
         }
+
+        // Test phím L để giảm máu
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            TakeDamage(10);
+        }
     }
 
     void Move()
@@ -66,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if (inputHorizontal > 0)
             transform.localScale = new Vector3(ScalePlayer, ScalePlayer, ScalePlayer);
         if (inputHorizontal < 0)
-            transform.localScale = new Vector3(ScalePlayer * (-1), ScalePlayer, ScalePlayer);
+            transform.localScale = new Vector3(-ScalePlayer, ScalePlayer, ScalePlayer);
     }
 
     void Jump()
@@ -98,37 +108,53 @@ public class PlayerController : MonoBehaviour
         bool grounded = IsGrounded();
         bool running = inputHorizontal != 0;
 
-        // Ưu tiên leo thang
         animator.SetBool("isClimbing", isClimbing);
 
         if (!grounded)
         {
-            // Ưu tiên animation nhảy
             animator.SetBool("isJumping", true);
             animator.SetBool("isRunning", false);
         }
         else
-        {
-            animator.SetBool("isJumping", false);
+        {animator.SetBool("isJumping", false);
             animator.SetBool("isRunning", running);
         }
     }
 
     void Attack()
-    {
-        animator.SetTrigger("Attack");
-        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+{
+    animator.SetTrigger("Attack");
+
+    // Xác định hướng tấn công
+    Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+
+    // Tạo raycast để kiểm tra kẻ địch
     RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
 
-    if (hit.collider != null)
-    {
-        EnemyPatrol enemy = hit.collider.GetComponent<EnemyPatrol>();
-        if (enemy != null)
+        if (hit.collider != null)
         {
-            enemy.TakeDamage(1);
+            // Kiểm tra xem có phải Enemy hay không
+        EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
+        if (enemyPatrol != null)
+        {
+            float damage = Random.Range(15f, 25f);
+            enemyPatrol.TakeDamage(damage);
             AddScore(50);
+            Debug.Log($"Hit enemy patrol for {damage} damage.");
         }
-    }
+
+
+
+        EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
+        if (enemyNormal != null)
+        {
+            float damage = Random.Range(15f, 25f);
+            enemyNormal.TakeDamage(damage);
+            AddScore(50);
+            Debug.Log($"Hit enemy normal for {damage} damage.");
+        }
+
+        }
     }
 
     void UseSkill()
@@ -138,6 +164,8 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         if (isBlocking)
         {
             Debug.Log("Blocked damage!");
@@ -151,17 +179,20 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
         UpdateUI();
-
-        if (currentHP <= 0)
-        {
-            Die();
-        }
     }
 
     void Die()
     {
-        Debug.Log("Player died.");
-        // TODO: Gọi animation chết, disable điều khiển, reload scene,...
+        if (isDead) return;
+        isDead = true;
+
+        Debug.Log("Player is now DEAD");
+
+        // Optional: hiệu ứng, âm thanh, v.v.
+        // GetComponent<Animator>().SetTrigger("Die");
+
+        // ✅ Biến mất khỏi màn hình sau 0.5 giây (có thể điều chỉnh)
+        Destroy(gameObject, 0.5f);
     }
 
     bool IsGrounded()
@@ -172,7 +203,15 @@ public class PlayerController : MonoBehaviour
 
     void UpdateUI()
     {
-        if (healthBar != null) healthBar.value = currentHP;
+        if (healthBar != null)
+        {
+            healthBar.value = currentHP;
+            if (currentHP <= 0)
+            {
+                Die();
+            }
+        }
+
         if (scoreText != null) scoreText.text = "Score: " + score;
         if (coinText != null) coinText.text = "Coins: " + coin;
     }
@@ -188,4 +227,8 @@ public class PlayerController : MonoBehaviour
         coin += amount;
         UpdateUI();
     }
+    public int GetCurrentHP()
+{
+    return currentHP;
+}
 }

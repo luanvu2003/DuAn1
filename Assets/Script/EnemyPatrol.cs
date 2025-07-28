@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class EnemyPatrol : MonoBehaviour
     private float currentHealth;
     private bool isDead = false;
 
+    [Header("Health Bar (No Prefab)")]
+    private Image healthFillImage;
+    public Vector3 healthBarOffset = new Vector3(0, 1.2f, 0);
+
     [Header("Jumping Over Obstacles")]
     public float jumpForce = 7f;
     public Transform groundCheck;
@@ -43,11 +48,22 @@ public class EnemyPatrol : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         currentTarget = patrolPointA;
         originalScaleX = transform.localScale.x;
         initialPosition = transform.position;
+
+        // 🔧 Gắn sẵn Health Bar trong prefab (không Instantiate)
+        Transform fill = transform.Find("EnemyHealthBar/Background/Fill");
+        if (fill != null)
+        {
+            healthFillImage = fill.GetComponent<Image>();
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy EnemyHealthBar/Background/Fill!");
+        }
     }
 
     void Update()
@@ -83,46 +99,45 @@ public class EnemyPatrol : MonoBehaviour
                 Patrol();
             }
         }
+
+        // Nếu bạn muốn giữ UI đúng vị trí (optional)
+        if (healthFillImage != null)
+        {
+            Transform bar = healthFillImage.transform.parent.parent;
+            bar.position = transform.position + healthBarOffset;
+        }
     }
 
-    // ========================= Movement =========================
+    // ========== Movement & Flip ==========
 
     void Patrol()
     {
         animator.Play("Patrol");
-
         float direction = currentTarget.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * patrolSpeed, rb.velocity.y);
-
         FlipDirectionIfNeeded(direction);
 
         if (Mathf.Abs(direction) < 0.3f)
-        {
             currentTarget = currentTarget == patrolPointA ? patrolPointB : patrolPointA;
-        }
 
         TryJumpIfObstacleAhead();
     }
 
     void ChasePlayer()
     {
-        animator.Play("Chase");
-
+        animator.SetBool("Chase", true);
         float direction = player.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.velocity.y);
-
         FlipDirectionIfNeeded(direction);
-
         TryJumpIfObstacleAhead();
     }
 
     void ReturnToStart()
     {
+        animator.SetBool("Chase", false);
         animator.Play("Return");
-
         float direction = initialPosition.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * patrolSpeed, rb.velocity.y);
-
         FlipDirectionIfNeeded(direction);
 
         if (Mathf.Abs(direction) < 0.3f)
@@ -132,15 +147,6 @@ public class EnemyPatrol : MonoBehaviour
         }
 
         TryJumpIfObstacleAhead();
-    }
-
-    void TryJumpIfObstacleAhead()
-    {
-        if (IsGrounded() && IsObstacleAhead())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            animator.Play("Jump");
-        }
     }
 
     void FlipDirectionIfNeeded(float direction)
@@ -153,16 +159,6 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    void AttackPlayer()
-    {
-        animator.Play("Attack");
-
-        float damage = Random.Range(damageRange.x, damageRange.y);
-        Debug.Log($"Enemy attacked player for {damage} damage");
-
-        // player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
-    }
-
     void Flip(bool faceRight)
     {
         Vector3 scale = transform.localScale;
@@ -170,7 +166,53 @@ public class EnemyPatrol : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // ========================= Ground & Obstacle Checks =========================
+    void TryJumpIfObstacleAhead()
+    {
+        if (IsGrounded() && IsObstacleAhead())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.Play("Jump");
+        }
+    }
+
+    // ========== Health ==========
+
+    public void TakeDamage(float amount)
+    {
+        if (isDead) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        Debug.Log($"Enemy took {amount} damage. Current HP: {currentHealth}");
+
+        if (healthFillImage != null)
+        {
+            float ratio = currentHealth / maxHealth;
+            healthFillImage.fillAmount = ratio;
+            Debug.Log($"Health bar updated to: {ratio}");
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            animator.SetTrigger("Hurt");
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        animator.Play("Die");
+        Debug.Log("Enemy died.");
+
+        Destroy(gameObject, 0.5f);
+    }
+
+    // ========== Checks ==========
 
     bool IsGrounded()
     {
@@ -184,37 +226,19 @@ public class EnemyPatrol : MonoBehaviour
         return hit.collider != null;
     }
 
-    // ========================= Health =========================
+    // ========== Attack ==========
 
-    public void TakeDamage(float amount)
+    void AttackPlayer()
     {
-        if (isDead) return;
-
-        currentHealth -= amount;
-        Debug.Log($"Enemy took {amount} damage. Current HP: {currentHealth}");
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            animator.Play("Hurt");
-        }
+        animator.Play("Attack");
+        float damage = Random.Range(damageRange.x, damageRange.y);
+        Debug.Log($"Enemy attacked player for {damage} damage");
+         //player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
     }
 
-    void Die()
+    void OnCollisionEnter2D(Collision2D other)
     {
-        isDead = true;
-        rb.velocity = Vector2.zero;
-        animator.Play("Die");
-        Debug.Log("Enemy died.");
-        Destroy(gameObject, 1.5f);
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             float damage = Random.Range(damageRange.x, damageRange.y);
             Debug.Log($"Enemy triggered player for {damage} damage");

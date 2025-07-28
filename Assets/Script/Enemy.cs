@@ -142,7 +142,7 @@ public class EnemyController : MonoBehaviour
         rb.velocity = Vector2.zero;
         animator.Play("Die");
         Debug.Log("Enemy died.");
-        Destroy(gameObject, 1.5f);
+        Destroy(gameObject, 0.5f);
     }
 
     // ========================= Damage on Trigger =========================
