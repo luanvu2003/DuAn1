@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI; // dùng cho Slider và Text
-using TMPro; // nếu dùng TextMeshPro
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,21 +8,14 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
 
-    public Slider healthBar;           // Gán trong Inspector
-    public TMP_Text scoreText;         // Gán trong Inspector
-    public TMP_Text coinText;          // Gán trong Inspector
-
     private int currentHP;
-    private int score = 0;
-    private int coin = 0;
-
     private Rigidbody2D rb;
     private Animator animator;
     private BoxCollider2D boxCollider;
 
     private bool isClimbing = false;
     private bool isBlocking = false;
-    private float ScalePlayer = 0.6125f;
+
     private float inputHorizontal;
     private float inputVertical;
 
@@ -34,9 +25,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
-
-        if (healthBar != null) healthBar.maxValue = maxHP;
-        UpdateUI();
     }
 
     void Update()
@@ -47,6 +35,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Climb();
+        HandleBlock();
         HandleAnimation();
 
         if (Input.GetMouseButtonDown(0) && !isBlocking)
@@ -63,10 +52,8 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-        if (inputHorizontal > 0)
-            transform.localScale = new Vector3(ScalePlayer, ScalePlayer, ScalePlayer);
-        if (inputHorizontal < 0)
-            transform.localScale = new Vector3(ScalePlayer * (-1), ScalePlayer, ScalePlayer);
+        if (inputHorizontal != 0)
+            transform.localScale = new Vector3(Mathf.Sign(inputHorizontal), 1, 1);
     }
 
     void Jump()
@@ -93,25 +80,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleAnimation()
+    void HandleBlock()
     {
-        bool grounded = IsGrounded();
-        bool running = inputHorizontal != 0;
-
-        // Ưu tiên leo thang
-        animator.SetBool("isClimbing", isClimbing);
-
-        if (!grounded)
+        if (Input.GetMouseButton(1))
         {
-            // Ưu tiên animation nhảy
-            animator.SetBool("isJumping", true);
-            animator.SetBool("isRunning", false);
+            isBlocking = true;
         }
         else
         {
-            animator.SetBool("isJumping", false);
-            animator.SetBool("isRunning", running);
+            isBlocking = false;
         }
+    }
+
+    void HandleAnimation()
+    {
+        animator.SetBool("isRunning", inputHorizontal != 0);
+        animator.SetBool("isJumping", !IsGrounded());
+        animator.SetBool("isClimbing", isClimbing);
+        animator.SetBool("isBlocking", isBlocking);
     }
 
     void Attack()
@@ -165,12 +151,9 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHP -= damage;
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-
         animator.SetTrigger("Hurt");
-        Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
-        UpdateUI();
+        Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
         if (currentHP <= 0)
         {
@@ -188,24 +171,5 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
         return hit.collider != null;
-    }
-
-    void UpdateUI()
-    {
-        if (healthBar != null) healthBar.value = currentHP;
-        if (scoreText != null) scoreText.text = "Score: " + score;
-        if (coinText != null) coinText.text = "Coins: " + coin;
-    }
-
-    public void AddScore(int amount)
-    {
-        score += amount;
-        UpdateUI();
-    }
-
-    public void AddCoin(int amount)
-    {
-        coin += amount;
-        UpdateUI();
     }
 }
