@@ -230,19 +230,32 @@ public class EnemyPatrol : MonoBehaviour
 
     void AttackPlayer()
     {
-        animator.Play("Attack");
-        float damage = Random.Range(damageRange.x, damageRange.y);
-        Debug.Log($"Enemy attacked player for {damage} damage");
-         //player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
-    }
+    animator.Play("Attack");
+    float damage = Random.Range(damageRange.x, damageRange.y);
+    Debug.Log($"Enemy attacked player for {damage} damage");
 
-    void OnCollisionEnter2D(Collision2D other)
+    if (player != null)
     {
-        if (other.gameObject.CompareTag("Player"))
+        PlayerController pc = player.GetComponent<PlayerController>();
+        if (pc != null)
         {
-            float damage = Random.Range(damageRange.x, damageRange.y);
-            Debug.Log($"Enemy triggered player for {damage} damage");
-            // other.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+            pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
         }
     }
+}
+
+    void OnCollisionEnter2D(Collision2D other)
+   {
+    if (other.gameObject.CompareTag("Player"))
+    {
+        float damage = Random.Range(damageRange.x, damageRange.y);
+        Debug.Log($"Enemy triggered player for {damage} damage");
+
+        PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+        }
+    }
+}
 }
