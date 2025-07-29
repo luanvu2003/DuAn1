@@ -122,40 +122,53 @@ public class PlayerController : MonoBehaviour
     }
 
     void Attack()
-{
-    animator.SetTrigger("Attack");
+    {
+        animator.SetTrigger("Attack");
 
     // Xác định hướng tấn công
-    Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
     // Tạo raycast để kiểm tra kẻ địch
-    RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
 
         if (hit.collider != null)
         {
-            // Kiểm tra xem có phải Enemy hay không
-        EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
-        if (enemyPatrol != null)
-        {
             float damage = Random.Range(15f, 25f);
-            enemyPatrol.TakeDamage(damage);
-            AddScore(50);
-            Debug.Log($"Hit enemy patrol for {damage} damage.");
-        }
 
+        // Gây damage cho EnemyPatrol
+            EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
+            if (enemyPatrol != null)
+            {
+                enemyPatrol.TakeDamage(damage);
+                AddScore(50);
+                Debug.Log($"Hit enemy patrol for {damage} damage.");
+                return;
+            }
 
-
+        // Gây damage cho EnemyNormal
         EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
         if (enemyNormal != null)
         {
-            float damage = Random.Range(15f, 25f);
             enemyNormal.TakeDamage(damage);
             AddScore(50);
             Debug.Log($"Hit enemy normal for {damage} damage.");
+            return;
         }
 
+        // Gây damage cho Enemy (generic)
+        Enemy enemy = hit.collider.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+            AddScore(50);
+            Debug.Log($"Hit enemy base for {damage} damage.");
+            return;
         }
+
+        Debug.Log("Enemy hit không có script TakeDamage hợp lệ.");
     }
+}
+
 
     void UseSkill()
     {
