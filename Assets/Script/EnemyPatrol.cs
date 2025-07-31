@@ -112,7 +112,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void Patrol()
     {
-        animator.Play("Patrol");
+        //animator.Play("Patrol");
         float direction = currentTarget.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * patrolSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -135,7 +135,7 @@ public class EnemyPatrol : MonoBehaviour
     void ReturnToStart()
     {
         animator.SetBool("Chase", false);
-        animator.Play("Return");
+        //animator.Play("Return");
         float direction = initialPosition.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * patrolSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -206,7 +206,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         isDead = true;
         rb.velocity = Vector2.zero;
-        animator.Play("Die");
+        //animator.Play("Die");
         Debug.Log("Enemy died.");
 
         Destroy(gameObject, 0.5f);

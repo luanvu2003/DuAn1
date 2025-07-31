@@ -125,13 +125,44 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
 
-   
+        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
+
+        if (hit.collider != null)
+        {
+            EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
+            if (enemyPatrol != null)
+            {
+                float damage = Random.Range(15f, 25f);
+                enemyPatrol.TakeDamage(damage);
+                AddScore(50);
+                Debug.Log($"Hit enemy patrol for {damage} damage.");
+            }
+
+            EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
+            if (enemyNormal != null)
+            {
+                float damage = Random.Range(15f, 25f);
+                enemyNormal.TakeDamage(damage);
+                AddScore(50);
+                Debug.Log($"Hit enemy normal for {damage} damage.");
+            }
+            Enemy enemy = hit.collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                float damage = Random.Range(15f, 25f);
+                enemy.TakeDamage(damage);
+                AddScore(50);
+                Debug.Log($"Hit enemy for {damage} damage.");
+            }
+        }
+
     }
 
 
     void UseSkill()
     {
-        animator.SetTrigger("Skill");
+        //animator.SetTrigger("Skill");
     }
 
     public void TakeDamage(int damage)
@@ -147,7 +178,7 @@ public class PlayerController : MonoBehaviour
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
-        animator.SetTrigger("Hurt");
+        //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
         UpdateUI();
