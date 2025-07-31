@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Attack");
 
    
-}
+    }
 
 
     void UseSkill()
