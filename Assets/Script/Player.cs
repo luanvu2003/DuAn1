@@ -146,12 +146,24 @@ public class PlayerController : MonoBehaviour
                 AddScore(50);
                 Debug.Log($"Hit enemy normal for {damage} damage.");
             }
+
+            Enemy enemy = hit.collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                float damage = Random.Range(15f, 25f);
+                enemy.TakeDamage(damage);
+                AddScore(50);
+                Debug.Log($"Hit enemy for {damage} damage.");
+            }
         }
+
+
     }
+
 
     void UseSkill()
     {
-        animator.SetTrigger("Skill");
+        //animator.SetTrigger("Skill");
     }
 
     public void TakeDamage(int damage)
@@ -167,7 +179,7 @@ public class PlayerController : MonoBehaviour
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
-        animator.SetTrigger("Hurt");
+        //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
         UpdateUI();
