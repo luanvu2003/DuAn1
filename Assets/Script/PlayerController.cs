@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -175,12 +176,25 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        if (isDead) return;
-        isDead = true;
+    isDead = true;
+    animator.SetTrigger("Die");
+    rb.velocity = Vector2.zero;
+    rb.bodyType = RigidbodyType2D.Static;
 
-        Debug.Log("Player is now DEAD");
-        Destroy(gameObject, 0.5f);
-    }
+    if (healthBarImage != null)
+        healthBarImage.transform.parent.gameObject.SetActive(false);
+
+    Debug.Log("Player died.");
+
+    // ✅ Chuyển sang scene thua sau 1.5 giây
+    Invoke("LoadGameOverScene", 1.5f);
+}
+
+void LoadGameOverScene()
+{
+    SceneManager.LoadScene("Lose");
+}
+
 
     bool IsGrounded()
     {
@@ -221,4 +235,18 @@ public class PlayerController : MonoBehaviour
     {
         return currentHP;
     }
+    void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Coin"))
+    {
+        AddCoin(1);
+        Destroy(collision.gameObject);
+    }
+
+    if (collision.CompareTag("Trap"))
+    {
+        Debug.Log("Player va vào bẫy!");
+        Die();
+    }
+}
 }

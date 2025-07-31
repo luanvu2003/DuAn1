@@ -5143,13 +5143,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6563573625560715569, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 1334312519}
   m_SourcePrefab: {fileID: 100100000, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
 --- !u!4 &1334312515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
   m_PrefabInstance: {fileID: 1334312514}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1334312516 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6563573625560715569, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+  m_PrefabInstance: {fileID: 1334312514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1334312517 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4108647208513839719, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+  m_PrefabInstance: {fileID: 1334312514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1334312518 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7180852284383712523, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+  m_PrefabInstance: {fileID: 1334312514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1334312519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334312516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53bdb68864a4f644a6b998fc6423eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSource: {fileID: 1334312518}
+  effectSource: {fileID: 1334312517}
+  footstepClip: {fileID: 8300000, guid: 4c51835a5bb397e4aa752ee7a9ec6903, type: 3}
+  swordSwingClip: {fileID: 8300000, guid: 7d76a021c4ad9e2448013b59508d0ace, type: 3}
 --- !u!1 &1499134801
 GameObject:
   m_ObjectHideFlags: 0
