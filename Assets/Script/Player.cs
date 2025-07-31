@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
 
-    public Slider healthBar;
+    public Image healthBarImage; // 🔄 Thay Slider bằng Image có fillAmount
     public TMP_Text scoreText;
     public TMP_Text coinText;
 
@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
 
-        if (healthBar != null) healthBar.maxValue = maxHP;
         UpdateUI();
     }
 
@@ -63,7 +62,6 @@ public class PlayerController : MonoBehaviour
             UseSkill();
         }
 
-        // Test phím L để giảm máu
         if (Input.GetKeyDown(KeyCode.L))
         {
             TakeDamage(10);
@@ -116,7 +114,8 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
         else
-        {animator.SetBool("isJumping", false);
+        {
+            animator.SetBool("isJumping", false);
             animator.SetBool("isRunning", running);
         }
     }
@@ -147,6 +146,7 @@ public class PlayerController : MonoBehaviour
                 AddScore(50);
                 Debug.Log($"Hit enemy normal for {damage} damage.");
             }
+
             Enemy enemy = hit.collider.GetComponent<Enemy>();
             if (enemy != null)
             {
@@ -156,6 +156,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log($"Hit enemy for {damage} damage.");
             }
         }
+
 
     }
 
@@ -190,11 +191,6 @@ public class PlayerController : MonoBehaviour
         isDead = true;
 
         Debug.Log("Player is now DEAD");
-
-        // Optional: hiệu ứng, âm thanh, v.v.
-        // GetComponent<Animator>().SetTrigger("Die");
-
-        // ✅ Biến mất khỏi màn hình sau 0.5 giây (có thể điều chỉnh)
         Destroy(gameObject, 0.5f);
     }
 
@@ -206,9 +202,11 @@ public class PlayerController : MonoBehaviour
 
     void UpdateUI()
     {
-        if (healthBar != null)
+        if (healthBarImage != null)
         {
-            healthBar.value = currentHP;
+            float percent = (float)currentHP / maxHP;
+            healthBarImage.fillAmount = percent;
+
             if (currentHP <= 0)
             {
                 Die();
@@ -230,8 +228,9 @@ public class PlayerController : MonoBehaviour
         coin += amount;
         UpdateUI();
     }
+
     public int GetCurrentHP()
-{
-    return currentHP;
-}
+    {
+        return currentHP;
+    }
 }
