@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
     Debug.Log("Player died.");
 
     // ✅ Chuyển sang scene thua sau 1.5 giây
-    Invoke("LoadGameOverScene", 1.5f);
+    Invoke("LoadGameOverScene", 0.5f);
 }
 
 void LoadGameOverScene()
