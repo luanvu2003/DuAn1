@@ -8,7 +8,7 @@ public class GoNextMap1 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayerPrefs.SetString("NextScene", "map1");
+            PlayerPrefs.SetString("NextScene", "map2");
             SceneManager.LoadScene("Loading");
         }
     }
