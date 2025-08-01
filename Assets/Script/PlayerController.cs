@@ -10,14 +10,13 @@ public class PlayerController : MonoBehaviour
     public int maxHP = 100;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
-
     public Image healthBarImage; // 🔄 Thay Slider bằng Image có fillAmount
     public TMP_Text scoreText;
     public TMP_Text coinText;
 
     private int currentHP;
     private int score = 0;
-    private int coin = 0;
+    private int coins = 0;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -37,8 +36,9 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
-
-        UpdateUI();
+        UpdateHealthBar();
+        UpdateScoreText();
+        UpdateCoinText();
     }
 
     void Update()
@@ -182,8 +182,20 @@ public class PlayerController : MonoBehaviour
 
         //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
+        UpdateHealthBar();
 
-        UpdateUI();
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    void UpdateHealthBar()
+    {
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = (float)currentHP / maxHP;
+        }
     }
 
     void Die()
@@ -210,10 +222,16 @@ void LoadGameOverScene()
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            0f,
+            Vector2.down,
+            0.1f,
+            groundLayer
+        );
         return hit.collider != null;
     }
-
     void UpdateUI()
     {
         if (healthBarImage != null)
@@ -230,17 +248,27 @@ void LoadGameOverScene()
         if (scoreText != null) scoreText.text = "Score: " + score;
         if (coinText != null) coinText.text = "Coins: " + coin;
     }
-
     public void AddScore(int amount)
     {
         score += amount;
-        UpdateUI();
+        UpdateScoreText();
     }
 
-    public void AddCoin(int amount)
+    public void AddCoins(int amount)
     {
-        coin += amount;
-        UpdateUI();
+        coins += amount;
+        UpdateCoinText();
+    }
+    void UpdateScoreText()
+    {
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
+    }
+
+    void UpdateCoinText()
+    {
+        if (coinText != null)
+            coinText.text = "Coins: " + coins;
     }
 
     public int GetCurrentHP()
