@@ -4820,11 +4820,11 @@ PrefabInstance:
     - target: {fileID: 4508176803392196299, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: patrolPointA
       value: 
-      objectReference: {fileID: 1811880940}
+      objectReference: {fileID: 0}
     - target: {fileID: 4508176803392196299, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: patrolPointB
       value: 
-      objectReference: {fileID: 113133879}
+      objectReference: {fileID: 0}
     - target: {fileID: 4667698078121176432, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.66
@@ -13288,11 +13288,11 @@ PrefabInstance:
     - target: {fileID: 4508176803392196299, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: patrolPointA
       value: 
-      objectReference: {fileID: 582554093}
+      objectReference: {fileID: 0}
     - target: {fileID: 4508176803392196299, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: patrolPointB
       value: 
-      objectReference: {fileID: 608005995}
+      objectReference: {fileID: 0}
     - target: {fileID: 4667698078121176432, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.7176876
@@ -13435,12 +13435,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-
   - component: {fileID: 1726488597}
   - component: {fileID: 1726488599}
   - component: {fileID: 1726488598}
-  m_Layer: 5
-  m_Name: HealthBarBack
+  m_Layer: 0
+  m_Name: 
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14948,3 +14947,8 @@ SceneRoots:
   - {fileID: 1304445652}
   - {fileID: 3788805854052387410}
   - {fileID: 528406137}
+  - {fileID: 1060631177}
+  - {fileID: 1000076106}
+  - {fileID: 1716954325}
+  - {fileID: 369760472}
+  - {fileID: 958235266}
