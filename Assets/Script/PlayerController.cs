@@ -1,7 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
 using UnityEngine.SceneManagement;
+=======
+>>>>>>> Stashed changes:Assets/Script/Player.cs
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,13 +14,18 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
 
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
     public Image healthBarImage; // 🔄 Thay Slider bằng Image có fillAmount
+=======
+    [Header("UI")]
+    public Image healthBarFill; // ✅ Dùng Image thay vì Slider
+>>>>>>> Stashed changes:Assets/Script/Player.cs
     public TMP_Text scoreText;
     public TMP_Text coinText;
 
     private int currentHP;
     private int score = 0;
-    private int coin = 0;
+    private int coins = 0;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -38,7 +46,13 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
 
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
         UpdateUI();
+=======
+        UpdateHealthBar();
+        UpdateScoreText();
+        UpdateCoinText();
+>>>>>>> Stashed changes:Assets/Script/Player.cs
     }
 
     void Update()
@@ -104,6 +118,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleAnimation()
     {
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
         bool grounded = IsGrounded();
         bool running = inputHorizontal != 0;
 
@@ -119,11 +134,17 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isJumping", false);
             animator.SetBool("isRunning", running);
         }
+=======
+        animator.SetBool("isRunning", inputHorizontal != 0);
+        animator.SetBool("isJumping", !IsGrounded());
+        animator.SetBool("isClimbing", isClimbing);
+>>>>>>> Stashed changes:Assets/Script/Player.cs
     }
 
     void Attack()
     {
         animator.SetTrigger("Attack");
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
 
         Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
@@ -161,6 +182,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+=======
+    }
+>>>>>>> Stashed changes:Assets/Script/Player.cs
 
     void UseSkill()
     {
@@ -169,6 +193,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
         if (isDead) return;
 
         if (isBlocking)
@@ -178,16 +203,38 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHP -= damage;
+=======
+        if (isBlocking || isDead) return;
+currentHP -= damage;
+>>>>>>> Stashed changes:Assets/Script/Player.cs
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
         //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
         UpdateUI();
+=======
+        UpdateHealthBar();
+
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+>>>>>>> Stashed changes:Assets/Script/Player.cs
+    }
+
+    void UpdateHealthBar()
+    {
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = (float)currentHP / maxHP;
+        }
     }
 
     void Die()
     {
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
     isDead = true;
     animator.SetTrigger("Die");
     rb.velocity = Vector2.zero;
@@ -207,13 +254,33 @@ void LoadGameOverScene()
     SceneManager.LoadScene("Lose");
 }
 
+=======
+        isDead = true;
+        animator.SetTrigger("Die");
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+
+        if (healthBarFill != null)
+            healthBarFill.transform.parent.gameObject.SetActive(false); // Ẩn toàn bộ thanh máu nếu có
+
+        Debug.Log("Player died.");
+    }
+>>>>>>> Stashed changes:Assets/Script/Player.cs
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            0f,
+            Vector2.down,
+            0.1f,
+            groundLayer
+        );
         return hit.collider != null;
     }
 
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
     void UpdateUI()
     {
         if (healthBarImage != null)
@@ -231,22 +298,40 @@ void LoadGameOverScene()
         if (coinText != null) coinText.text = "Coins: " + coin;
     }
 
+=======
+>>>>>>> Stashed changes:Assets/Script/Player.cs
     public void AddScore(int amount)
     {
         score += amount;
-        UpdateUI();
+        UpdateScoreText();
     }
 
-    public void AddCoin(int amount)
+    public void AddCoins(int amount)
     {
-        coin += amount;
-        UpdateUI();
+        coins += amount;
+        UpdateCoinText();
     }
 
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
+=======
+    void UpdateScoreText()
+    {
+        if (scoreText != null)
+            scoreText.text = "Score: " + score;
+    }
+
+    void UpdateCoinText()
+    {
+        if (coinText != null)
+            coinText.text = "Coins: " + coins;
+    }
+
+>>>>>>> Stashed changes:Assets/Script/Player.cs
     public int GetCurrentHP()
     {
         return currentHP;
     }
+<<<<<<< Updated upstream:Assets/Script/PlayerController.cs
     void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.CompareTag("Coin"))
@@ -262,3 +347,6 @@ void LoadGameOverScene()
     }
 }
 }
+=======
+}
+>>>>>>> Stashed changes:Assets/Script/Player.cs

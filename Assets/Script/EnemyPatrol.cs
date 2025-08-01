@@ -3,28 +3,27 @@ using UnityEngine.UI;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    [Header("Movement")]
-    public float patrolSpeed = 2f;
-    public float chaseSpeed = 3.5f;
+    [Header("Patrol")]
     public Transform patrolPointA;
     public Transform patrolPointB;
-    private Transform currentTarget;
-    private bool movingRight = true;
-    private Vector3 initialPosition;
-    private bool isReturning = false;
+    public float moveSpeed = 2f;
+    public float idleDuration = 2f;
 
-    [Header("Detection & Attack")]
+    [Header("Detection")]
     public float detectionRange = 5f;
-    public float attackRange = 1f;
-    public Vector2 damageRange = new Vector2(5, 15);
-    private Transform player;
-    private bool playerDetected = false;
+    public float attackRange = 1.5f;
+    public LayerMask playerLayer;
+
+    [Header("Attack")]
+    public float attackDamage = 10f;
+    public float attackCooldown = 2f;
 
     [Header("Health")]
     public float maxHealth = 100f;
     private float currentHealth;
     private bool isDead = false;
 
+<<<<<<< Updated upstream
     [Header("Health Bar (No Prefab)")]
     private Image healthFillImage;
     public Vector3 healthBarOffset = new Vector3(0, 1.2f, 0);
@@ -36,16 +35,25 @@ public class EnemyPatrol : MonoBehaviour
     public Transform obstacleCheck;
     public float obstacleCheckDistance = 0.5f;
     public LayerMask groundLayer;
+=======
+    // ✅ NEW: Slider để hiển thị thanh máu
+    public Slider healthBar;
+>>>>>>> Stashed changes
 
-    [Header("Components")]
     private Rigidbody2D rb;
     private Animator animator;
+    private Transform player;
 
+    private Transform currentTarget;
     private float originalScaleX;
+    private float idleTimer;
+    private float attackTimer;
+    private Vector3 initialPosition;
 
     void Start()
     {
         currentHealth = maxHealth;
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -54,6 +62,7 @@ public class EnemyPatrol : MonoBehaviour
         originalScaleX = transform.localScale.x;
         initialPosition = transform.position;
 
+<<<<<<< Updated upstream
         // 🔧 Gắn sẵn Health Bar trong prefab (không Instantiate)
         Transform fill = transform.Find("EnemyHealthBar/Background/Fill");
         if (fill != null)
@@ -63,6 +72,13 @@ public class EnemyPatrol : MonoBehaviour
         else
         {
             Debug.LogWarning("Không tìm thấy EnemyHealthBar/Background/Fill!");
+=======
+        // ✅ Khởi tạo thanh máu
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+>>>>>>> Stashed changes
         }
     }
 
@@ -74,30 +90,15 @@ public class EnemyPatrol : MonoBehaviour
 
         if (distanceToPlayer <= attackRange)
         {
-            playerDetected = true;
-            AttackPlayer();
+            Attack();
         }
         else if (distanceToPlayer <= detectionRange)
         {
-            playerDetected = true;
             ChasePlayer();
         }
         else
         {
-            if (playerDetected)
-            {
-                playerDetected = false;
-                isReturning = true;
-            }
-
-            if (isReturning)
-            {
-                ReturnToStart();
-            }
-            else
-            {
-                Patrol();
-            }
+            Patrol();
         }
 
         // Nếu bạn muốn giữ UI đúng vị trí (optional)
@@ -108,6 +109,7 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     // ========== Movement & Flip ==========
 
     void Patrol()
@@ -119,12 +121,34 @@ public class EnemyPatrol : MonoBehaviour
 
         if (Mathf.Abs(direction) < 0.3f)
             currentTarget = currentTarget == patrolPointA ? patrolPointB : patrolPointA;
+=======
+    void Patrol()
+    {
+        animator.SetBool("isRunning", true);
 
-        TryJumpIfObstacleAhead();
+        if (Vector2.Distance(transform.position, currentTarget.position) < 0.1f)
+        {
+            idleTimer += Time.deltaTime;
+            rb.velocity = Vector2.zero;
+>>>>>>> Stashed changes
+
+            if (idleTimer >= idleDuration)
+            {
+                idleTimer = 0f;
+                currentTarget = (currentTarget == patrolPointA) ? patrolPointB : patrolPointA;
+                Flip();
+            }
+        }
+        else
+        {
+            Vector2 direction = (currentTarget.position - transform.position).normalized;
+            rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+        }
     }
 
     void ChasePlayer()
     {
+<<<<<<< Updated upstream
         animator.SetBool("Chase", true);
         float direction = player.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.velocity.y);
@@ -150,22 +174,54 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     void FlipDirectionIfNeeded(float direction)
-    {
-        bool shouldFaceRight = direction > 0;
-        if (shouldFaceRight != movingRight)
+=======
+        animator.SetBool("isRunning", true);
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+
+        if ((direction.x > 0 && transform.localScale.x < 0) || (direction.x < 0 && transform.localScale.x > 0))
         {
-            movingRight = shouldFaceRight;
-            Flip(movingRight);
+            Flip();
         }
     }
 
+    void Attack()
+>>>>>>> Stashed changes
+    {
+        attackTimer += Time.deltaTime;
+        rb.velocity = Vector2.zero;
+        animator.SetBool("isRunning", false);
+
+        if (attackTimer >= attackCooldown)
+        {
+            animator.SetTrigger("Attack");
+            attackTimer = 0f;
+
+            // Gây sát thương cho Player nếu trong vùng
+            Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position, attackRange, playerLayer);
+            foreach (Collider2D hit in hitPlayers)
+            {
+                PlayerController player = hit.GetComponent<PlayerController>();
+                if (player != null && player.GetCurrentHP() > 0)
+                {
+                    player.TakeDamage((int)attackDamage);
+                }
+            }
+        }
+    }
+
+<<<<<<< Updated upstream
     void Flip(bool faceRight)
+=======
+    void Flip()
+>>>>>>> Stashed changes
     {
         Vector3 scale = transform.localScale;
-        scale.x = originalScaleX * (faceRight ? 1 : -1);
+        scale.x = -scale.x;
         transform.localScale = scale;
     }
 
+<<<<<<< Updated upstream
     void TryJumpIfObstacleAhead()
     {
         if (IsGrounded() && IsObstacleAhead())
@@ -229,11 +285,15 @@ public class EnemyPatrol : MonoBehaviour
     // ========== Attack ==========
 
     void AttackPlayer()
+=======
+    public void TakeDamage(float amount)
+>>>>>>> Stashed changes
     {
     animator.Play("Attack");
     float damage = Random.Range(damageRange.x, damageRange.y);
     Debug.Log($"Enemy attacked player for {damage} damage");
 
+<<<<<<< Updated upstream
     if (player != null)
     {
         PlayerController pc = player.GetComponent<PlayerController>();
@@ -241,6 +301,53 @@ public class EnemyPatrol : MonoBehaviour
         {
             pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
         }
+=======
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        Debug.Log($"Enemy took {amount} damage. Current HP: {currentHealth}");
+
+        UpdateHealthBar();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            animator.Play("Hurt");
+        }
+    }
+
+    void UpdateHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.value = currentHealth;
+        }
+    }
+
+    void Die()
+    {
+        isDead = true;
+        animator.SetTrigger("Die");
+
+        // ✅ Tắt thanh máu nếu muốn:
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(false);
+        }
+
+        Destroy(gameObject, 1f); // Delay cho animation
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+>>>>>>> Stashed changes
     }
 }
 
