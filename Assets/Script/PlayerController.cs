@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public int maxHP = 100;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
-    public Image healthBarImage; // 🔄 Thay Slider bằng Image có fillAmount
+    public Image healthBarImage; // 🔄 Image dạng Fill
     public TMP_Text scoreText;
     public TMP_Text coinText;
 
@@ -130,42 +130,26 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider != null)
         {
-            EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
-            if (enemyPatrol != null)
+            float damage = Random.Range(15f, 25f);
+            if (hit.collider.TryGetComponent(out EnemyPatrol ep))
             {
-                float damage = Random.Range(15f, 25f);
-                enemyPatrol.TakeDamage(damage);
+                ep.TakeDamage(damage);
                 AddScore(50);
-                Debug.Log($"Hit enemy patrol for {damage} damage.");
             }
-
-            EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
-            if (enemyNormal != null)
+            else if (hit.collider.TryGetComponent(out EnemyNormal en))
             {
-                float damage = Random.Range(15f, 25f);
-                enemyNormal.TakeDamage(damage);
+                en.TakeDamage(damage);
                 AddScore(50);
-                Debug.Log($"Hit enemy normal for {damage} damage.");
             }
-
-            Enemy enemy = hit.collider.GetComponent<Enemy>();
-            if (enemy != null)
+            else if (hit.collider.TryGetComponent(out Enemy e))
             {
-                float damage = Random.Range(15f, 25f);
-                enemy.TakeDamage(damage);
+                e.TakeDamage(damage);
                 AddScore(50);
-                Debug.Log($"Hit enemy for {damage} damage.");
             }
         }
-
-
     }
 
-
-    void UseSkill()
-    {
-        //animator.SetTrigger("Skill");
-    }
+    void UseSkill() {}
 
     public void TakeDamage(int damage)
     {
@@ -180,7 +164,6 @@ public class PlayerController : MonoBehaviour
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
-        //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
         UpdateHealthBar();
 
@@ -192,62 +175,38 @@ public class PlayerController : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        if (healthBarFill != null)
+        if (healthBarImage != null)
         {
-            healthBarFill.fillAmount = (float)currentHP / maxHP;
+            float percent = (float)currentHP / maxHP;
+            healthBarImage.fillAmount = percent;
         }
     }
 
     void Die()
     {
-    isDead = true;
-    animator.SetTrigger("Die");
-    rb.velocity = Vector2.zero;
-    rb.bodyType = RigidbodyType2D.Static;
+        isDead = true;
+        animator.SetTrigger("Die");
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
 
-    if (healthBarImage != null)
-        healthBarImage.transform.parent.gameObject.SetActive(false);
+        if (healthBarImage != null)
+            healthBarImage.transform.parent.gameObject.SetActive(false);
 
-    Debug.Log("Player died.");
+        Debug.Log("Player died.");
+        Invoke("LoadGameOverScene", 0.5f);
+    }
 
-    // ✅ Chuyển sang scene thua sau 1.5 giây
-    Invoke("LoadGameOverScene", 0.5f);
-}
-
-void LoadGameOverScene()
-{
-    SceneManager.LoadScene("Lose");
-}
-
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("Lose");
+    }
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(
-            boxCollider.bounds.center,
-            boxCollider.bounds.size,
-            0f,
-            Vector2.down,
-            0.1f,
-            groundLayer
-        );
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
         return hit.collider != null;
     }
-    void UpdateUI()
-    {
-        if (healthBarImage != null)
-        {
-            float percent = (float)currentHP / maxHP;
-            healthBarImage.fillAmount = percent;
 
-            if (currentHP <= 0)
-            {
-                Die();
-            }
-        }
-
-        if (scoreText != null) scoreText.text = "Score: " + score;
-        if (coinText != null) coinText.text = "Coins: " + coin;
-    }
     public void AddScore(int amount)
     {
         score += amount;
@@ -259,6 +218,7 @@ void LoadGameOverScene()
         coins += amount;
         UpdateCoinText();
     }
+
     void UpdateScoreText()
     {
         if (scoreText != null)
@@ -275,18 +235,19 @@ void LoadGameOverScene()
     {
         return currentHP;
     }
-    void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.CompareTag("Coin"))
-    {
-        AddCoin(1);
-        Destroy(collision.gameObject);
-    }
 
-    if (collision.CompareTag("Trap"))
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player va vào bẫy!");
-        Die();
+        if (collision.CompareTag("Coin"))
+        {
+            AddCoins(1);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.CompareTag("Trap"))
+        {
+            Debug.Log("Player va vào bẫy!");
+            Die();
+        }
     }
-}
 }
