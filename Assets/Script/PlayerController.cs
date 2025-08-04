@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -259,6 +260,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player va vào bẫy!");
             Die();
+        }
+        if (collision.CompareTag("EnemyFirePoint"))
+        {
+            TakeDamage(10);
         }
     }
 }
