@@ -10,13 +10,14 @@ public class PlayerController : MonoBehaviour
     public int maxHP = 100;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
+
     public Image healthBarImage; // 🔄 Thay Slider bằng Image có fillAmount
     public TMP_Text scoreText;
     public TMP_Text coinText;
 
     private int currentHP;
     private int score = 0;
-    private int coins = 0;
+    private int coin = 0;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -36,9 +37,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
-        UpdateHealthBar();
-        UpdateScoreText();
-        UpdateCoinText();
+
+        UpdateUI();
     }
 
     void Update()
@@ -182,56 +182,38 @@ public class PlayerController : MonoBehaviour
 
         //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
-        UpdateHealthBar();
 
-        if (currentHP <= 0)
-        {
-            Die();
-        }
-    }
-
-    void UpdateHealthBar()
-    {
-        if (healthBarFill != null)
-        {
-            healthBarFill.fillAmount = (float)currentHP / maxHP;
-        }
+        UpdateUI();
     }
 
     void Die()
     {
-    isDead = true;
-    animator.SetTrigger("Die");
-    rb.velocity = Vector2.zero;
-    rb.bodyType = RigidbodyType2D.Static;
+        isDead = true;
+        animator.SetTrigger("Die");
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
 
-    if (healthBarImage != null)
-        healthBarImage.transform.parent.gameObject.SetActive(false);
+        if (healthBarImage != null)
+            healthBarImage.transform.parent.gameObject.SetActive(false);
 
-    Debug.Log("Player died.");
+        Debug.Log("Player died.");
 
-    // ✅ Chuyển sang scene thua sau 1.5 giây
-    Invoke("LoadGameOverScene", 0.5f);
-}
+        // ✅ Chuyển sang scene thua sau 1.5 giây
+        Invoke("LoadGameOverScene", 0.5f);
+    }
 
-void LoadGameOverScene()
-{
-    SceneManager.LoadScene("Lose");
-}
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("Lose");
+    }
 
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(
-            boxCollider.bounds.center,
-            boxCollider.bounds.size,
-            0f,
-            Vector2.down,
-            0.1f,
-            groundLayer
-        );
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
         return hit.collider != null;
     }
+
     void UpdateUI()
     {
         if (healthBarImage != null)
@@ -248,27 +230,17 @@ void LoadGameOverScene()
         if (scoreText != null) scoreText.text = "Score: " + score;
         if (coinText != null) coinText.text = "Coins: " + coin;
     }
+
     public void AddScore(int amount)
     {
         score += amount;
-        UpdateScoreText();
+        UpdateUI();
     }
 
-    public void AddCoins(int amount)
+    public void AddCoin(int amount)
     {
-        coins += amount;
-        UpdateCoinText();
-    }
-    void UpdateScoreText()
-    {
-        if (scoreText != null)
-            scoreText.text = "Score: " + score;
-    }
-
-    void UpdateCoinText()
-    {
-        if (coinText != null)
-            coinText.text = "Coins: " + coins;
+        coin += amount;
+        UpdateUI();
     }
 
     public int GetCurrentHP()
@@ -276,17 +248,17 @@ void LoadGameOverScene()
         return currentHP;
     }
     void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.CompareTag("Coin"))
     {
-        AddCoin(1);
-        Destroy(collision.gameObject);
-    }
+        if (collision.CompareTag("Coin"))
+        {
+            AddCoin(1);
+            Destroy(collision.gameObject);
+        }
 
-    if (collision.CompareTag("Trap"))
-    {
-        Debug.Log("Player va vào bẫy!");
-        Die();
+        if (collision.CompareTag("Trap"))
+        {
+            Debug.Log("Player va vào bẫy!");
+            Die();
+        }
     }
-}
 }
