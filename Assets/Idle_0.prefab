@@ -494,7 +494,7 @@ MonoBehaviour:
   chaseSpeed: 3.5
   detectionRange: 7
   damageRange: {x: 5, y: 15}
-  projectilePrefab: {fileID: 1250821868014770737, guid: 97b361865cafeae42bff4d3c18fdc4ea, type: 3}
+  projectilePrefab: {fileID: 94093868007597711, guid: a1213d1718bf6304fa098708dbb28169, type: 3}
   firePoint: {fileID: 1201115962485013407}
   skillCooldown: 2
   projectileDamage: 10
