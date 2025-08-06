@@ -17,7 +17,8 @@ public class NPCChatTriggerMap1Start : MonoBehaviour
         "Xin chào, hiệp sĩ!",
         "Cổng để dẫn tới lâu đài hiện tại đang bị lũ quái chiếm.",
         "Hãy đánh bại hết tất cả các lũ quái ở đây để đến cổng đó.",
-        "Và tôi sẽ đứng ở đó chờ bạn khi tất cả đã bị đánh bại."    
+        "Và tôi sẽ đứng ở đó chờ bạn khi tất cả đã bị đánh bại.",
+        "Chúc bạn may mắn!"    
     };
 
     private void Start()

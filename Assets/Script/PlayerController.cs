@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("EnemyFirePoint"))
         {
-            TakeDamage(10);
+            TakeDamage(2);
         }
     }
 }
