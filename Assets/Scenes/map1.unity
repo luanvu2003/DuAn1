@@ -5009,6 +5009,10 @@ PrefabInstance:
       propertyPath: patrolPointB
       value: 
       objectReference: {fileID: 1517360590}
+    - target: {fileID: 4508176803392196299, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
+      propertyPath: healthFillImage
+      value: 
+      objectReference: {fileID: 2072772236}
     - target: {fileID: 4667698078121176432, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.66
@@ -15272,6 +15276,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 662194080356567718, guid: 366bd147d3b568843ab9463d10b7fb98, type: 3}
   m_PrefabInstance: {fileID: 2029771788}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2072772236 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6885184557280181536, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
+  m_PrefabInstance: {fileID: 1060631177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2086645043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15567,6 +15582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior_Sheet-Effect_0
       objectReference: {fileID: 0}
+    - target: {fileID: 6563573625560715569, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7089433803606079117, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_Camera
       value: 
@@ -15585,11 +15604,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.9
+      value: -12.54
       objectReference: {fileID: 0}
     - target: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.1
+      value: -2.96
       objectReference: {fileID: 0}
     - target: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_LocalPosition.z
