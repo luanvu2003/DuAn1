@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPCChatTriggerMap1Start : MonoBehaviour
+public class NPCChatTriggerMap2End : MonoBehaviour
 {
     public GameObject chatBox;           // Khung chat (Panel hoặc Image)
     public Text chatText;                // Text hiển thị nội dung
@@ -14,11 +14,10 @@ public class NPCChatTriggerMap1Start : MonoBehaviour
     // Danh sách câu thoại
     private string[] dialogueLines = new string[]
     {
-        "Xin chào, hiệp sĩ!",
-        "Cổng để dẫn tới lâu đài hiện tại đang bị lũ quái chiếm.",
-        "Hãy đánh bại hết tất cả các lũ quái ở đây để đến cổng đó.",
-        "Và tôi sẽ đứng ở đó chờ bạn khi tất cả đã bị đánh bại.",
-        "Chúc bạn may mắn!"    
+        "Cổng đã được mở, hãy đi vào để đi đến lâu đài.",  
+        "Ở trong lâu đài có rất nhiều quái vật mạnh, bạn hãy cẩn thận!",  
+        "Ở đó có một pháp sư trấn giữ cánh cửa để vào phòng Vua của chúng.",
+        "Sau lưng tôi là cánh cổng, hãy tiến vào đó!",
     };
 
     private void Start()
