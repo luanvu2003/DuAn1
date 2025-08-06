@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -188,24 +189,24 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-    isDead = true;
-    animator.SetTrigger("Die");
-    rb.velocity = Vector2.zero;
-    rb.bodyType = RigidbodyType2D.Static;
+        isDead = true;
+        animator.SetTrigger("Die");
+        rb.velocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
 
-    if (healthBarImage != null)
-        healthBarImage.transform.parent.gameObject.SetActive(false);
+        if (healthBarImage != null)
+            healthBarImage.transform.parent.gameObject.SetActive(false);
 
-    Debug.Log("Player died.");
+        Debug.Log("Player died.");
 
-    // ✅ Chuyển sang scene thua sau 1.5 giây
-    Invoke("LoadGameOverScene", 0.5f);
-}
+        // ✅ Chuyển sang scene thua sau 1.5 giây
+        Invoke("LoadGameOverScene", 0.5f);
+    }
 
-void LoadGameOverScene()
-{
-    SceneManager.LoadScene("Lose");
-}
+    void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("Lose");
+    }
 
 
     bool IsGrounded()
@@ -248,17 +249,21 @@ void LoadGameOverScene()
         return currentHP;
     }
     void OnTriggerEnter2D(Collider2D collision)
-{
-    if (collision.CompareTag("Coin"))
     {
-        AddCoin(1);
-        Destroy(collision.gameObject);
-    }
+        if (collision.CompareTag("Coin"))
+        {
+            AddCoin(1);
+            Destroy(collision.gameObject);
+        }
 
-    if (collision.CompareTag("Trap"))
-    {
-        Debug.Log("Player va vào bẫy!");
-        Die();
+        if (collision.CompareTag("Trap"))
+        {
+            Debug.Log("Player va vào bẫy!");
+            Die();
+        }
+        if (collision.CompareTag("EnemyFirePoint"))
+        {
+            TakeDamage(10);
+        }
     }
-}
 }

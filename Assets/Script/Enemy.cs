@@ -63,41 +63,41 @@ public class Enemy : MonoBehaviour
     }
 
     void Update()
-{
-    if (isDead || player == null) return;
-
-    float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-    if (distanceToPlayer <= detectionRange)
     {
-        playerDetected = true;
-        isReturning = false;
+        if (isDead || player == null) return;
 
-        // luôn nhìn về hướng player
-        float direction = player.position.x - transform.position.x;
-        FlipDirectionIfNeeded(direction);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        UseRangedSkill();
-    }
-    else
-    {
-        if (playerDetected)
+        if (distanceToPlayer <= detectionRange)
         {
-            playerDetected = false;
-            isReturning = true;
+            playerDetected = true;
+            isReturning = false;
+
+            // luôn nhìn về hướng player
+            float direction = player.position.x - transform.position.x;
+            FlipDirectionIfNeeded(direction);
+
+            UseRangedSkill();
+        }
+        else
+        {
+            if (playerDetected)
+            {
+                playerDetected = false;
+                isReturning = true;
+            }
+
+            if (isReturning)
+                ReturnToStart();
         }
 
-        if (isReturning)
-            ReturnToStart();
+        // Cập nhật vị trí thanh máu
+        if (healthFillImage != null)
+        {
+            Transform bar = healthFillImage.transform.parent.parent;
+            bar.position = transform.position + healthBarOffset;
+        }
     }
-
-    // Cập nhật vị trí thanh máu
-    if (healthFillImage != null)
-    {
-        Transform bar = healthFillImage.transform.parent.parent;
-        bar.position = transform.position + healthBarOffset;
-    }
-}
 
 
     void UseRangedSkill()
@@ -137,16 +137,16 @@ public class Enemy : MonoBehaviour
     }
 
     void FlipDirectionIfNeeded(float direction)
-{
-    if (Mathf.Abs(direction) < 0.05f) return;
-
-    bool shouldFaceRight = direction > 0;
-    if (shouldFaceRight != movingRight)
     {
-        movingRight = shouldFaceRight;
-        Flip(movingRight);
+        if (Mathf.Abs(direction) < 0.05f) return;
+
+        bool shouldFaceRight = direction > 0;
+        if (shouldFaceRight != movingRight)
+        {
+            movingRight = shouldFaceRight;
+            Flip(movingRight);
+        }
     }
-}
 
 
     void Flip(bool faceRight)
@@ -182,7 +182,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
             Die();
         //else
-            //animator.Play("Hurt");
+        //animator.Play("Hurt");
     }
 
     void Die()

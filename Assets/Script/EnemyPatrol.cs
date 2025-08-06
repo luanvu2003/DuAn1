@@ -230,32 +230,32 @@ public class EnemyPatrol : MonoBehaviour
 
     void AttackPlayer()
     {
-    animator.Play("Attack");
-    float damage = Random.Range(damageRange.x, damageRange.y);
-    Debug.Log($"Enemy attacked player for {damage} damage");
+        animator.Play("Attack");
+        float damage = Random.Range(damageRange.x, damageRange.y);
+        Debug.Log($"Enemy attacked player for {damage} damage");
 
-    if (player != null)
-    {
-        PlayerController pc = player.GetComponent<PlayerController>();
-        if (pc != null)
+        if (player != null)
         {
-            pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            PlayerController pc = player.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            }
         }
     }
-}
 
     void OnCollisionEnter2D(Collision2D other)
-   {
-    if (other.gameObject.CompareTag("Player"))
     {
-        float damage = Random.Range(damageRange.x, damageRange.y);
-        Debug.Log($"Enemy triggered player for {damage} damage");
-
-        PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-        if (pc != null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            float damage = Random.Range(damageRange.x, damageRange.y);
+            Debug.Log($"Enemy triggered player for {damage} damage");
+
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            }
         }
     }
-}
 }
