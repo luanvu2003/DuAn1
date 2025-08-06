@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 7f;
+    public float jumpForce = 20f;
     public int maxHP = 100;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
             EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
             if (enemyPatrol != null)
             {
-                float damage = Random.Range(15f, 25f);
+                float damage = Random.Range(15f, 30f);
                 enemyPatrol.TakeDamage(damage);
                 AddScore(50);
                 Debug.Log($"Hit enemy patrol for {damage} damage.");
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
             EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
             if (enemyNormal != null)
             {
-                float damage = Random.Range(15f, 25f);
+                float damage = Random.Range(15f, 30f);
                 enemyNormal.TakeDamage(damage);
                 AddScore(50);
                 Debug.Log($"Hit enemy normal for {damage} damage.");
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             Enemy enemy = hit.collider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                float damage = Random.Range(15f, 25f);
+                float damage = Random.Range(15f, 30f);
                 enemy.TakeDamage(damage);
                 AddScore(50);
                 Debug.Log($"Hit enemy for {damage} damage.");
@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("EnemyFirePoint"))
         {
-            TakeDamage(10);
+            TakeDamage(2);
         }
     }
 }
