@@ -706,6 +706,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soi
       objectReference: {fileID: 0}
+    - target: {fileID: 6163628396042199993, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163628396042199993, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.18
+      objectReference: {fileID: 0}
     - target: {fileID: 6239309792105335993, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1
@@ -4841,6 +4849,10 @@ PrefabInstance:
     - target: {fileID: 4915997062141468214, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
       propertyPath: m_Name
       value: Idle_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501791655218155020, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
+      propertyPath: m_TagString
+      value: EnemyFirePoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14501,7 +14513,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 1.1, z: 0}
   m_MaxChunkCount: 16
