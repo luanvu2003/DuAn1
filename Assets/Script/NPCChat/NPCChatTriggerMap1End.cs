@@ -14,9 +14,10 @@ public class NPCChatTriggerMap1End : MonoBehaviour
     // Danh sách câu thoại
     private string[] dialogueLines = new string[]
     {
-        "Cổng đã được mở, hãy đi vào để đi đến ngôi làng bên cạnh.",  
-        "Ở ngôi làng đó có một lối tắt dẫn đến lâu đài.",  
-        "Nhưng ở đó cũng không được an toàn hãy cẩn thận!."
+        "Cổng đã được mở, hãy đi vào để đi đến ngôi làng bên cạnh.",
+        "Ở ngôi làng đó có một lối tắt dẫn đến lâu đài.",
+        "Nhưng ở đó cũng không được an toàn hãy cẩn thận!.",
+        "Chúc bạn may mắn!"
     };
 
     private void Start()
