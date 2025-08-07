@@ -44,7 +44,6 @@ public class Enemy : MonoBehaviour
 
     private float originalScaleX;
     private bool movingRight = true;
-    public HealthItemPool healthItemPool;
 
     void Start()
     {
@@ -182,27 +181,15 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        else
-        animator.SetTrigger("Hurt");
+        //else
+        //animator.Play("Hurt");
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         //animator.Play("Die");
-        if (healthItemPool != null)
-        {
-            healthItemPool.GetAvailableItem(transform.position);
-        }
-=======
-        animator.SetTrigger("Die");
->>>>>>> Stashed changes
-=======
-        animator.SetTrigger("Die");
->>>>>>> Stashed changes
         Destroy(gameObject, 0.5f);
     }
 
