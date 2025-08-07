@@ -14,6 +14,7 @@ public class EnemyNormal : MonoBehaviour
     private bool playerDetected = false;
     private bool isReturning = false;
     private Vector3 initialPosition;
+    
 
     [Header("Health")]
     public float maxHealth = 100f;
@@ -73,6 +74,7 @@ public class EnemyNormal : MonoBehaviour
         {
             playerDetected = true;
             isReturning = false;
+            animator.SetBool("IsWalking", true);
             ChasePlayer();
         }
         else
@@ -84,7 +86,8 @@ public class EnemyNormal : MonoBehaviour
             }
 
             if (isReturning)
-                ReturnToStart();
+            animator.SetBool("IsWalking", false);
+            ReturnToStart();
         }
 
         // Cập nhật vị trí thanh máu
@@ -97,7 +100,6 @@ public class EnemyNormal : MonoBehaviour
 
     void ChasePlayer()
     {
-        //animator.Play("Chase");
         float direction = player.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -106,7 +108,7 @@ public class EnemyNormal : MonoBehaviour
 
     void ReturnToStart()
     {
-        //animator.Play("Return");
+        animator.SetTrigger("Return");
         float direction = initialPosition.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -161,19 +163,29 @@ public class EnemyNormal : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
+<<<<<<< Updated upstream
         //else
         //animator.Play("Hurt");
+=======
+        else
+            animator.SetTrigger("Hurt");
+>>>>>>> Stashed changes
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
+<<<<<<< Updated upstream
         //animator.Play("Die");
         if (healthItemPool != null)
         {
             healthItemPool.GetAvailableItem(transform.position);
         }
+=======
+        animator.SetBool("IsDead", true);
+        animator.SetTrigger("Die");
+>>>>>>> Stashed changes
         Destroy(gameObject, 0.5f);
     }
 
@@ -191,9 +203,17 @@ public class EnemyNormal : MonoBehaviour
 
     void AttackPlayer()
     {
+<<<<<<< Updated upstream
         animator.Play("Attack");
         float damage = Random.Range(damageRange.x, damageRange.y);
         Debug.Log($"Enemy attacked player for {damage} damage");
+=======
+    animator.SetBool("IsWalking", false); // Ngừng đi
+    animator.SetTrigger("Attack");
+
+    float damage = Random.Range(damageRange.x, damageRange.y);
+    Debug.Log($"Enemy attacked player for {damage} damage");
+>>>>>>> Stashed changes
 
         if (player != null)
         {

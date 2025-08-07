@@ -182,19 +182,23 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        //else
-        //animator.Play("Hurt");
+        else
+        animator.SetTrigger("Hurt");
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
+<<<<<<< Updated upstream
         //animator.Play("Die");
         if (healthItemPool != null)
         {
             healthItemPool.GetAvailableItem(transform.position);
         }
+=======
+        animator.SetTrigger("Die");
+>>>>>>> Stashed changes
         Destroy(gameObject, 0.5f);
     }
 
