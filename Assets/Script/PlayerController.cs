@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
                 baseEnemy.TakeDamage(damage);
                 AddScore(50);
             }
-            else if (enemy.TryGetComponent<Enemy>(out var bossEnemy))
+            else if (enemy.TryGetComponent<BossEnemy>(out var bossEnemy))
             {
                 bossEnemy.TakeDamage(damage);
                 AddScore(100);
