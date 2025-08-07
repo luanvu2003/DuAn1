@@ -1,7 +1,8 @@
 // BossEnemy.cs - Fixed version: boss doesn't shift when turning, zones follow correctly
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 public class BossEnemy : MonoBehaviour
 {
     [Header("Movement")]
@@ -185,6 +186,7 @@ public class BossEnemy : MonoBehaviour
         animator.SetTrigger("die");
         rb.velocity = Vector2.zero;
         Destroy(gameObject, 2f);
+        SceneManager.LoadScene("Win");
     }
 
     void UpdateHealthBar()
