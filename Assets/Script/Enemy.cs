@@ -181,15 +181,15 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        //else
-        //animator.Play("Hurt");
+        else
+        animator.SetTrigger("Hurt");
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
-        //animator.Play("Die");
+        animator.SetTrigger("Die");
         Destroy(gameObject, 0.5f);
     }
 
