@@ -126,7 +126,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void ChasePlayer()
     {
-        animator.SetBool("Chase", true);
+        animator.SetTrigger("Run");
         float direction = player.position.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * chaseSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -135,8 +135,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void ReturnToStart()
     {
-        animator.SetBool("Chase", false);
-        //animator.Play("Return");
+        animator.SetTrigger("Run");
         float direction = initialPosition.x - transform.position.x;
         rb.velocity = new Vector2(Mathf.Sign(direction) * patrolSpeed, rb.velocity.y);
         FlipDirectionIfNeeded(direction);
@@ -172,7 +171,7 @@ public class EnemyPatrol : MonoBehaviour
         if (IsGrounded() && IsObstacleAhead())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            animator.Play("Jump");
+            //animator.Play("Jump");
         }
     }
 
@@ -234,7 +233,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void AttackPlayer()
     {
-        animator.Play("Attack");
+        //animator.Play("Attack");
         float damage = Random.Range(damageRange.x, damageRange.y);
         Debug.Log($"Enemy attacked player for {damage} damage");
 
