@@ -42,6 +42,7 @@ public class EnemyPatrol : MonoBehaviour
     private Animator animator;
 
     private float originalScaleX;
+    public HealthItemPool healthItemPool;
 
     void Start()
     {
@@ -208,7 +209,10 @@ public class EnemyPatrol : MonoBehaviour
         rb.velocity = Vector2.zero;
         //animator.Play("Die");
         Debug.Log("Enemy died.");
-
+        if (healthItemPool != null)
+        {
+            healthItemPool.GetAvailableItem(transform.position);
+        }
         Destroy(gameObject, 0.5f);
     }
 
@@ -239,7 +243,7 @@ public class EnemyPatrol : MonoBehaviour
             PlayerController pc = player.GetComponent<PlayerController>();
             if (pc != null)
             {
-                pc.TakeDamage((int)damage); 
+                pc.TakeDamage((int)damage);
             }
         }
     }
@@ -254,7 +258,7 @@ public class EnemyPatrol : MonoBehaviour
             PlayerController pc = other.gameObject.GetComponent<PlayerController>();
             if (pc != null)
             {
-                pc.TakeDamage((int)damage); 
+                pc.TakeDamage((int)damage);
             }
         }
     }
