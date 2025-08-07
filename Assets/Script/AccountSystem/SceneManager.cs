@@ -13,11 +13,13 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void Play()
     {
+        PlayerController.shouldResetUI = true;
         PlayerPrefs.SetString("NextScene", "main");
         SceneManager.LoadScene("Loading");
     }
     public void PlayAgain()
     {
+        PlayerController.shouldResetUI = true;
         PlayerPrefs.SetString("NextScene", "main");
         SceneManager.LoadScene("Loading");
     }
