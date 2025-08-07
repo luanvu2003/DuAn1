@@ -38,7 +38,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers;
     private bool isFacingRight = true;
     private Vector3 attackPointOffset;
-    
+    public static bool shouldResetUI = false; // ✅ Biến toàn cục dùng chung giữa các scene
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -58,7 +59,11 @@ public class PlayerController : MonoBehaviour
         }
         attackPointOffset = attackPoint.localPosition;
         Debug.Log("Offset attack ban đầu: " + attackPoint.localPosition);
-        resetUI();
+        if (shouldResetUI)
+        {
+            resetUI();
+            shouldResetUI = false; // reset xong thì tắt cờ đi
+        }
         UpdateUI();
     }
 
