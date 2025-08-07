@@ -239,7 +239,7 @@ public class EnemyPatrol : MonoBehaviour
             PlayerController pc = player.GetComponent<PlayerController>();
             if (pc != null)
             {
-                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+                pc.TakeDamage((int)damage); 
             }
         }
     }
@@ -254,7 +254,7 @@ public class EnemyPatrol : MonoBehaviour
             PlayerController pc = other.gameObject.GetComponent<PlayerController>();
             if (pc != null)
             {
-                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+                pc.TakeDamage((int)damage); 
             }
         }
     }
