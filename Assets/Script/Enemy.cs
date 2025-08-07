@@ -191,11 +191,15 @@ public class Enemy : MonoBehaviour
         isDead = true;
         rb.velocity = Vector2.zero;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         //animator.Play("Die");
         if (healthItemPool != null)
         {
             healthItemPool.GetAvailableItem(transform.position);
         }
+=======
+        animator.SetTrigger("Die");
+>>>>>>> Stashed changes
 =======
         animator.SetTrigger("Die");
 >>>>>>> Stashed changes
