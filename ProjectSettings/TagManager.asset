@@ -10,6 +10,7 @@ TagManager:
   - Trap
   - EnemyFirePoint
   - Front
+  - Attack
   layers:
   - Default
   - TransparentFX
