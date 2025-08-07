@@ -5,11 +5,10 @@ public class BossEnemy : MonoBehaviour
 {
     [Header("Movement")]
     public float chaseSpeed = 2f;
-    private bool isFacingRight = true;
 
     [Header("Detection & Attack")]
     public float detectionRange = 5f;
-    public float attackRange = 1.2f;
+    public float attackRange = 2f;
     public float skillRange = 3f;
     public float attackCooldown = 2f;
     private float lastAttackTime = 0f;
@@ -21,6 +20,8 @@ public class BossEnemy : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth;
     private bool isDead = false;
+    private float initialScaleX;
+
 
     [Header("Health Bar")]
     private Image healthFillImage;
@@ -42,6 +43,7 @@ public class BossEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        initialScaleX = transform.localScale.x;
 
         currentHealth = maxHealth;
 
@@ -49,8 +51,6 @@ public class BossEnemy : MonoBehaviour
         if (fill != null)
             healthFillImage = fill.GetComponent<Image>();
 
-        // Reset direction
-        isFacingRight = true;
     }
 
     void Update()
@@ -64,6 +64,8 @@ public class BossEnemy : MonoBehaviour
         if (distance <= attackRange && Time.time >= lastAttackTime + attackCooldown)
         {
             Attack();
+            Debug.Log("Ready to attack");
+
         }
         else if (distance <= skillRange && Time.time >= lastSkillTime + skillCooldown)
         {
@@ -98,19 +100,16 @@ public class BossEnemy : MonoBehaviour
     {
         if (player == null) return;
 
-        if (player.position.x > transform.position.x && !isFacingRight)
-            Flip();
-        else if (player.position.x < transform.position.x && isFacingRight)
-            Flip();
-    }
-
-    void Flip()
-    {
-        isFacingRight = !isFacingRight;
         Vector3 scale = transform.localScale;
-        scale.x *= -1;
+
+        if (player.position.x > transform.position.x)
+        scale.x = Mathf.Abs(initialScaleX); // Hướng phải
+        else
+        scale.x = -Mathf.Abs(initialScaleX); // Hướng trái
+
         transform.localScale = scale;
     }
+
 
     void Attack()
     {
@@ -136,9 +135,13 @@ public class BossEnemy : MonoBehaviour
 
     void SpawnSpell()
     {
-        if (spellPrefab != null && spellSpawnPoint != null)
-            Instantiate(spellPrefab, spellSpawnPoint.position, Quaternion.identity);
+        if (spellPrefab != null && player != null)
+        {
+            Vector3 offset = new Vector3(0, 2f, 0); // spawn tren dau
+            Instantiate(spellPrefab, player.position + offset, Quaternion.identity);
+        }
     }
+
 
     public void TakeDamage(float amount)
     {
