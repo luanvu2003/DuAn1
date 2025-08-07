@@ -26,8 +26,8 @@ public class SceneSwitcher : MonoBehaviour
         PlayerPrefs.SetString("NextScene", "MainMenu"); 
         SceneManager.LoadScene("Loading");
     }
-    // public void Exit()
-    // {
-
-    // }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,13 +33,21 @@ public class PlayerController : MonoBehaviour
     private float inputHorizontal;
     private float inputVertical;
 
+    public float attackCooldown = 1f;
+    private float lastAttackTime = -Mathf.Infinity;
+    public Transform attackPoint;
+    public float attackRange = 1f;
+    public LayerMask enemyLayers;
+    private bool isFacingRight = true;
+    private Vector3 attackPointOffset;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         currentHP = maxHP;
-
+        attackPointOffset = attackPoint.localPosition;
+        Debug.Log("Offset attack ban đầu: " + attackPoint.localPosition);
         UpdateUI();
     }
 
@@ -56,7 +65,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && !isBlocking)
         {
-            Attack();
+            if (Time.time - lastAttackTime >= attackCooldown)
+            {
+                Attack();
+                lastAttackTime = Time.time;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
@@ -73,11 +86,17 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
-        if (inputHorizontal > 0)
-            transform.localScale = new Vector3(ScalePlayer, ScalePlayer, ScalePlayer);
-        if (inputHorizontal < 0)
-            transform.localScale = new Vector3(-ScalePlayer, ScalePlayer, ScalePlayer);
+
+        if (inputHorizontal > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (inputHorizontal < 0 && isFacingRight)
+        {
+            Flip();
+        }
     }
+
 
     void Jump()
     {
@@ -122,44 +141,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     void Attack()
     {
+        if (isDead) return;
+
         animator.SetTrigger("Attack");
 
-        Vector2 attackDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, attackDirection, 1.5f, LayerMask.GetMask("Enemy"));
+        Vector2 attackDir = isFacingRight ? Vector2.right : Vector2.left;
+        Vector3 attackOrigin = attackPoint.position;
 
-        if (hit.collider != null)
+        // Vẽ debug để bạn nhìn thấy trong Scene
+        Debug.DrawRay(attackOrigin, attackDir * attackRange, Color.red, 0.5f);
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOrigin + (Vector3)(attackDir * attackRange), attackRange, enemyLayers);
+        Debug.Log("Enemies hit: " + hitEnemies.Length);
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            EnemyPatrol enemyPatrol = hit.collider.GetComponent<EnemyPatrol>();
-            if (enemyPatrol != null)
+            float damage = Random.Range(15f, 30f);
+
+            if (enemy.TryGetComponent<EnemyPatrol>(out var patrol))
             {
-                float damage = Random.Range(15f, 30f);
-                enemyPatrol.TakeDamage(damage);
+                patrol.TakeDamage(damage);
                 AddScore(50);
-                Debug.Log($"Hit enemy patrol for {damage} damage.");
+            }
+            else if (enemy.TryGetComponent<EnemyNormal>(out var normal))
+            {
+                normal.TakeDamage(damage);
+                AddScore(50);
+            }
+            else if (enemy.TryGetComponent<Enemy>(out var baseEnemy))
+            {
+                baseEnemy.TakeDamage(damage);
+                AddScore(50);
             }
 
-            EnemyNormal enemyNormal = hit.collider.GetComponent<EnemyNormal>();
-            if (enemyNormal != null)
-            {
-                float damage = Random.Range(15f, 30f);
-                enemyNormal.TakeDamage(damage);
-                AddScore(50);
-                Debug.Log($"Hit enemy normal for {damage} damage.");
-            }
-
-            Enemy enemy = hit.collider.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                float damage = Random.Range(15f, 30f);
-                enemy.TakeDamage(damage);
-                AddScore(50);
-                Debug.Log($"Hit enemy for {damage} damage.");
-            }
+            Debug.Log($"Hit {enemy.name} for {damage} damage.");
         }
-
-
     }
 
 
@@ -248,22 +267,51 @@ public class PlayerController : MonoBehaviour
     {
         return currentHP;
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("Coin"))
+        if (other.CompareTag("Coin"))
         {
             AddCoin(1);
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
 
-        if (collision.CompareTag("Trap"))
+        if (other.CompareTag("Trap"))
         {
             Debug.Log("Player va vào bẫy!");
             Die();
         }
-        if (collision.CompareTag("EnemyFirePoint"))
+        if (other.CompareTag("EnemyFirePoint"))
         {
             TakeDamage(2);
         }
+
     }
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+
+        // Flip nhân vật
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+
+        // Flip cả attackPoint theo
+        Vector3 attackScale = attackPoint.localScale;
+        attackScale.x *= -1;
+        attackPoint.localScale = attackScale;
+    }
+    public void Heal(int amount)
+    {
+        currentHP += amount;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateUI();
+    }
+
 }

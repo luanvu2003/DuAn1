@@ -38,6 +38,7 @@ public class EnemyNormal : MonoBehaviour
 
     private float originalScaleX;
     private bool movingRight = true;
+    public HealthItemPool healthItemPool;
 
     void Start()
     {
@@ -161,7 +162,7 @@ public class EnemyNormal : MonoBehaviour
         if (currentHealth <= 0)
             Die();
         //else
-            //animator.Play("Hurt");
+        //animator.Play("Hurt");
     }
 
     void Die()
@@ -169,6 +170,10 @@ public class EnemyNormal : MonoBehaviour
         isDead = true;
         rb.velocity = Vector2.zero;
         //animator.Play("Die");
+        if (healthItemPool != null)
+        {
+            healthItemPool.GetAvailableItem(transform.position);
+        }
         Destroy(gameObject, 0.5f);
     }
 
@@ -186,32 +191,32 @@ public class EnemyNormal : MonoBehaviour
 
     void AttackPlayer()
     {
-    animator.Play("Attack");
-    float damage = Random.Range(damageRange.x, damageRange.y);
-    Debug.Log($"Enemy attacked player for {damage} damage");
+        animator.Play("Attack");
+        float damage = Random.Range(damageRange.x, damageRange.y);
+        Debug.Log($"Enemy attacked player for {damage} damage");
 
-    if (player != null)
-    {
-        PlayerController pc = player.GetComponent<PlayerController>();
-        if (pc != null)
+        if (player != null)
         {
-            pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            PlayerController pc = player.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            }
         }
     }
-}
 
     void OnCollisionEnter2D(Collision2D other)
     {
-    if (other.gameObject.CompareTag("Player"))
-    {
-        float damage = Random.Range(damageRange.x, damageRange.y);
-        Debug.Log($"Enemy triggered player for {damage} damage");
-
-        PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-        if (pc != null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            float damage = Random.Range(damageRange.x, damageRange.y);
+            Debug.Log($"Enemy triggered player for {damage} damage");
+
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+            }
         }
     }
-}
 }
