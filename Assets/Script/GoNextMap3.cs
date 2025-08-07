@@ -8,6 +8,11 @@ public class GoNextMap3 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.SavePlayerProgress();
+            }
             PlayerPrefs.SetString("NextScene", "map3");
             SceneManager.LoadScene("Loading");
         }
