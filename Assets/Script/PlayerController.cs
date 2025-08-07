@@ -307,4 +307,11 @@ public class PlayerController : MonoBehaviour
         attackScale.x *= -1;
         attackPoint.localScale = attackScale;
     }
+    public void Heal(int amount)
+    {
+        currentHP += amount;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateUI();
+    }
+
 }

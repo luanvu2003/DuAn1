@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
 
     private float originalScaleX;
     private bool movingRight = true;
+    public HealthItemPool healthItemPool;
 
     void Start()
     {
@@ -190,6 +191,10 @@ public class Enemy : MonoBehaviour
         isDead = true;
         rb.velocity = Vector2.zero;
         //animator.Play("Die");
+        if (healthItemPool != null)
+        {
+            healthItemPool.GetAvailableItem(transform.position);
+        }
         Destroy(gameObject, 0.5f);
     }
 
