@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
     private bool isClimbing = false;
     private bool isBlocking = false;
     private bool isDead = false;
-
-    private float ScalePlayer = 0.6125f;
     private float inputHorizontal;
     private float inputVertical;
 
@@ -40,12 +38,24 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers;
     private bool isFacingRight = true;
     private Vector3 attackPointOffset;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-        currentHP = maxHP;
+        if (PlayerPrefs.HasKey("player_hp"))
+        {
+            currentHP = PlayerPrefs.GetInt("player_hp");
+            score = PlayerPrefs.GetInt("player_score");
+            coin = PlayerPrefs.GetInt("player_coin");
+        }
+        else
+        {
+            currentHP = maxHP;
+            score = 0;
+            coin = 0;
+        }
         attackPointOffset = attackPoint.localPosition;
         Debug.Log("Offset attack ban đầu: " + attackPoint.localPosition);
         UpdateUI();
@@ -176,6 +186,11 @@ public class PlayerController : MonoBehaviour
                 baseEnemy.TakeDamage(damage);
                 AddScore(50);
             }
+            else if (enemy.TryGetComponent<BossEnemy>(out var bossEnemy))
+            {
+                bossEnemy.TakeDamage(damage);
+                AddScore(100);
+            }
 
             Debug.Log($"Hit {enemy.name} for {damage} damage.");
         }
@@ -263,6 +278,16 @@ public class PlayerController : MonoBehaviour
         UpdateUI();
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public int GetCoin()
+    {
+        return coin;
+    }
+
     public int GetCurrentHP()
     {
         return currentHP;
@@ -312,6 +337,13 @@ public class PlayerController : MonoBehaviour
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         UpdateUI();
+    }
+    public void SavePlayerProgress()
+    {
+        PlayerPrefs.SetInt("player_hp", currentHP);
+        PlayerPrefs.SetInt("player_score", score);
+        PlayerPrefs.SetInt("player_coin", coin);
+        PlayerPrefs.Save();
     }
 
 }
