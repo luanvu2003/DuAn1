@@ -73,6 +73,7 @@ public class EnemyNormal : MonoBehaviour
         {
             playerDetected = true;
             isReturning = false;
+            animator.SetBool("IsWalking", true);
             ChasePlayer();
         }
         else
@@ -84,7 +85,10 @@ public class EnemyNormal : MonoBehaviour
             }
 
             if (isReturning)
+            {
+                animator.SetBool("IsWalking", false);
                 ReturnToStart();
+            }
         }
 
         // Cập nhật vị trí thanh máu
@@ -161,15 +165,15 @@ public class EnemyNormal : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        //else
-        //animator.Play("Hurt");
+        else
+            animator.SetTrigger("Hurt");
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
-        //animator.Play("Die");
+        animator.SetTrigger("Die");
         if (healthItemPool != null)
         {
             healthItemPool.GetAvailableItem(transform.position);

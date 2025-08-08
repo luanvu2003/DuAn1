@@ -30,7 +30,6 @@ public class HealthItemPool : MonoBehaviour
             }
         }
 
-        // Nếu không có item nào rảnh, có thể tạo thêm hoặc return null
         Debug.LogWarning("Pool full, no health item available!");
         return null;
     }
