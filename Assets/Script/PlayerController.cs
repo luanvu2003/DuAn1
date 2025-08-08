@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers;
     private bool isFacingRight = true;
     private Vector3 attackPointOffset;
+    public static bool shouldResetUI = false; // ✅ Biến toàn cục dùng chung giữa các scene
 
     void Start()
     {
@@ -58,6 +59,11 @@ public class PlayerController : MonoBehaviour
         }
         attackPointOffset = attackPoint.localPosition;
         Debug.Log("Offset attack ban đầu: " + attackPoint.localPosition);
+        if (shouldResetUI)
+        {
+            resetUI();
+            shouldResetUI = false; // reset xong thì tắt cờ đi
+        }
         UpdateUI();
     }
 
@@ -232,9 +238,9 @@ public class PlayerController : MonoBehaviour
             healthBarImage.transform.parent.gameObject.SetActive(false);
 
         Debug.Log("Player died.");
-
         // ✅ Chuyển sang scene thua sau 1.5 giây
         Invoke("LoadGameOverScene", 0.5f);
+        resetUI();
     }
 
     void LoadGameOverScene()
@@ -345,5 +351,10 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("player_coin", coin);
         PlayerPrefs.Save();
     }
-
+    public void resetUI()
+    {
+        currentHP = maxHP;
+        score = 0;
+        coin = 0;
+    }
 }
