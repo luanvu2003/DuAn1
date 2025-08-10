@@ -17,7 +17,7 @@ public class SpellEffect : MonoBehaviour
         {
             PlayerController pc = col.GetComponent<PlayerController>();
             if (pc != null)
-                pc.TakeDamage(damage);
+                pc.TakeDamage(damage, this.transform);
         }
     }
 }

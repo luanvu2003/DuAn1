@@ -137,7 +137,7 @@ public class BossEnemy : MonoBehaviour
             float dist = Vector2.Distance(attackZone.position, player.position);
             if (dist <= attackZoneRadius + 0.3f)
             {
-                pc.TakeDamage((int)damage);
+                pc.TakeDamage((int)damage, this.transform);
             }
         }
 
