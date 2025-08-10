@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour
     private bool isFacingRight = true;
     private Vector3 attackPointOffset;
     public static bool shouldResetUI = false; // ✅ Biến toàn cục dùng chung giữa các scene
-
+    [Header("Knockback")]
+    public float knockbackDuration = 0.2f; // Thời gian player bị đẩy lùi
+    public float knockbackForce = 20f; // Lực đẩy
+    private bool isKnockedBack = false; // Trạng thái bị đẩy lùi
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,7 +72,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return;
+        if (isKnockedBack || isDead)
+        {
+            return;
+        }
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
@@ -95,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            TakeDamage(10);
+            TakeDamage(10, this.transform);
         }
     }
 
@@ -171,25 +177,30 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(attackOrigin, attackDir * attackRange, Color.red, 0.5f);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOrigin + (Vector3)(attackDir * attackRange), attackRange, enemyLayers);
+
         Debug.Log("Enemies hit: " + hitEnemies.Length);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             float damage = Random.Range(15f, 30f);
-
+            float knockbackForce = 500f; // Lực đẩy, bạn có thể tùy chỉnh
+            Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
             if (enemy.TryGetComponent<EnemyPatrol>(out var patrol))
             {
                 patrol.TakeDamage(damage);
+                patrol.Knockback(knockbackDirection, knockbackForce);
                 AddScore(50);
             }
             else if (enemy.TryGetComponent<EnemyNormal>(out var normal))
             {
                 normal.TakeDamage(damage);
+                normal.Knockback(knockbackDirection, knockbackForce);
                 AddScore(50);
             }
             else if (enemy.TryGetComponent<Enemy>(out var baseEnemy))
             {
                 baseEnemy.TakeDamage(damage);
+                baseEnemy.Knockback(knockbackDirection, knockbackForce);
                 AddScore(50);
             }
             else if (enemy.TryGetComponent<BossEnemy>(out var bossEnemy))
@@ -208,7 +219,7 @@ public class PlayerController : MonoBehaviour
         //animator.SetTrigger("Skill");
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Transform attacker)
     {
         if (isDead) return;
 
@@ -220,7 +231,8 @@ public class PlayerController : MonoBehaviour
 
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-
+        Vector2 knockbackDirection = (transform.position - attacker.position).normalized;
+        Knockback(knockbackDirection, knockbackForce);
         //animator.SetTrigger("Hurt");
         Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
@@ -242,7 +254,20 @@ public class PlayerController : MonoBehaviour
         Invoke("LoadGameOverScene", 0.5f);
         resetUI();
     }
+    private void Knockback(Vector2 direction, float force)
+    {
+        isKnockedBack = true;
+        rb.velocity = Vector2.zero; // Reset vận tốc trước khi thêm lực
+        rb.AddForce(direction * force);
+        StartCoroutine(StopKnockback());
+    }
 
+    private IEnumerator StopKnockback()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false;
+        rb.velocity = Vector2.zero; // Dừng chuyển động sau khi hết knockback
+    }
     void LoadGameOverScene()
     {
         SceneManager.LoadScene("Lose");
@@ -313,7 +338,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("EnemyFirePoint"))
         {
-            TakeDamage(2);
+            TakeDamage(2, this.transform);
         }
 
     }

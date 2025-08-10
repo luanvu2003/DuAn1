@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,8 @@ public class Enemy : MonoBehaviour
     private float originalScaleX;
     private bool movingRight = true;
     public HealthItemPool healthItemPool;
+    public float knockbackDuration = 0.2f;
+    protected bool isKnockedBack = false;
     void Start()
     {
         currentHealth = maxHealth;
@@ -99,7 +102,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void Knockback(Vector2 knockbackDirection, float knockbackForce)
+    {
+        if (isDead) return;
 
+        // Bật trạng thái bị đẩy lùi
+        isKnockedBack = true;
+
+        // Thêm lực đẩy
+        rb.velocity = Vector2.zero; // Reset vận tốc trước khi thêm lực để hiệu ứng mượt hơn
+        rb.AddForce(knockbackDirection * knockbackForce);
+
+        // Bắt đầu Coroutine để dừng hiệu ứng knockback sau 1 khoảng thời gian
+        StartCoroutine(StopKnockback());
+    }
+
+    protected IEnumerator StopKnockback()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false;
+        // Sau khi hết thời gian, dừng chuyển động để enemy không bị trôi
+        rb.velocity = Vector2.zero;
+    }
     void UseRangedSkill()
     {
         float timeSinceLastSkill = Time.time - lastSkillTime;
@@ -182,7 +206,7 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
             Die();
         else
-        animator.SetTrigger("Hurt");
+            animator.SetTrigger("Hurt");
     }
 
     void Die()

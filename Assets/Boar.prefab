@@ -305,6 +305,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  healthItemPool: {fileID: 0}
+  knockbackDuration: 0.2
+  attackCooldown: 1
 --- !u!60 &5896362429162719559
 PolygonCollider2D:
   m_ObjectHideFlags: 0
