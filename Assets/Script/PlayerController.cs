@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             float damage = Random.Range(15f, 30f);
-            float knockbackForce = 1500f; // Lực đẩy, bạn có thể tùy chỉnh
+            float knockbackForce = 500f; // Lực đẩy, bạn có thể tùy chỉnh
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
             if (enemy.TryGetComponent<EnemyPatrol>(out var patrol))
             {
