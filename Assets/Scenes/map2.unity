@@ -8188,6 +8188,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soi (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3260433429715408948, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260433429715408948, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_Color.g
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260433429715408948, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10501,6 +10513,14 @@ PrefabInstance:
     - target: {fileID: 4915997062141468214, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
       propertyPath: m_Name
       value: Idle_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564613675176690728, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564613675176690728, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.085
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15261,6 +15281,18 @@ PrefabInstance:
     - target: {fileID: 2676499158414547082, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
       propertyPath: m_Name
       value: Soi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260433429715408948, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260433429715408948, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_Color.g
+      value: 0.24705887
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260433429715408948, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
