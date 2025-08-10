@@ -9,8 +9,8 @@ TagManager:
   - NPC
   - Trap
   - EnemyFirePoint
-  - Front
   - Attack
+  - Ground
   layers:
   - Default
   - TransparentFX

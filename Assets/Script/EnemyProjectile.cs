@@ -20,20 +20,30 @@ public class EnemyProjectile : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Player"))
     {
-        if (collision.CompareTag("Player"))
-        {
-            // Gây sát thương cho player
-            // collision.GetComponent<PlayerHealth>()?.TakeDamage(damage);
-            Debug.Log($"Projectile hit player for {damage} damage");
-            Destroy(gameObject);
-        }
+        // Gây sát thương cho player
+        PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
+            if (pc != null)
+            {
+                pc.TakeDamage((int)damage, this.transform); // ✅ Gây sát thương vào PlayerController
+            }
+
+        Destroy(gameObject);
     }
-    void OnCollisionEnter2D(Collision2D other)
+    else if (collision.CompareTag("Ground")) // 🔹 Chạm đất thì huỷ
     {
-        if (other.gameObject.CompareTag("Front"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
+}
+
+void OnCollisionEnter2D(Collision2D other)
+{
+    if (other.gameObject.CompareTag("Ground")) // 🔹 Chạm đất thì huỷ
+    {
+        Destroy(gameObject);
+    }
+}
+
 }
