@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Health Bar (No Prefab)")]
     private Image healthFillImage;
-    public Vector3 healthBarOffset = new Vector3(0, 1.2f, 0);
+    public Vector3 healthBarOffset = new Vector3(0, 0.5f, 0);
 
     [Header("Jumping Over Obstacles")]
     public float jumpForce = 7f;
