@@ -1761,6 +1761,10 @@ PrefabInstance:
       propertyPath: healthItemPool
       value: 
       objectReference: {fileID: 1983775317}
+    - target: {fileID: 923693082128315991, guid: 506b603e6ccb4364fb51c567113d353d, type: 3}
+      propertyPath: healthBarOffset.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2249497010416718580, guid: 506b603e6ccb4364fb51c567113d353d, type: 3}
       propertyPath: m_Name
       value: Boar (2)
@@ -1847,6 +1851,10 @@ PrefabInstance:
       propertyPath: healthItemPool
       value: 
       objectReference: {fileID: 1983775317}
+    - target: {fileID: 923693082128315991, guid: 506b603e6ccb4364fb51c567113d353d, type: 3}
+      propertyPath: healthBarOffset.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2249497010416718580, guid: 506b603e6ccb4364fb51c567113d353d, type: 3}
       propertyPath: m_Name
       value: Boar (1)
@@ -10510,6 +10518,10 @@ PrefabInstance:
       propertyPath: healthItemPool
       value: 
       objectReference: {fileID: 1983775317}
+    - target: {fileID: 3532753134796556294, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
+      propertyPath: healthBarOffset.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4915997062141468214, guid: 3203fd19e5dc152428b89592611a2e79, type: 3}
       propertyPath: m_Name
       value: Idle_0
@@ -15168,6 +15180,10 @@ PrefabInstance:
       propertyPath: healthItemPool
       value: 
       objectReference: {fileID: 1983775317}
+    - target: {fileID: 4508176803392196299, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
+      propertyPath: healthBarOffset.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4667698078121176432, guid: b576dfc24220dbf4fa4445dd6a9d93d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.92
