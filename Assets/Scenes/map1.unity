@@ -5648,7 +5648,6 @@ MonoBehaviour:
   - {fileID: 649429840}
   - {fileID: 370210064}
   - {fileID: 54826871}
-  - {fileID: 0}
   objectsToEnable:
   - {fileID: 1748662435}
   - {fileID: 1833806458}
