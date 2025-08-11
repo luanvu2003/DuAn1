@@ -1,7 +1,6 @@
 // BossEnemy.cs - Fixed version: boss doesn't shift when turning, zones follow correctly
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 public class BossEnemy : MonoBehaviour
 {
