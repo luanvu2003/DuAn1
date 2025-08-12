@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public int maxHP = 200;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
+    private string currentScene;
 
     public Image healthBarImage;
     public TMP_Text scoreText;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        currentScene = SceneManager.GetActiveScene().name;
 
         if (PlayerPrefs.HasKey("player_hp"))
         {
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Climb();
         HandleAnimation();
+        HandleSkills();
 
         if (Input.GetMouseButtonDown(0) && !isBlocking)
         {
@@ -102,21 +105,48 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (!isCastingSkill && Time.time >= lastSkillTime + skillCooldown)
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-                StartCoroutine(CastSkill(1));
-            else if (Input.GetKeyDown(KeyCode.Y))
-                StartCoroutine(CastSkill(2));
-            else if (Input.GetKeyDown(KeyCode.U))
-                StartCoroutine(CastSkill(3));
-        }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
             TakeDamage(10, this.transform);
         }
     }
+    void HandleSkills()
+    {
+        // Mặc định: không dùng skill ở map1
+        bool canUseSkill1 = false;
+        bool canUseSkill2 = false;
+        bool canUseSkill3 = false;
+
+        switch (currentScene)
+        {
+            case "map2":
+                canUseSkill1 = true;
+                break;
+
+            case "map3":
+                canUseSkill1 = true;
+                canUseSkill2 = true;
+                break;
+
+            case "mapboss":
+                canUseSkill1 = true;
+                canUseSkill2 = true;
+                canUseSkill3 = true;
+                break;
+        }
+
+        if (!isCastingSkill && Time.time >= lastSkillTime + skillCooldown)
+        {
+            if (canUseSkill1 && Input.GetKeyDown(KeyCode.T))
+                StartCoroutine(CastSkill(1));
+            else if (canUseSkill2 && Input.GetKeyDown(KeyCode.Y))
+                StartCoroutine(CastSkill(2));
+            else if (canUseSkill3 && Input.GetKeyDown(KeyCode.U))
+                StartCoroutine(CastSkill(3));
+        }
+    }
+
 
     void Move()
     {
