@@ -2,20 +2,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 20f;
-    public int maxHP = 100;
+    public int maxHP = 200;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
 
-    public Image healthBarImage; // 🔄 Thay Slider bằng Image có fillAmount
+    public Image healthBarImage;
     public TMP_Text scoreText;
     public TMP_Text coinText;
+
+    [Header("Skill Casting")]
+    public GameObject spellPrefab;    // Skill 1
+    public GameObject spellPrefab2;   // Skill 2
+    public GameObject spellPrefab3;   // Skill 3
+    public float skillCooldown = 5f;
+
+    private float lastSkillTime = -999f;
+    private bool isCastingSkill = false;
 
     private int currentHP;
     private int score = 0;
@@ -31,23 +39,26 @@ public class PlayerController : MonoBehaviour
     private float inputHorizontal;
     private float inputVertical;
 
-    public float attackCooldown = 1f;
+    public float attackCooldown = 0.3f;
     private float lastAttackTime = -Mathf.Infinity;
     public Transform attackPoint;
     public float attackRange = 1f;
     public LayerMask enemyLayers;
     private bool isFacingRight = true;
     private Vector3 attackPointOffset;
-    public static bool shouldResetUI = false; // ✅ Biến toàn cục dùng chung giữa các scene
+    public static bool shouldResetUI = false;
+
     [Header("Knockback")]
-    public float knockbackDuration = 0.2f; // Thời gian player bị đẩy lùi
-    public float knockbackForce = 20f; // Lực đẩy
-    private bool isKnockedBack = false; // Trạng thái bị đẩy lùi
+    public float knockbackDuration = 0.2f;
+    public float knockbackForce = 20f;
+    private bool isKnockedBack = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+
         if (PlayerPrefs.HasKey("player_hp"))
         {
             currentHP = PlayerPrefs.GetInt("player_hp");
@@ -60,22 +71,19 @@ public class PlayerController : MonoBehaviour
             score = 0;
             coin = 0;
         }
+
         attackPointOffset = attackPoint.localPosition;
-        Debug.Log("Offset attack ban đầu: " + attackPoint.localPosition);
         if (shouldResetUI)
         {
             resetUI();
-            shouldResetUI = false; // reset xong thì tắt cờ đi
+            shouldResetUI = false;
         }
         UpdateUI();
     }
 
     void Update()
     {
-        if (isKnockedBack || isDead)
-        {
-            return;
-        }
+        if (isKnockedBack || isDead) return;
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
@@ -94,9 +102,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (!isCastingSkill && Time.time >= lastSkillTime + skillCooldown)
         {
-            UseSkill();
+            if (Input.GetKeyDown(KeyCode.T))
+                StartCoroutine(CastSkill(1));
+            else if (Input.GetKeyDown(KeyCode.Y))
+                StartCoroutine(CastSkill(2));
+            else if (Input.GetKeyDown(KeyCode.U))
+                StartCoroutine(CastSkill(3));
         }
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -109,16 +122,9 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(inputHorizontal * moveSpeed, rb.velocity.y);
 
-        if (inputHorizontal > 0 && !isFacingRight)
-        {
-            Flip();
-        }
-        else if (inputHorizontal < 0 && isFacingRight)
-        {
-            Flip();
-        }
+        if (inputHorizontal > 0 && !isFacingRight) Flip();
+        else if (inputHorizontal < 0 && isFacingRight) Flip();
     }
-
 
     void Jump()
     {
@@ -163,7 +169,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void Attack()
     {
         if (isDead) return;
@@ -173,68 +178,54 @@ public class PlayerController : MonoBehaviour
         Vector2 attackDir = isFacingRight ? Vector2.right : Vector2.left;
         Vector3 attackOrigin = attackPoint.position;
 
-        // Vẽ debug để bạn nhìn thấy trong Scene
-        Debug.DrawRay(attackOrigin, attackDir * attackRange, Color.red, 0.5f);
-
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOrigin + (Vector3)(attackDir * attackRange), attackRange, enemyLayers);
-
-        Debug.Log("Enemies hit: " + hitEnemies.Length);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             float damage = Random.Range(15f, 30f);
-            float knockbackForce = 500f; // Lực đẩy, bạn có thể tùy chỉnh
+            float knockbackForce = 500f;
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
-            if (enemy.TryGetComponent<EnemyPatrol>(out var patrol))
-            {
-                patrol.TakeDamage(damage);
-                patrol.Knockback(knockbackDirection, knockbackForce);
-                AddScore(50);
-            }
-            else if (enemy.TryGetComponent<EnemyNormal>(out var normal))
+
+            // ✅ Gây damage cho EnemyNormal
+            if (enemy.TryGetComponent<EnemyNormal>(out var normal))
             {
                 normal.TakeDamage(damage);
                 normal.Knockback(knockbackDirection, knockbackForce);
                 AddScore(50);
             }
+            // ✅ Gây damage cho EnemyPatrol
+            else if (enemy.TryGetComponent<EnemyPatrol>(out var patrol))
+            {
+                patrol.TakeDamage(damage);
+                patrol.Knockback(knockbackDirection, knockbackForce);
+                AddScore(50);
+            }
+            // ✅ Gây damage cho Enemy (base)
             else if (enemy.TryGetComponent<Enemy>(out var baseEnemy))
             {
                 baseEnemy.TakeDamage(damage);
                 baseEnemy.Knockback(knockbackDirection, knockbackForce);
                 AddScore(50);
             }
-            else if (enemy.TryGetComponent<BossEnemy>(out var bossEnemy))
+            // ✅ Gây damage cho BossEnemy (không knockback)
+            else if (enemy.TryGetComponent<BossEnemy>(out var boss))
             {
-                bossEnemy.TakeDamage(damage);
+                boss.TakeDamage(damage);
                 AddScore(100);
             }
-
-            Debug.Log($"Hit {enemy.name} for {damage} damage.");
         }
     }
 
-
-    void UseSkill()
-    {
-        //animator.SetTrigger("Skill");
-    }
 
     public void TakeDamage(int damage, Transform attacker)
     {
         if (isDead) return;
-
-        if (isBlocking)
-        {
-            Debug.Log("Blocked damage!");
-            return;
-        }
+        if (isBlocking) return;
 
         currentHP -= damage;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         Vector2 knockbackDirection = (transform.position - attacker.position).normalized;
         Knockback(knockbackDirection, knockbackForce);
-        //animator.SetTrigger("Hurt");
-        Debug.Log("Player took damage: " + damage + " | Current HP: " + currentHP);
 
         UpdateUI();
     }
@@ -249,15 +240,14 @@ public class PlayerController : MonoBehaviour
         if (healthBarImage != null)
             healthBarImage.transform.parent.gameObject.SetActive(false);
 
-        Debug.Log("Player died.");
-        // ✅ Chuyển sang scene thua sau 1.5 giây
         Invoke("LoadGameOverScene", 0.5f);
         resetUI();
     }
+
     private void Knockback(Vector2 direction, float force)
     {
         isKnockedBack = true;
-        rb.velocity = Vector2.zero; // Reset vận tốc trước khi thêm lực
+        rb.velocity = Vector2.zero;
         rb.AddForce(direction * force);
         StartCoroutine(StopKnockback());
     }
@@ -266,13 +256,13 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(knockbackDuration);
         isKnockedBack = false;
-        rb.velocity = Vector2.zero; // Dừng chuyển động sau khi hết knockback
+        rb.velocity = Vector2.zero;
     }
+
     void LoadGameOverScene()
     {
         SceneManager.LoadScene("Lose");
     }
-
 
     bool IsGrounded()
     {
@@ -309,20 +299,10 @@ public class PlayerController : MonoBehaviour
         UpdateUI();
     }
 
-    public int GetScore()
-    {
-        return score;
-    }
+    public int GetScore() => score;
+    public int GetCoin() => coin;
+    public int GetCurrentHP() => currentHP;
 
-    public int GetCoin()
-    {
-        return coin;
-    }
-
-    public int GetCurrentHP()
-    {
-        return currentHP;
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin"))
@@ -333,42 +313,123 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Trap"))
         {
-            Debug.Log("Player va vào bẫy!");
             Die();
         }
+
         if (other.CompareTag("EnemyFirePoint"))
         {
             TakeDamage(2, this.transform);
         }
-
     }
+
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+    IEnumerator CastSkill(int skillNumber)
+    {
+        isCastingSkill = true;
+        lastSkillTime = Time.time;
+        rb.velocity = Vector2.zero;
+
+        if (animator != null)
+            animator.SetTrigger("Skill");
+
+        // Delay để phù hợp với animation cast skill
+        yield return new WaitForSeconds(0.7f);
+
+        switch (skillNumber)
+        {
+            case 1:
+                Skill1_SummonAtNearestEnemy();
+                break;
+            case 2:
+                StartCoroutine(Skill2_RainSpells());
+                break;
+            case 3:
+                Skill3_AOEDamage();
+                break;
+        }
+
+        // Đợi thêm 0.5s để kết thúc casting
+        yield return new WaitForSeconds(0.5f);
+        isCastingSkill = false;
+    }
+
+    void Skill1_SummonAtNearestEnemy()
+    {
+        if (spellPrefab == null) return;
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 10f, enemyLayers);
+        if (enemies.Length == 0) return;
+
+        Transform nearestEnemy = enemies[0].transform;
+        float minDistance = Vector2.Distance(transform.position, nearestEnemy.position);
+
+        foreach (Collider2D enemy in enemies)
+        {
+            float dist = Vector2.Distance(transform.position, enemy.transform.position);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                nearestEnemy = enemy.transform;
+            }
+        }
+
+        Instantiate(spellPrefab, nearestEnemy.position, Quaternion.identity);
+    }
+
+    IEnumerator Skill2_RainSpells()
+    {
+        if (spellPrefab2 == null) yield break;
+
+        int count = 5; // số lượng spell rơi xuống
+        float radius = 5f; // bán kính rơi quanh player
+        float height = 8f; // độ cao rơi
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * radius;
+            spawnPos.y += height; // tăng y lên để spell rơi từ trên trời
+
+            Instantiate(spellPrefab2, spawnPos, Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    void Skill3_AOEDamage()
+    {
+        if (spellPrefab3 == null) return;
+
+        // Gọi spell gây sát thương diện rộng ngay quanh player
+        Instantiate(spellPrefab3, transform.position, Quaternion.identity);
+
+        // Ví dụ bạn có thể thêm logic sát thương ở đây hoặc bên trong prefab spellPrefab3
+    }
+
     void Flip()
     {
         isFacingRight = !isFacingRight;
 
-        // Flip nhân vật
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
 
-        // Flip cả attackPoint theo
         Vector3 attackScale = attackPoint.localScale;
         attackScale.x *= -1;
         attackPoint.localScale = attackScale;
     }
+
     public void Heal(int amount)
     {
         currentHP += amount;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
         UpdateUI();
     }
+
     public void SavePlayerProgress()
     {
         PlayerPrefs.SetInt("player_hp", currentHP);
@@ -376,10 +437,12 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("player_coin", coin);
         PlayerPrefs.Save();
     }
+
     public void resetUI()
     {
         currentHP = maxHP;
         score = 0;
         coin = 0;
+        UpdateUI();
     }
 }
