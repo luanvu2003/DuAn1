@@ -51,11 +51,11 @@ TagManager:
   - name: item
     uniqueID: 4018803511
     locked: 0
-  - name: player
-    uniqueID: 3480818881
-    locked: 0
   - name: enermy
     uniqueID: 1277457133
+    locked: 0
+  - name: player
+    uniqueID: 3480818881
     locked: 0
   - name: UI
     uniqueID: 2394269045
