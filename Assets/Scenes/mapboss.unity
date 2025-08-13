@@ -299,22 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e519f21341641e84bbdcf96344e4b700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 3
-  detectionRange: 15
-  attackZone: {fileID: 2051261139}
-  skillZone: {fileID: 358660267}
-  attackZoneRadius: 2
-  skillZoneRadius: 3
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  attackCooldown: 2
-  damageRange: {x: 10, y: 20}
-  maxHealth: 50
-  healthBarOffset: {x: 0, y: 1.2, z: 0}
-  spellPrefab: {fileID: 8274878915326440435, guid: 2951c9cc9c773544b847a9f7694db0b6, type: 3}
-  spellSpawnPoint: {fileID: 1425336323}
-  skillCooldown: 6
 --- !u!95 &254038821
 Animator:
   serializedVersion: 5
@@ -1462,7 +1446,8 @@ MonoBehaviour:
   target: {fileID: 1335639082}
   offset: {x: 0, y: 1, z: -10}
   smoothSpeed: 0.125
-  mapBoundsCollider: {fileID: 1717269928}
+  minBounds: {x: -19.47, y: -1.93}
+  maxBounds: {x: 16.34, y: 8.6}
 --- !u!1001 &1045409672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5923,11 +5908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.72
+      value: -19.47
       objectReference: {fileID: 0}
     - target: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.56
+      value: -1.93
       objectReference: {fileID: 0}
     - target: {fileID: 8717223676090793448, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_LocalPosition.z
