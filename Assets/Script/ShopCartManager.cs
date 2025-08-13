@@ -6,23 +6,21 @@ public class ShopCartManager : MonoBehaviour
     [System.Serializable]
     public class ShopItem
     {
-        public string itemName;            // Tên item (để dễ nhớ trong Inspector)
+        public string itemName;            // Tên item
         public int price;                  // Giá mỗi item
-        [HideInInspector] public int quantity;  // Số lượng muốn mua trong shop
-        public TMP_Text quantityText;      // Text số lượng chọn trong shop
-        public TMP_Text priceText;         // Text giá hiển thị trong shop
+        [HideInInspector] public int quantity; // Số lượng muốn mua
 
-        [Header("HUD khi sở hữu")]
-        public GameObject hudObject;       // HUD icon item khi sở hữu
-        public TMP_Text hudQuantityText;   // Text số lượng trên HUD
-        [HideInInspector] public int ownedQuantity; // Số lượng đang sở hữu
+        [Header("UI trong Shop")]
+        public TMP_Text itemNameText;      // TextMeshPro tên item
+        public TMP_Text priceText;         // TextMeshPro giá (kèm icon coin)
+        public TMP_Text quantityText;      // TextMeshPro số lượng chọn mua
     }
 
     [Header("Danh sách Item trong Shop")]
-    public ShopItem[] items = new ShopItem[4];
+    public ShopItem[] items = new ShopItem[4]; // 4 item
 
     [Header("UI khác")]
-    public TMP_Text totalPriceText;        // Text tổng tiền
+    public TMP_Text totalPriceText;        // TextMeshPro tổng tiền
     public GameObject notifySuccess;       // Notify mua thành công
     public GameObject notifyFail;          // Notify không đủ tiền
 
@@ -30,58 +28,65 @@ public class ShopCartManager : MonoBehaviour
 
     void Start()
     {
-        // Gán giá hiển thị và reset số lượng khi bắt đầu
-        foreach (var item in items)
+        // Khởi tạo dữ liệu item
+        for (int i = 0; i < items.Length; i++)
         {
-            if (item.priceText != null)
-                item.priceText.text = item.price + " coin";
+            if (items[i].itemNameText != null)
+                items[i].itemNameText.text = items[i].itemName;
 
-            item.quantity = 0;
-            if (item.quantityText != null)
-                item.quantityText.text = "0";
+            if (items[i].priceText != null)
+                items[i].priceText.text = $"{items[i].price} <sprite name=\"coin\">";
 
-            item.ownedQuantity = 0;
-            if (item.hudObject != null)
-                item.hudObject.SetActive(false);
+            items[i].quantity = 0;
+            if (items[i].quantityText != null)
+                items[i].quantityText.text = "0";
         }
+
         UpdateTotalPrice();
 
-        // Ẩn notify khi bắt đầu
         if (notifySuccess != null) notifySuccess.SetActive(false);
         if (notifyFail != null) notifyFail.SetActive(false);
     }
 
-    // Nút +
+    // Nút "+"
     public void AddItem(int index)
     {
         items[index].quantity++;
-        items[index].quantityText.text = items[index].quantity.ToString();
+        UpdateItemUI(index);
         UpdateTotalPrice();
     }
 
-    // Nút -
+    // Nút "-"
     public void RemoveItem(int index)
     {
         if (items[index].quantity > 0)
         {
             items[index].quantity--;
-            items[index].quantityText.text = items[index].quantity.ToString();
+            UpdateItemUI(index);
             UpdateTotalPrice();
         }
     }
 
-    // Cập nhật tổng tiền
-    void UpdateTotalPrice()
+    // Cập nhật số lượng hiển thị
+    private void UpdateItemUI(int index)
     {
-        totalPrice = 0;
-        foreach (var item in items)
-        {
-            totalPrice += item.price * item.quantity;
-        }
-        totalPriceText.text = "Tổng tiền: " + totalPrice + " coin";
+        if (items[index].quantityText != null)
+            items[index].quantityText.text = items[index].quantity.ToString();
     }
 
-    // Nút Mua
+    // Cập nhật tổng tiền tất cả item
+    private void UpdateTotalPrice()
+    {
+        totalPrice = 0;
+        for (int i = 0; i < items.Length; i++)
+        {
+            totalPrice += items[i].price * items[i].quantity;
+        }
+        if (totalPriceText != null)
+            totalPriceText.text = $"Tổng tiền: {totalPrice} <sprite name=\"coin\">";
+    }
+
+    // Nút "Mua"
     public void Buy()
     {
         int playerCoin = PlayerPrefs.GetInt("player_coin", 0);
@@ -93,54 +98,22 @@ public class ShopCartManager : MonoBehaviour
             PlayerPrefs.SetInt("player_coin", playerCoin);
             PlayerPrefs.Save();
 
-            // Cập nhật HUD và số lượng sở hữu
+            // Reset số lượng đã chọn
             for (int i = 0; i < items.Length; i++)
             {
-                if (items[i].quantity > 0)
-                {
-                    items[i].ownedQuantity += items[i].quantity;
-
-                    if (items[i].hudObject != null)
-                    {
-                        items[i].hudObject.SetActive(true);
-                        items[i].hudQuantityText.text = "x" + items[i].ownedQuantity;
-                    }
-
-                    // Reset số lượng chọn mua trong shop
-                    items[i].quantity = 0;
-                    items[i].quantityText.text = "0";
-                }
+                items[i].quantity = 0;
+                UpdateItemUI(i);
             }
 
             UpdateTotalPrice();
 
-            // Notify thành công
             if (notifySuccess != null) notifySuccess.SetActive(true);
             if (notifyFail != null) notifyFail.SetActive(false);
         }
         else
         {
-            // Notify thất bại
             if (notifyFail != null) notifyFail.SetActive(true);
             if (notifySuccess != null) notifySuccess.SetActive(false);
-        }
-    }
-
-    // Khi dùng item trong gameplay
-    public void UseItem(int index)
-    {
-        if (items[index].ownedQuantity > 0)
-        {
-            items[index].ownedQuantity--;
-
-            if (items[index].ownedQuantity > 0)
-            {
-                items[index].hudQuantityText.text = "x" + items[index].ownedQuantity;
-            }
-            else
-            {
-                items[index].hudObject.SetActive(false);
-            }
         }
     }
 }
