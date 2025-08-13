@@ -689,10 +689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9111ca7b9661d74f829e7b96f3882fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diem: {fileID: 144833729}
+  scoreText: {fileID: 144833729}
   gameOverPanel: {fileID: 2039562059}
   targetScore: 5
-  nextSceneName: map2
 --- !u!4 &794674662
 Transform:
   m_ObjectHideFlags: 0

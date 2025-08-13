@@ -12,6 +12,7 @@ TagManager:
   - Attack
   - Ground
   - Cong
+  - ScoreZone
   layers:
   - Default
   - TransparentFX

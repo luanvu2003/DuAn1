@@ -5,12 +5,12 @@ public class BirdController : MonoBehaviour
     public float jumpForce = 5f;
     private Rigidbody2D rb;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
@@ -20,6 +20,14 @@ public class BirdController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        FindObjectOfType<GameManager>().GameOver();
+        GameManager.Instance.GameOver();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("ScoreZone"))
+        {
+            GameManager.Instance.AddScore();
+        }
     }
 }
