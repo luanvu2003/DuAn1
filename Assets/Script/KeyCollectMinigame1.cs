@@ -2,7 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections; // cần cho IEnumerator
+using System.Collections;
+using System; // cần cho IEnumerator
 
 public class ItemCollector : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class ItemCollector : MonoBehaviour
     public CanvasGroup startImageCanvasGroup; // CanvasGroup của ảnh intro
     public float startImageDisplayTime = 3f; // Tổng thời gian hiển thị (fade in + giữ + fade out)
     public float startImageFadeDuration = 0.5f; // thời gian fade in/out
+    [Header("Luật chơi")]
+    public GameObject infoPanel; // Panel sẽ bật lên sau intro
+    public Button closeInfoButton; // Nút đóng panel
+    public TextMeshProUGUI infoText; // Text để chạy chữ
+    [TextArea] public string message = "Người chơi phải đi tìm chìa khóa và tìm cửa ra ở bên trong mê cung, nếu người chơi thoát khỏi mê cung thành công thì sẽ được thưởng 100 coin, nếu người chơi bỏ cuộc thì sẽ bị trừ 50% coin."; // Nội dung
+    public float typeSpeed = 0.05f; // tốc độ chạy chữ
     private void Start()
     {
         UpdateItemText();
@@ -54,9 +61,10 @@ public class ItemCollector : MonoBehaviour
         {
             if (collectedItems >= totalItems)
             {
-                PlayerController player = collision.GetComponent<PlayerController>();
+                PlayerController player = FindObjectOfType<PlayerController>();
                 if (player != null)
                 {
+                    player.AddCoin(100);
                     player.SavePlayerProgress();
                 }
                 PlayerPrefs.SetString("NextScene", "map3");
@@ -68,6 +76,7 @@ public class ItemCollector : MonoBehaviour
                     ShowWarning();
             }
         }
+
     }
 
     private void UpdateItemText()
@@ -117,8 +126,9 @@ public class ItemCollector : MonoBehaviour
     }
     private IEnumerator ShowStartImage()
     {
-
+        Time.timeScale = 0f;
         startImageCanvasGroup.gameObject.SetActive(true);
+
         // Fade in
         yield return StartCoroutine(FadeCanvasGroup(startImageCanvasGroup, 0, 1, startImageFadeDuration));
 
@@ -129,5 +139,52 @@ public class ItemCollector : MonoBehaviour
         yield return StartCoroutine(FadeCanvasGroup(startImageCanvasGroup, 1, 0, startImageFadeDuration));
 
         startImageCanvasGroup.gameObject.SetActive(false);
+
+        // ✅ Hiện panel sau intro
+        if (infoPanel != null)
+        {
+            infoPanel.SetActive(true);
+
+            // Chạy hiệu ứng chữ
+            if (infoText != null)
+            {
+                StartCoroutine(TypeText(message));
+            }
+
+            // Gán nút đóng panel
+            if (closeInfoButton != null)
+            {
+                closeInfoButton.onClick.RemoveAllListeners();
+                closeInfoButton.onClick.AddListener(() =>
+                {
+                    infoPanel.SetActive(false);
+                    Time.timeScale = 1f;
+                });
+            }
+        }
     }
+
+
+    private IEnumerator TypeText(string textToType)
+    {
+        infoText.text = "";
+        foreach (char c in textToType)
+        {
+            infoText.text += c;
+            yield return new WaitForSecondsRealtime(typeSpeed); // Dùng Realtime vì đang Time.timeScale = 0
+        }
+    }
+
+
+    public void OnGiveUpButton()
+    {
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.GiveUp();
+        }
+
+        PlayerPrefs.SetString("NextScene", "map3");
+        SceneManager.LoadScene("Loading");
+    }
+
 }

@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     public float knockbackDuration = 0.2f;
     public float knockbackForce = 20f;
     private bool isKnockedBack = false;
-
+    public static PlayerController Instance;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -94,7 +94,18 @@ public class PlayerController : MonoBehaviour
         }
         UpdateUI();
     }
-
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     void Update()
     {
         if (isKnockedBack || isDead) return;
@@ -515,6 +526,13 @@ public class PlayerController : MonoBehaviour
             fillImg.fillAmount = 0;
             cdText.text = "";
         }
+    }
+    public void GiveUp()
+    {
+        int lostCoin = coin / 2; // mất 50%
+        coin -= lostCoin;
+        UpdateUI();
+        SavePlayerProgress();
     }
 
 }
