@@ -61,12 +61,20 @@ public class ItemCollector : MonoBehaviour
         {
             if (collectedItems >= totalItems)
             {
-                PlayerController player = FindObjectOfType<PlayerController>();
-                if (player != null)
-                {
-                    player.AddCoin(100);
-                    player.SavePlayerProgress();
-                }
+                // Đọc lại dữ liệu mới nhất
+                int hp = PlayerPrefs.GetInt("player_hp", 200);
+                int score = PlayerPrefs.GetInt("player_score", 0);
+                int coin = PlayerPrefs.GetInt("player_coin", 0);
+
+                // Thêm phần thưởng
+                coin += 100;
+
+                // Lưu lại
+                PlayerPrefs.SetInt("player_hp", hp);
+                PlayerPrefs.SetInt("player_score", score);
+                PlayerPrefs.SetInt("player_coin", coin);
+                PlayerPrefs.Save();
+
                 PlayerPrefs.SetString("NextScene", "map3");
                 SceneManager.LoadScene("Loading");
             }
@@ -76,6 +84,7 @@ public class ItemCollector : MonoBehaviour
                     ShowWarning();
             }
         }
+
 
     }
 
@@ -178,11 +187,16 @@ public class ItemCollector : MonoBehaviour
 
     public void OnGiveUpButton()
     {
-        if (PlayerController.Instance != null)
-        {
-            PlayerController.Instance.GiveUp();
-        }
 
+        int hp = PlayerPrefs.GetInt("player_hp", 200);
+        int score = PlayerPrefs.GetInt("player_score", 0);
+        int coin = PlayerPrefs.GetInt("player_coin", 0);
+        int lostCoin = coin / 2;
+        coin -= lostCoin;
+        PlayerPrefs.SetInt("player_hp", hp);
+        PlayerPrefs.SetInt("player_score", score);
+        PlayerPrefs.SetInt("player_coin", coin);
+        PlayerPrefs.Save();
         PlayerPrefs.SetString("NextScene", "map3");
         SceneManager.LoadScene("Loading");
     }
