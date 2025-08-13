@@ -29,6 +29,8 @@ public class ItemCollector : MonoBehaviour
     public TextMeshProUGUI infoText; // Text để chạy chữ
     [TextArea] public string message = "Người chơi phải đi tìm chìa khóa và tìm cửa ra ở bên trong mê cung, nếu người chơi thoát khỏi mê cung thành công thì sẽ được thưởng 100 coin, nếu người chơi bỏ cuộc thì sẽ bị trừ 50% coin."; // Nội dung
     public float typeSpeed = 0.05f; // tốc độ chạy chữ
+    [Header("Give Up Button")]
+    public GameObject GiveUp;
     private void Start()
     {
         UpdateItemText();
@@ -167,6 +169,7 @@ public class ItemCollector : MonoBehaviour
                 closeInfoButton.onClick.AddListener(() =>
                 {
                     infoPanel.SetActive(false);
+                    GiveUp.SetActive(true);
                     Time.timeScale = 1f;
                 });
             }

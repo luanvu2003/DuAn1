@@ -490,7 +490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &294921042
 RectTransform:
   m_ObjectHideFlags: 0
@@ -785,6 +785,7 @@ MonoBehaviour:
     th\u01B0\u1EDFng 100 coin, n\u1EBFu ng\u01B0\u1EDDi ch\u01A1i b\u1ECF cu\u1ED9c
     th\xEC s\u1EBD b\u1ECB tr\u1EEB 50% coin."
   typeSpeed: 0.05
+  GiveUp: {fileID: 294921041}
 --- !u!1 &385053902 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 276983498489572072, guid: 50fa03b4076e9cf489c6562f1858d68b, type: 3}
