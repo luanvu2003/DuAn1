@@ -7,7 +7,6 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        // Đảm bảo chỉ tồn tại 1 AudioManager duy nhất
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -17,10 +16,13 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Lấy volume đã lưu
+        if (musicSource != null)
+            musicSource.loop = true;
+
         float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         musicSource.volume = savedVolume;
     }
+
 
     public void SetVolume(float volume)
     {
