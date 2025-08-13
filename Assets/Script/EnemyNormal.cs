@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,7 @@ public class EnemyNormal : MonoBehaviour
 
     [Header("Health Bar (No Prefab)")]
     private Image healthFillImage;
-    public Vector3 healthBarOffset = new Vector3(0, 1.2f, 0);
+    public Vector3 healthBarOffset = new Vector3(0, 0.5f, 0);
 
     [Header("Jumping Over Obstacles")]
     public float jumpForce = 7f;
@@ -39,7 +40,10 @@ public class EnemyNormal : MonoBehaviour
     private float originalScaleX;
     private bool movingRight = true;
     public HealthItemPool healthItemPool;
-
+    public float knockbackDuration = 0.2f;
+    protected bool isKnockedBack = false;
+    private float lastAttackTime;
+    public float attackCooldown = 1f;
     void Start()
     {
         currentHealth = maxHealth;
@@ -59,6 +63,10 @@ public class EnemyNormal : MonoBehaviour
 
     void Update()
     {
+        if (isKnockedBack)
+        {
+            return;
+        }
         if (isDead || player == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
@@ -73,6 +81,7 @@ public class EnemyNormal : MonoBehaviour
         {
             playerDetected = true;
             isReturning = false;
+            animator.SetBool("IsWalking", true);
             ChasePlayer();
         }
         else
@@ -84,7 +93,10 @@ public class EnemyNormal : MonoBehaviour
             }
 
             if (isReturning)
+            {
+                animator.SetBool("IsWalking", false);
                 ReturnToStart();
+            }
         }
 
         // Cập nhật vị trí thanh máu
@@ -94,7 +106,28 @@ public class EnemyNormal : MonoBehaviour
             bar.position = transform.position + healthBarOffset;
         }
     }
+    public void Knockback(Vector2 knockbackDirection, float knockbackForce)
+    {
+        if (isDead) return;
 
+        // Bật trạng thái bị đẩy lùi
+        isKnockedBack = true;
+
+        // Thêm lực đẩy
+        rb.velocity = Vector2.zero; // Reset vận tốc trước khi thêm lực để hiệu ứng mượt hơn
+        rb.AddForce(knockbackDirection * knockbackForce);
+
+        // Bắt đầu Coroutine để dừng hiệu ứng knockback sau 1 khoảng thời gian
+        StartCoroutine(StopKnockback());
+    }
+
+    protected IEnumerator StopKnockback()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false;
+        // Sau khi hết thời gian, dừng chuyển động để enemy không bị trôi
+        rb.velocity = Vector2.zero;
+    }
     void ChasePlayer()
     {
         //animator.Play("Chase");
@@ -161,15 +194,15 @@ public class EnemyNormal : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        //else
-        //animator.Play("Hurt");
+        else
+            animator.SetTrigger("Hurt");
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
-        //animator.Play("Die");
+        animator.SetTrigger("Die");
         if (healthItemPool != null)
         {
             healthItemPool.GetAvailableItem(transform.position);
@@ -200,14 +233,14 @@ public class EnemyNormal : MonoBehaviour
             PlayerController pc = player.GetComponent<PlayerController>();
             if (pc != null)
             {
-                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+                pc.TakeDamage((int)damage, this.transform); // ✅ Gây sát thương vào PlayerController
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && Time.time > lastAttackTime + attackCooldown)
         {
             float damage = Random.Range(damageRange.x, damageRange.y);
             Debug.Log($"Enemy triggered player for {damage} damage");
@@ -215,7 +248,8 @@ public class EnemyNormal : MonoBehaviour
             PlayerController pc = other.gameObject.GetComponent<PlayerController>();
             if (pc != null)
             {
-                pc.TakeDamage((int)damage); // ✅ Gây sát thương vào PlayerController
+                pc.TakeDamage((int)damage, this.transform); // ✅ Gây sát thương vào PlayerController
+                lastAttackTime = Time.time;
             }
         }
     }

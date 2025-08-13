@@ -5,11 +5,9 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     public AudioSource musicSource;
 
-    [Tooltip("Danh sách scene giữ nhạc không bị destroy")]
-    public string[] allowedScenes;
-
     void Awake()
     {
+        // Đảm bảo chỉ tồn tại 1 AudioManager duy nhất
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -19,27 +17,9 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // Lấy volume đã lưu
         float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
         musicSource.volume = savedVolume;
-    }
-
-    void Update()
-    {
-        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        if (!IsAllowedScene(currentScene))
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private bool IsAllowedScene(string sceneName)
-    {
-        foreach (string scene in allowedScenes)
-        {
-            if (scene == sceneName)
-                return true;
-        }
-        return false;
     }
 
     public void SetVolume(float volume)

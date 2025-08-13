@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Health Bar (No Prefab)")]
     private Image healthFillImage;
-    public Vector3 healthBarOffset = new Vector3(0, 1.2f, 0);
+    public Vector3 healthBarOffset = new Vector3(0, 0.5f, 0);
 
     [Header("Jumping Over Obstacles")]
     public float jumpForce = 7f;
@@ -44,7 +45,9 @@ public class Enemy : MonoBehaviour
 
     private float originalScaleX;
     private bool movingRight = true;
-
+    public HealthItemPool healthItemPool;
+    public float knockbackDuration = 0.2f;
+    protected bool isKnockedBack = false;
     void Start()
     {
         currentHealth = maxHealth;
@@ -99,7 +102,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void Knockback(Vector2 knockbackDirection, float knockbackForce)
+    {
+        if (isDead) return;
 
+        // Bật trạng thái bị đẩy lùi
+        isKnockedBack = true;
+
+        // Thêm lực đẩy
+        rb.velocity = Vector2.zero; // Reset vận tốc trước khi thêm lực để hiệu ứng mượt hơn
+        rb.AddForce(knockbackDirection * knockbackForce);
+
+        // Bắt đầu Coroutine để dừng hiệu ứng knockback sau 1 khoảng thời gian
+        StartCoroutine(StopKnockback());
+    }
+
+    protected IEnumerator StopKnockback()
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockedBack = false;
+        // Sau khi hết thời gian, dừng chuyển động để enemy không bị trôi
+        rb.velocity = Vector2.zero;
+    }
     void UseRangedSkill()
     {
         float timeSinceLastSkill = Time.time - lastSkillTime;
@@ -181,15 +205,19 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
             Die();
-        //else
-        //animator.Play("Hurt");
+        else
+            animator.SetTrigger("Hurt");
     }
 
     void Die()
     {
         isDead = true;
         rb.velocity = Vector2.zero;
-        //animator.Play("Die");
+        animator.SetTrigger("Die");
+        if (healthItemPool != null)
+        {
+            healthItemPool.GetAvailableItem(transform.position);
+        }
         Destroy(gameObject, 0.5f);
     }
 

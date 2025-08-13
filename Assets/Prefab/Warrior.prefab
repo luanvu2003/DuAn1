@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 7
+  jumpForce: 10
   maxHP: 100
   groundLayer:
     serializedVersion: 2
@@ -356,12 +356,18 @@ MonoBehaviour:
   healthBarImage: {fileID: 0}
   scoreText: {fileID: 0}
   coinText: {fileID: 0}
-  attackCooldown: 2
+  spellPrefab: {fileID: 2158124523804825930, guid: f47e7a773eafdff4b813ea16dc589d0f, type: 3}
+  spellPrefab2: {fileID: 1663610425956677321, guid: e3e37d5a004013742ab3d521f5a20bdc, type: 3}
+  spellPrefab3: {fileID: 1042452958742751905, guid: 250754729c6fe2f458f19b90878e783a, type: 3}
+  skillCooldown: 5
+  attackCooldown: 0.5
   attackPoint: {fileID: 1314997548600840780}
   attackRange: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
+  knockbackDuration: 0.2
+  knockbackForce: 20
 --- !u!114 &1912550031473988834
 MonoBehaviour:
   m_ObjectHideFlags: 0
