@@ -6,7 +6,7 @@ public class ScoreZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            FindObjectOfType<GameManager>().AddScore();
+            GameManager.Instance.AddScore();
         }
     }
 }
