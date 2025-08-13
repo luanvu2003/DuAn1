@@ -25,7 +25,19 @@ public class PlayerController : MonoBehaviour
 
     private float lastSkillTime = -999f;
     private bool isCastingSkill = false;
+    [Header("Skill UI")]
+    public Image skill1Fill;
+    public TMP_Text skill1CooldownText;
 
+    public Image skill2Fill;
+    public TMP_Text skill2CooldownText;
+
+    public Image skill3Fill;
+    public TMP_Text skill3CooldownText;
+
+    private float skill1LastTime = -999f;
+    private float skill2LastTime = -999f;
+    private float skill3LastTime = -999f;
     private int currentHP;
     private int score = 0;
     private int coin = 0;
@@ -110,6 +122,10 @@ public class PlayerController : MonoBehaviour
         {
             TakeDamage(10, this.transform);
         }
+        UpdateSkillUI(skill1Fill, skill1CooldownText, skill1LastTime);
+        UpdateSkillUI(skill2Fill, skill2CooldownText, skill2LastTime);
+        UpdateSkillUI(skill3Fill, skill3CooldownText, skill3LastTime);
+
     }
     void HandleSkills()
     {
@@ -136,14 +152,23 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (!isCastingSkill && Time.time >= lastSkillTime + skillCooldown)
+        if (!isCastingSkill)
         {
-            if (canUseSkill1 && Input.GetKeyDown(KeyCode.T))
+            if (canUseSkill1 && Time.time >= skill1LastTime + skillCooldown && Input.GetKeyDown(KeyCode.T))
+            {
+                skill1LastTime = Time.time;
                 StartCoroutine(CastSkill(1));
-            else if (canUseSkill2 && Input.GetKeyDown(KeyCode.Y))
+            }
+            else if (canUseSkill2 && Time.time >= skill2LastTime + skillCooldown && Input.GetKeyDown(KeyCode.Y))
+            {
+                skill2LastTime = Time.time;
                 StartCoroutine(CastSkill(2));
-            else if (canUseSkill3 && Input.GetKeyDown(KeyCode.U))
+            }
+            else if (canUseSkill3 && Time.time >= skill3LastTime + skillCooldown && Input.GetKeyDown(KeyCode.U))
+            {
+                skill3LastTime = Time.time;
                 StartCoroutine(CastSkill(3));
+            }
         }
     }
 
@@ -475,4 +500,21 @@ public class PlayerController : MonoBehaviour
         coin = 0;
         UpdateUI();
     }
+    void UpdateSkillUI(Image fillImg, TMP_Text cdText, float lastTime)
+    {
+        if (fillImg == null || cdText == null) return;
+
+        float remaining = (lastTime + skillCooldown) - Time.time;
+        if (remaining > 0)
+        {
+            fillImg.fillAmount = remaining / skillCooldown;
+            cdText.text = Mathf.CeilToInt(remaining).ToString();
+        }
+        else
+        {
+            fillImg.fillAmount = 0;
+            cdText.text = "";
+        }
+    }
+
 }
