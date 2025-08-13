@@ -18,7 +18,10 @@ public class ItemCollector : MonoBehaviour
     public int totalItems = 1;
 
     public float fadeDuration = 0.3f; // thời gian fade in/out
-
+    [Header("Start Image")]
+    public CanvasGroup startImageCanvasGroup; // CanvasGroup của ảnh intro
+    public float startImageDisplayTime = 3f; // Tổng thời gian hiển thị (fade in + giữ + fade out)
+    public float startImageFadeDuration = 0.5f; // thời gian fade in/out
     private void Start()
     {
         UpdateItemText();
@@ -30,6 +33,10 @@ public class ItemCollector : MonoBehaviour
             closeButton.onClick.AddListener(CloseWarning);
         if (closeButtonX != null)
             closeButtonX.onClick.AddListener(CloseWarning);
+
+        // Hiện ảnh intro khi vào scene
+        if (startImageCanvasGroup != null)
+            StartCoroutine(ShowStartImage());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,6 +54,11 @@ public class ItemCollector : MonoBehaviour
         {
             if (collectedItems >= totalItems)
             {
+                PlayerController player = collision.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    player.SavePlayerProgress();
+                }
                 PlayerPrefs.SetString("NextScene", "map3");
                 SceneManager.LoadScene("Loading");
             }
@@ -102,5 +114,20 @@ public class ItemCollector : MonoBehaviour
         cg.alpha = end;
         cg.interactable = end > 0.5f;
         cg.blocksRaycasts = end > 0.5f;
+    }
+    private IEnumerator ShowStartImage()
+    {
+
+        startImageCanvasGroup.gameObject.SetActive(true);
+        // Fade in
+        yield return StartCoroutine(FadeCanvasGroup(startImageCanvasGroup, 0, 1, startImageFadeDuration));
+
+        // Giữ nguyên trong một khoảng thời gian
+        yield return new WaitForSecondsRealtime(startImageDisplayTime - (startImageFadeDuration * 2));
+
+        // Fade out
+        yield return StartCoroutine(FadeCanvasGroup(startImageCanvasGroup, 1, 0, startImageFadeDuration));
+
+        startImageCanvasGroup.gameObject.SetActive(false);
     }
 }
