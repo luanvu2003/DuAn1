@@ -7,7 +7,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 20f;
+    public float jumpForce = 7f;
     public int maxHP = 200;
     public LayerMask groundLayer;
     public LayerMask ladderLayer;
