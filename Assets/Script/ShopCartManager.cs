@@ -14,6 +14,8 @@ public class ShopCartManager : MonoBehaviour
         public TMP_Text itemNameText;      // TextMeshPro tên item
         public TMP_Text priceText;         // TextMeshPro giá (kèm icon coin)
         public TMP_Text quantityText;      // TextMeshPro số lượng chọn mua
+        [Header("UI HUD ngoài gameplay")]
+        public TMP_Text amountHUD;
     }
 
     [Header("Danh sách Item trong Shop")]
@@ -25,10 +27,8 @@ public class ShopCartManager : MonoBehaviour
     public GameObject notifyFail;          // Notify không đủ tiền
     public GameObject ShopPanel;
     private int totalPrice = 0;
-
     void Start()
     {
-        // Khởi tạo dữ liệu item
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i].itemNameText != null)
@@ -40,6 +40,9 @@ public class ShopCartManager : MonoBehaviour
             items[i].quantity = 0;
             if (items[i].quantityText != null)
                 items[i].quantityText.text = "0";
+
+            if (items[i].amountHUD != null)
+                items[i].amountHUD.text = "x0";
         }
 
         UpdateTotalPrice();
@@ -93,18 +96,29 @@ public class ShopCartManager : MonoBehaviour
 
         if (playerCoin >= totalPrice && totalPrice > 0)
         {
-            // Trừ coin
             playerCoin -= totalPrice;
             PlayerPrefs.SetInt("player_coin", playerCoin);
-            PlayerPrefs.Save();
 
-            // Reset số lượng đã chọn
             for (int i = 0; i < items.Length; i++)
             {
-                items[i].quantity = 0;
-                UpdateItemUI(i);
+                if (items[i].quantity > 0)
+                {
+                    string hudText = items[i].amountHUD.text.Replace("x", "");
+                    int currentHUD = 0;
+                    int.TryParse(hudText, out currentHUD);
+
+                    currentHUD += items[i].quantity;
+                    items[i].amountHUD.text = "x" + currentHUD;
+
+                    // ✅ Lưu vào PlayerPrefs
+                    PlayerPrefs.SetInt("item_amount_" + i, currentHUD);
+
+                    items[i].quantity = 0;
+                    UpdateItemUI(i);
+                }
             }
 
+            PlayerPrefs.Save();
             UpdateTotalPrice();
 
             if (notifySuccess != null) notifySuccess.SetActive(true);
@@ -116,8 +130,10 @@ public class ShopCartManager : MonoBehaviour
             if (notifySuccess != null) notifySuccess.SetActive(false);
         }
     }
+
     public void CloseBuy()
     {
+        Time.timeScale = 1f;
         ShopPanel.SetActive(false);
     }
 }
