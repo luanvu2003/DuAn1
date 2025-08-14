@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public float typeSpeed = 0.05f; // tốc độ chạy chữ
     [Header("Give Up Button")]
     public GameObject GiveUp;
+    private static bool hasShownIntro = false;
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -37,13 +38,20 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Hiện ảnh intro khi vào scene
-        if (startImageCanvasGroup != null)
-            StartCoroutine(ShowStartImage());
         score = 0;
         UpdateScoreText();
         gameOverPanel.SetActive(false);
-        // Time.timeScale = 1f; 
+
+        if (!hasShownIntro)
+        {
+            if (startImageCanvasGroup != null)
+                StartCoroutine(ShowStartImage());
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            GiveUp.SetActive(true);
+        }
     }
 
     public void AddScore()
@@ -65,16 +73,43 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
-    public void GameOver()
+    public void PlayerHitCot(GameObject player)
+    {
+        if (isGameOver) return;
+        StartCoroutine(GameOverWithAnimation(player));
+    }
+
+    private IEnumerator GameOverWithAnimation(GameObject player)
     {
         isGameOver = true;
+
+        // Lấy Animator & Rigidbody2D
+        Animator anim = player.GetComponent<Animator>();
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+
+        // Play animation Die
+        if (anim != null)
+            anim.SetTrigger("Die");
+
+        // Cho player rơi xuống
+        if (rb != null)
+        {
+            rb.gravityScale = 2f;       // tăng trọng lực
+            rb.velocity = new Vector2(0, -5f); // rơi nhanh xuống
+        }
+
+        // Chờ 3 giây
+        yield return new WaitForSeconds(1f);
+
+        // Hiện panel Game Over
         gameOverPanel.SetActive(true);
-        Time.timeScale = 0f; // Pause khi thua
+        Time.timeScale = 0f;
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        hasShownIntro = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -147,6 +182,7 @@ public class GameManager : MonoBehaviour
                     infoPanel.SetActive(false);
                     GiveUp.SetActive(true);
                     Time.timeScale = 1f;
+                    hasShownIntro = true; // Đánh dấu đã xem
                 });
             }
         }
@@ -166,7 +202,23 @@ public class GameManager : MonoBehaviour
 
     public void OnGiveUpButton()
     {
+        Time.timeScale = 1f;
+        int hp = PlayerPrefs.GetInt("player_hp", 200);
+        int score = PlayerPrefs.GetInt("player_score", 0);
+        int coin = PlayerPrefs.GetInt("player_coin", 0);
+        int lostCoin = coin / 2;
+        coin -= lostCoin;
+        PlayerPrefs.SetInt("player_hp", hp);
+        PlayerPrefs.SetInt("player_score", score);
+        PlayerPrefs.SetInt("player_coin", coin);
+        PlayerPrefs.Save();
+        PlayerPrefs.SetString("NextScene", "map2");
+        SceneManager.LoadScene("Loading");
 
+    }
+    public void OnGiveUpAgainButton()
+    {
+        Time.timeScale = 1f;
         int hp = PlayerPrefs.GetInt("player_hp", 200);
         int score = PlayerPrefs.GetInt("player_score", 0);
         int coin = PlayerPrefs.GetInt("player_coin", 0);

@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 6184269071466318880}
   m_Layer: 0
   m_Name: Part 4G_0
-  m_TagString: Untagged
+  m_TagString: Cot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 3469802848152074682}
   m_Layer: 0
   m_Name: Part 4G_0 (1)
-  m_TagString: Untagged
+  m_TagString: Cot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
