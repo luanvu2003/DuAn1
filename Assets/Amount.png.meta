@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: deede750e67bbd445a2fe8c8b63d7d84
+guid: 4c50432d36acf014f841f6b863b2e695
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -160,91 +160,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: binhthuocfinal_0
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 315
-        width: 214
-        height: 379
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 338a491f0e2e3d74888ca43dc0224a7c
-      internalID: 1714864427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: binhthuocfinal_1
-      rect:
-        serializedVersion: 2
-        x: 303
-        y: 317
-        width: 192
-        height: 377
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99b92fa811676bd429e1a6bb1b1aa0e2
-      internalID: 846204015
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: binhthuocfinal_3
-      rect:
-        serializedVersion: 2
-        x: 535
-        y: 317
-        width: 190
-        height: 376
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e7d8563521c4a7b4f8add96efa7d7a92
-      internalID: -160838336
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: binhthuocfinal_6
-      rect:
-        serializedVersion: 2
-        x: 765
-        y: 317
-        width: 193
-        height: 378
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff8cccfef42c22341988c15b233e1561
-      internalID: 2078096971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -255,16 +171,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      binhthuocfinal_0: 1714864427
-      binhthuocfinal_1: 846204015
-      binhthuocfinal_2: -12063263
-      binhthuocfinal_3: -160838336
-      binhthuocfinal_4: -687976040
-      binhthuocfinal_5: 78284738
-      binhthuocfinal_6: 2078096971
-      binhthuocfinal_7: 1060277842
-      binhthuocfinal_8: -1715222289
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
