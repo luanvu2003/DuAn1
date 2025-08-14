@@ -20,7 +20,10 @@ public class BirdController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameManager.Instance.GameOver();
+        if (collision.gameObject.CompareTag("Cot"))
+        {
+            GameManager.Instance.PlayerHitCot(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
