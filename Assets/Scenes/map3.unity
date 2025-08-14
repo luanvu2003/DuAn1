@@ -2616,7 +2616,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1900698251
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &452725786
 RectTransform:
@@ -3232,6 +3232,14 @@ PrefabInstance:
       propertyPath: coinText
       value: 
       objectReference: {fileID: 1460656285}
+    - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      propertyPath: jumpForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: scoreText
       value: 
@@ -5775,6 +5783,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323277431973625642, guid: 564cc876d3b0e3f4999555a647f62549, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1865601747}
+    - target: {fileID: 6323277431973625642, guid: 564cc876d3b0e3f4999555a647f62549, type: 3}
       propertyPath: ShopPanel
       value: 
       objectReference: {fileID: 723459808}
@@ -8077,6 +8089,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 114598520}
+    - target: {fileID: 6004712200367062825, guid: aeec15deb3370f145b7a1635af2f19ee, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7557871138911584066, guid: aeec15deb3370f145b7a1635af2f19ee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

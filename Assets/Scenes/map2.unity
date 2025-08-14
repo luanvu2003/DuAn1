@@ -240,6 +240,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323277431973625642, guid: 564cc876d3b0e3f4999555a647f62549, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1840831029}
+    - target: {fileID: 6323277431973625642, guid: 564cc876d3b0e3f4999555a647f62549, type: 3}
       propertyPath: ShopPanel
       value: 
       objectReference: {fileID: 860471729}
@@ -1142,7 +1146,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1900698251
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &206334031
 RectTransform:
@@ -2035,7 +2039,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.5, y: 0.78125, z: 0}
   m_MaxChunkCount: 16
@@ -11985,7 +11989,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1128037936641015588, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_Size.x
-      value: 1.3431323
+      value: 1.1975868
       objectReference: {fileID: 0}
     - target: {fileID: 1128037936641015588, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_Size.y
@@ -11993,16 +11997,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1128037936641015588, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_Offset.x
-      value: 0.10511017
+      value: 0.07663393
       objectReference: {fileID: 0}
     - target: {fileID: 1128037936641015588, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: m_Offset.y
-      value: -0.118043125
+      value: -0.118043184
       objectReference: {fileID: 0}
     - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: coinText
       value: 
       objectReference: {fileID: 760594489}
+    - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      propertyPath: jumpForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: scoreText
       value: 
@@ -17153,6 +17165,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1480105856}
+    - target: {fileID: 6004712200367062825, guid: aeec15deb3370f145b7a1635af2f19ee, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7557871138911584066, guid: aeec15deb3370f145b7a1635af2f19ee, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

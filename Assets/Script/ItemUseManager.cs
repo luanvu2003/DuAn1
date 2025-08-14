@@ -55,23 +55,39 @@ public class ItemUseManager : MonoBehaviour
                 break;
 
             case 1: // Buff damage vĩnh viễn
-                player.minDamage *= 2f;
-                player.maxDamage *= 2f;
+                player.minDamage += 3f;
+                player.maxDamage += 3f;
                 PlayerPrefs.SetFloat("buff_minDamage", player.minDamage);
                 PlayerPrefs.SetFloat("buff_maxDamage", player.maxDamage);
                 break;
 
             case 2: // Buff tốc chạy vĩnh viễn
-                player.moveSpeed *= 1.5f;
+                player.moveSpeed += 1f;
                 PlayerPrefs.SetFloat("buff_moveSpeed", player.moveSpeed);
                 break;
 
             case 3: // Buff jump vĩnh viễn
-                player.jumpForce *= 1.5f;
+                player.jumpForce += 1f;
                 PlayerPrefs.SetFloat("buff_jumpForce", player.jumpForce);
                 break;
         }
 
         PlayerPrefs.Save();
     }
+    public static void ResetBuffs()
+    {
+        PlayerPrefs.DeleteKey("buff_minDamage");
+        PlayerPrefs.DeleteKey("buff_maxDamage");
+        PlayerPrefs.DeleteKey("buff_moveSpeed");
+        PlayerPrefs.DeleteKey("buff_jumpForce");
+
+        // Nếu muốn reset cả số lượng item
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerPrefs.DeleteKey("item_amount_" + i);
+        }
+
+        PlayerPrefs.Save();
+    }
+
 }

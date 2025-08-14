@@ -27,6 +27,7 @@ public class ShopCartManager : MonoBehaviour
     public GameObject notifyFail;          // Notify không đủ tiền
     public GameObject ShopPanel;
     private int totalPrice = 0;
+    public PlayerController player;
     void Start()
     {
         for (int i = 0; i < items.Length; i++)
@@ -42,7 +43,10 @@ public class ShopCartManager : MonoBehaviour
                 items[i].quantityText.text = "0";
 
             if (items[i].amountHUD != null)
-                items[i].amountHUD.text = "x0";
+            {
+                int savedAmount = PlayerPrefs.GetInt("item_amount_" + i, 0);
+                items[i].amountHUD.text = "x" + savedAmount;
+            }
         }
 
         UpdateTotalPrice();
@@ -92,12 +96,13 @@ public class ShopCartManager : MonoBehaviour
     // Nút "Mua"
     public void Buy()
     {
-        int playerCoin = PlayerPrefs.GetInt("player_coin", 0);
+        UpdateTotalPrice();
+
+        int playerCoin = player.GetCoin(); // lấy trực tiếp từ PlayerController
 
         if (playerCoin >= totalPrice && totalPrice > 0)
         {
-            playerCoin -= totalPrice;
-            PlayerPrefs.SetInt("player_coin", playerCoin);
+            player.AddCoin(-totalPrice); // trừ coin và update HUD, PlayerPrefs
 
             for (int i = 0; i < items.Length; i++)
             {
@@ -110,7 +115,6 @@ public class ShopCartManager : MonoBehaviour
                     currentHUD += items[i].quantity;
                     items[i].amountHUD.text = "x" + currentHUD;
 
-                    // ✅ Lưu vào PlayerPrefs
                     PlayerPrefs.SetInt("item_amount_" + i, currentHUD);
 
                     items[i].quantity = 0;
@@ -121,19 +125,34 @@ public class ShopCartManager : MonoBehaviour
             PlayerPrefs.Save();
             UpdateTotalPrice();
 
-            if (notifySuccess != null) notifySuccess.SetActive(true);
-            if (notifyFail != null) notifyFail.SetActive(false);
+            notifySuccess?.SetActive(true);
+            notifyFail?.SetActive(false);
         }
         else
         {
-            if (notifyFail != null) notifyFail.SetActive(true);
-            if (notifySuccess != null) notifySuccess.SetActive(false);
+            notifyFail?.SetActive(true);
+            notifySuccess?.SetActive(false);
         }
     }
 
     public void CloseBuy()
     {
+        // Reset số lượng mua của từng item
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i].quantity = 0;
+            UpdateItemUI(i);
+        }
+
+        // Reset tổng tiền
+        totalPrice = 0;
+        if (totalPriceText != null)
+            totalPriceText.text = $"Tổng: {totalPrice}";
+
         Time.timeScale = 1f;
         ShopPanel.SetActive(false);
+        notifySuccess.SetActive(false);
+        notifyFail.SetActive(false);
     }
+
 }
