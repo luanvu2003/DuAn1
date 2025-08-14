@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-
+[ExecuteAlways]
 public class ShopCartManager : MonoBehaviour
 {
     [System.Serializable]
@@ -23,7 +23,7 @@ public class ShopCartManager : MonoBehaviour
     public TMP_Text totalPriceText;        // TextMeshPro tổng tiền
     public GameObject notifySuccess;       // Notify mua thành công
     public GameObject notifyFail;          // Notify không đủ tiền
-
+    public GameObject ShopPanel;
     private int totalPrice = 0;
 
     void Start()
@@ -35,7 +35,7 @@ public class ShopCartManager : MonoBehaviour
                 items[i].itemNameText.text = items[i].itemName;
 
             if (items[i].priceText != null)
-                items[i].priceText.text = $"{items[i].price} <sprite name=\"coin\">";
+                items[i].priceText.text = $"{items[i].price}";
 
             items[i].quantity = 0;
             if (items[i].quantityText != null)
@@ -83,7 +83,7 @@ public class ShopCartManager : MonoBehaviour
             totalPrice += items[i].price * items[i].quantity;
         }
         if (totalPriceText != null)
-            totalPriceText.text = $"Tổng tiền: {totalPrice} <sprite name=\"coin\">";
+            totalPriceText.text = $"Tổng: {totalPrice}";
     }
 
     // Nút "Mua"
@@ -115,5 +115,9 @@ public class ShopCartManager : MonoBehaviour
             if (notifyFail != null) notifyFail.SetActive(true);
             if (notifySuccess != null) notifySuccess.SetActive(false);
         }
+    }
+    public void CloseBuy()
+    {
+        ShopPanel.SetActive(false);
     }
 }
