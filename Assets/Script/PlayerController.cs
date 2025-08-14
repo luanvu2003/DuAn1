@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
     private int currentHP;
     private int score = 0;
     private int coin = 0;
-
+    public float minDamage = 15f;
+    public float maxDamage = 30f;
     private Rigidbody2D rb;
     private Animator animator;
     private BoxCollider2D boxCollider;
@@ -235,7 +236,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            float damage = Random.Range(15f, 30f);
+            float damage = Random.Range(minDamage, maxDamage);
             float knockbackForce = 500f;
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
 

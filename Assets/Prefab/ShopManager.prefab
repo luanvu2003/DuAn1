@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1769038436154665996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5312239354530959641}
+  - component: {fileID: 6323277431973625642}
+  m_Layer: 0
+  m_Name: ShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5312239354530959641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769038436154665996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6877774, y: -2.652215, z: 0.014061891}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6323277431973625642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769038436154665996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a511ee0d53b68ad498278815485c74a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - itemName: "Thu\u1ED1c h\u1ED3i m\xE1u"
+    price: 15
+    quantity: 0
+    itemNameText: {fileID: 0}
+    priceText: {fileID: 0}
+    quantityText: {fileID: 0}
+    amountHUD: {fileID: 0}
+  - itemName: "Thu\u1ED1c t\u0103ng s\u1EE9c m\u1EA1nh"
+    price: 30
+    quantity: 0
+    itemNameText: {fileID: 0}
+    priceText: {fileID: 0}
+    quantityText: {fileID: 0}
+    amountHUD: {fileID: 0}
+  - itemName: "Thu\u1ED1c t\u0103ng t\u1ED1c ch\u1EA1y"
+    price: 10
+    quantity: 0
+    itemNameText: {fileID: 0}
+    priceText: {fileID: 0}
+    quantityText: {fileID: 0}
+    amountHUD: {fileID: 0}
+  - itemName: "Thu\u1ED1c t\u0103ng s\u1EE9c b\u1EADt"
+    price: 20
+    quantity: 0
+    itemNameText: {fileID: 0}
+    priceText: {fileID: 0}
+    quantityText: {fileID: 0}
+    amountHUD: {fileID: 0}
+  totalPriceText: {fileID: 0}
+  notifySuccess: {fileID: 0}
+  notifyFail: {fileID: 0}
+  ShopPanel: {fileID: 0}
