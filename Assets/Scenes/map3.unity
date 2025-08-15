@@ -4642,6 +4642,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 645831567283218782, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1361.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 645831567283218782, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 36.07
+      objectReference: {fileID: 0}
     - target: {fileID: 1819527678783147334, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4653,6 +4661,10 @@ PrefabInstance:
     - target: {fileID: 2161790822831774656, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
       propertyPath: m_Name
       value: UINPCTalkMisson
+      objectReference: {fileID: 0}
+    - target: {fileID: 2507340189019716864, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
+      propertyPath: m_margin.x
+      value: 2.4055786
       objectReference: {fileID: 0}
     - target: {fileID: 2854936224217285174, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
       propertyPath: m_Camera
@@ -4737,6 +4749,10 @@ PrefabInstance:
     - target: {fileID: 3580851169914470722, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215581506811776805, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4261098779597544196, guid: 502433e5200bc3647a7e2382ab597cc3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
