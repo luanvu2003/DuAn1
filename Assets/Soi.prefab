@@ -255,7 +255,7 @@ MonoBehaviour:
   attackRange: 1
   damageRange: {x: 5, y: 15}
   maxHealth: 200
-  healthBarOffset: {x: 0, y: 0.6, z: 0}
+  healthBarOffset: {x: 0, y: 1.2, z: 0}
   jumpForce: 7
   groundCheck: {fileID: 3654743081748544104}
   groundCheckRadius: 0.2

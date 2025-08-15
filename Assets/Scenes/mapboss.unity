@@ -511,7 +511,7 @@ MonoBehaviour:
     m_Bits: 1024
   attackCooldown: 2
   damageRange: {x: 10, y: 20}
-  maxHealth: 300
+  maxHealth: 50
   healthBarOffset: {x: 0, y: 1.2, z: 0}
   spellPrefab: {fileID: 8274878915326440435, guid: 2951c9cc9c773544b847a9f7694db0b6, type: 3}
   spellSpawnPoint: {fileID: 1425336323}
@@ -7565,10 +7565,6 @@ PrefabInstance:
       propertyPath: healthBarImage
       value: 
       objectReference: {fileID: 217176296}
-    - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
-      propertyPath: bloodEffectPrefab
-      value: 
-      objectReference: {fileID: 1730739386719418010, guid: 526ab41bb2e8a8948b15b43f08ee577a, type: 3}
     - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: skill1CooldownText
       value: 

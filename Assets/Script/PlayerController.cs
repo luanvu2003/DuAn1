@@ -228,6 +228,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Climb()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 1f, ladderLayer);
+        if (hit.collider != null && Mathf.Abs(inputVertical) > 0)
+        {
+            isClimbing = true;
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, inputVertical * moveSpeed);
+        }
+        else if (isClimbing && hit.collider == null)
+        {
+            isClimbing = false;
+            rb.gravityScale = 1f;
+        }
+    }
+
     void HandleAnimation()
     {
         bool grounded = IsGrounded();
