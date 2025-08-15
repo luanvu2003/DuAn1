@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 128
       height: 256
-    spriteID: a93cdbc5d73274a48b6c6b03f7592e52
+    spriteID: 2224461a5c7ceaa4993cd6dfc325e9b6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,21 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 3457520168
->>>>>>> Stashed changes
-=======
-      value0: 3457520168
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: -837447128
-    name: Hive
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -172,7 +159,7 @@ ScriptedImporter:
         y: 144
         width: 128
         height: 256
-      spriteId: a93cdbc5d73274a48b6c6b03f7592e52
+      spriteId: 2224461a5c7ceaa4993cd6dfc325e9b6
     linkedCells: []
     parentIndex: -1
   platformSettings:

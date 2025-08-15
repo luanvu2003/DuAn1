@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 363
       height: 24
-    spriteID: 0cd18741ab4982b44b68d6e2028e6d52
+    spriteID: d5b473bf00e12cc4ba1ed0566820efdb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,21 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 744050590
->>>>>>> Stashed changes
-=======
-      value0: 744050590
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 744050590
-    name: Dead-Sheet
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -172,7 +159,7 @@ ScriptedImporter:
         y: 0
         width: 384
         height: 32
-      spriteId: 0cd18741ab4982b44b68d6e2028e6d52
+      spriteId: d5b473bf00e12cc4ba1ed0566820efdb
     linkedCells: []
     parentIndex: -1
   platformSettings:
