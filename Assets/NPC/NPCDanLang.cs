@@ -1,52 +1,56 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using System;
 
 public class NPCDanLang : MonoBehaviour
 {
     [Header("UI")]
     public TextMeshProUGUI dialogueText;
-
-    [Header("Cấu hình thoại")]
-    [TextArea(2, 5)]
     public string[] dialogueParts;
     public float typeSpeed = 0.05f;
 
     private int currentPart = 0;
     private bool isTyping = false;
     private string currentSentence;
+    private bool hasAcceptedMission = false;
 
-    [Header("Ẩn UI")]
+    [Header("UI Panels")]
     public GameObject NPCTalk;
-
-    [Header("Hiện nhận nhiệm vụ")]
     public GameObject ShowComfirmMisson;
-
-    [Header("Nhiệm Vụ")]
     public GameObject ShowMisson;
+
     private RectTransform missionRect;
     public float slideDuration = 0.5f;
-    public float slideDistance = 800f;
+    public float slideDistanceRight = 800f;
+    public float slideDistanceLeft = -800f;
     public AnimationCurve slideCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-
-    [Header("Nút điều khiển")]
-    public GameObject buttonShow; // nút để trượt vào
-    public GameObject buttonHide; // nút để trượt ra
+    public GameObject btnShow;
+    private bool isPlayerNear = false;
     void Start()
     {
-        if (dialogueParts.Length > 0)
-        {
-            StartCoroutine(TypeText(dialogueParts[currentPart]));
-        }
-
         if (ShowMisson != null)
             missionRect = ShowMisson.GetComponent<RectTransform>();
+
+        Button btnShow = ShowMisson.transform.Find("BtnShow")?.GetComponent<Button>();
+        Button btnHide = ShowMisson.transform.Find("BtnHide")?.GetComponent<Button>();
+
+        if (btnShow != null) btnShow.onClick.AddListener(OnClickShow);
+        if (btnHide != null) btnHide.onClick.AddListener(OnClickHide);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (hasAcceptedMission) return;
+
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.E)) // chỉ bắt đầu khi bấm E gần NPC
+        {
+            NPCTalk.SetActive(true);
+            currentPart = 0;
+            StartCoroutine(TypeText(dialogueParts[currentPart]));
+        }
+
+        if (NPCTalk.activeSelf && Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
             {
@@ -80,7 +84,7 @@ public class NPCDanLang : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(typeSpeed);
+            yield return new WaitForSecondsRealtime(typeSpeed);
         }
 
         isTyping = false;
@@ -88,30 +92,35 @@ public class NPCDanLang : MonoBehaviour
 
     public void ComfirmMisson()
     {
+        hasAcceptedMission = true;
+        Time.timeScale = 1f;
         ShowComfirmMisson.SetActive(false);
         ShowMisson.SetActive(true);
-        buttonHide.SetActive(true);
-        buttonShow.SetActive(false);
-        StartCoroutine(SlideMission(slideDistance, 0)); // từ phải vào giữa
+
+        FindObjectOfType<OpenMisson>()?.AcceptMission();
+
+        missionRect.anchoredPosition = new Vector2(slideDistanceRight, missionRect.anchoredPosition.y);
+        StartCoroutine(SlideMission(slideDistanceRight, 0));
     }
 
-    public void HideMissionRight()
+    // 🔹 Hàm gán cho Button Hide
+    public void OnClickHide()
     {
-        StartCoroutine(SlideMission(0, slideDistance, () =>
+        StartCoroutine(SlideMission(0, slideDistanceRight, () =>
         {
-            buttonHide.SetActive(false);
-            buttonShow.SetActive(true);
+            ShowMisson.SetActive(false);
+            btnShow.gameObject.SetActive(true);
         }));
     }
 
-    public void ShowMissionFromRight()
+    // 🔹 Hàm gán cho Button Show
+    public void OnClickShow()
     {
+        btnShow.gameObject.SetActive(false);
+
         ShowMisson.SetActive(true);
-        StartCoroutine(SlideMission(slideDistance, 0, () =>
-        {
-            buttonHide.SetActive(true);
-            buttonShow.SetActive(false);
-        }));
+        missionRect.anchoredPosition = new Vector2(slideDistanceRight, missionRect.anchoredPosition.y);
+        StartCoroutine(SlideMission(slideDistanceRight, 0));
     }
 
     IEnumerator SlideMission(float startX, float endX, System.Action onComplete = null)
@@ -122,20 +131,24 @@ public class NPCDanLang : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < slideDuration)
         {
-            elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = slideCurve.Evaluate(elapsed / slideDuration);
             missionRect.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
             yield return null;
         }
 
         missionRect.anchoredPosition = endPos;
-
-        if (endX != 0)
-        {
-            // Nếu trượt ra ngoài thì ẩn bảng
-            ShowMisson.SetActive(false);
-        }
-
         onComplete?.Invoke();
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+            isPlayerNear = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+            isPlayerNear = false;
     }
 }
