@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class CheckDestroyedList : MonoBehaviour
 {
-    public List<GameObject> listToCheck;
+    [Header("Danh sách Enemy cần kiểm tra")]
+    public List<GameObject> enemiesToCheck;
+
+    [Header("Danh sách Item cần kiểm tra")]
+    public List<GameObject> itemsToCheck;
+
+    [Header("Khi tất cả đã bị destroy")]
     public List<GameObject> objectsToEnable;
     public List<GameObject> objectsToDisable;
 
@@ -13,18 +19,31 @@ public class CheckDestroyedList : MonoBehaviour
     {
         if (hasSwitched) return;
 
-        bool allDestroyed = true;
+        bool allEnemiesDestroyed = true;
+        bool allItemsDestroyed = true;
 
-        foreach (GameObject obj in listToCheck)
+        // Kiểm tra enemy
+        foreach (GameObject enemy in enemiesToCheck)
         {
-            if (obj != null)
+            if (enemy != null)
             {
-                allDestroyed = false;
+                allEnemiesDestroyed = false;
                 break;
             }
         }
 
-        if (allDestroyed)
+        // Kiểm tra item
+        foreach (GameObject item in itemsToCheck)
+        {
+            if (item != null)
+            {
+                allItemsDestroyed = false;
+                break;
+            }
+        }
+
+        // Nếu cả enemy và item đều đã bị destroy
+        if (allEnemiesDestroyed && allItemsDestroyed)
         {
             foreach (GameObject obj in objectsToEnable)
             {
