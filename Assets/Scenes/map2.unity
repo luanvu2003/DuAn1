@@ -11842,6 +11842,47 @@ PrefabInstance:
       propertyPath: ShowComfirmMisson
       value: 
       objectReference: {fileID: 650067692}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[1]
+      value: "Ng\xE0i\u2026 ng\xE0i l\xE0 hi\u1EC7p s\u0129 t\u1EEB l\xE0ng b\xEAn
+        sao? Xin h\xE3y nghe t\xF4i\u2026 Ch\xFAng t\xF4i kh\xF4ng c\xF2n nhi\u1EC1u
+        th\u1EDDi gian n\u1EEFa."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[2]
+      value: "Ba ng\xE0y tr\u01B0\u1EDBc\u2026 m\u1ED9t lu\u1ED3ng s\u01B0\u01A1ng
+        \u0111en tr\xE0n qua t\u1EEB ph\xEDa B\u1EAFc. M\u1ECDi c\xE2y c\u1ED1i ch\u1EBFt
+        kh\xF4 ch\u1EC9 trong m\u1ED9t \u0111\xEAm, v\xE0 nh\u1EEFng b\xF3ng \u0111en
+        b\u1EAFt \u0111\u1EA7u di chuy\u1EC3n trong s\u01B0\u01A1ng."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[3]
+      value: "Nhi\u1EC1u ng\u01B0\u1EDDi trong l\xE0ng b\u1ECF ch\u1EA1y\u2026 nh\u01B0ng
+        r\u1ED3i h\u1ECD bi\u1EBFn m\u1EA5t. M\u1ED9t s\u1ED1 tr\u1EDF l\u1EA1i\u2026
+        nh\u01B0ng kh\xF4ng c\xF2n l\xE0 ch\xEDnh h\u1ECD n\u1EEFa, h\u1ECD \u0111\xE3
+        bi\u1EBFn th\xE0nh nh\u1EEFng ph\xE1p s\u01B0 t\xE0 \xE1c. H\u1ECD t\u1EA5n
+        c\xF4ng b\u1EA5t c\u1EE9 ai m\xE0 h\u1ECD nh\xECn th\u1EA5y."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[4]
+      value: "T\xF4i nghe n\xF3i t\u1EA5t c\u1EA3 nh\u1EEFng chuy\u1EC7n n\xE0y \u0111\u1EC1u
+        do Drak King v\xE0 qu\xE2n \u0111o\xE0n c\u1EE7a h\u1EAFn. H\u1EAFn kh\xF4ng
+        ch\u1EC9 mu\u1ED1n chi\u1EBFm l\xE0ng n\xE0y\u2026 m\xE0 l\xE0 to\xE0n b\u1ED9
+        v\xF9ng \u0111\u1EA5t."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[5]
+      value: "N\u1EBFu ng\xE0i kh\xF4ng ng\u0103n h\u1EAFn l\u1EA1i\u2026 s\u1EBD
+        ch\u1EB3ng c\xF2n n\u01A1i n\xE0o \u0111\u1EC3 quay v\u1EC1."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
