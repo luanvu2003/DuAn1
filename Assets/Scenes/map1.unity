@@ -19073,6 +19073,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: npcdanlang_0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072996234511048154, guid: 662930207646d5342b06b3001e5dddf8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072996234511048154, guid: 662930207646d5342b06b3001e5dddf8, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072996234511048154, guid: 662930207646d5342b06b3001e5dddf8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -814148415
+      objectReference: {fileID: 0}
     - target: {fileID: 6410256628551589192, guid: 662930207646d5342b06b3001e5dddf8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -34.51
