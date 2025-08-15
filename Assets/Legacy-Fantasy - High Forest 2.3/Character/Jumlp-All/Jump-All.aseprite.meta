@@ -426,7 +426,11 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
+<<<<<<< Updated upstream
       value0: 0
+=======
+      value0: 1066376132
+>>>>>>> Stashed changes
       value1: 0
       value2: 0
       value3: 0

@@ -98,7 +98,11 @@
     },
     "com.unity.burst": {
       "version": "1.8.21",
+<<<<<<< Updated upstream
       "depth": 1,
+=======
+      "depth": 3,
+>>>>>>> Stashed changes
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
