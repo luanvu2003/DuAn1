@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 1319
       height: 1200
-    spriteID: 63453514ac8cee840bfd8cbc275ecc67
+    spriteID: ab58c7b2f3234e845ab834acdb06abcb
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,21 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 781660836
->>>>>>> Stashed changes
-=======
-      value0: 781660836
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 781660836
-    name: Red-Tree
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -172,7 +159,7 @@ ScriptedImporter:
         y: 0
         width: 1319
         height: 1200
-      spriteId: 63453514ac8cee840bfd8cbc275ecc67
+      spriteId: ab58c7b2f3234e845ab834acdb06abcb
     linkedCells: []
     parentIndex: -1
   platformSettings:

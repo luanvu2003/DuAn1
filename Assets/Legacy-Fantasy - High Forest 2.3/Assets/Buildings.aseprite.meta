@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 400
       height: 368
-    spriteID: 7bcc0be848b825c449a9fcc97478a9b0
+    spriteID: d6d1257e6f8a8bb4ab41d71220b23545
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,21 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 1660445297
->>>>>>> Stashed changes
-=======
-      value0: 1660445297
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 1660445297
-    name: Buildings
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -172,7 +159,7 @@ ScriptedImporter:
         y: 32
         width: 400
         height: 368
-      spriteId: 7bcc0be848b825c449a9fcc97478a9b0
+      spriteId: d6d1257e6f8a8bb4ab41d71220b23545
     linkedCells: []
     parentIndex: -1
   platformSettings:

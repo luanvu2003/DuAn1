@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 1319
       height: 1200
-    spriteID: 24c46d38c74b8984fad9f9a548b9adf3
+    spriteID: b76fa09555ef43f4e95422fe6dcc2147
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,21 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 1430664895
->>>>>>> Stashed changes
-=======
-      value0: 1430664895
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 1430664895
-    name: Dark-Tree
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -172,7 +159,7 @@ ScriptedImporter:
         y: 0
         width: 1319
         height: 1200
-      spriteId: 24c46d38c74b8984fad9f9a548b9adf3
+      spriteId: b76fa09555ef43f4e95422fe6dcc2147
     linkedCells: []
     parentIndex: -1
   platformSettings:

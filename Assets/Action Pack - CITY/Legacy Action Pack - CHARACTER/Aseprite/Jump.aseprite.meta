@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 20
       height: 22
-    spriteID: bf17aee30e0e84b43963ae87a7e2d372
+    spriteID: ef5fa8cc9310cc04e85e27c18b0bb0bf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,7 +153,7 @@ ScriptedImporter:
       y: 4
       width: 22
       height: 20
-    spriteID: 140fcd48476c6ae46945e36114cb48ef
+    spriteID: 206b9a19bf029f94cbfa0c6d90ee5c13
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -173,7 +173,7 @@ ScriptedImporter:
       y: 34
       width: 20
       height: 22
-    spriteID: c3d6ff91eef7b774e89ae4d7203aecc8
+    spriteID: a064f00eff56cb848982304b992a7c88
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -193,7 +193,7 @@ ScriptedImporter:
       y: 32
       width: 22
       height: 20
-    spriteID: 36cf1344cfeb4b1479b2a48841178ebe
+    spriteID: 9266785139213e54781f3a95cc02441f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -205,21 +205,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 842948034
->>>>>>> Stashed changes
-=======
-      value0: 842948034
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: 842948034
-    name: Jump
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -232,7 +219,7 @@ ScriptedImporter:
         y: 6
         width: 20
         height: 22
-      spriteId: bf17aee30e0e84b43963ae87a7e2d372
+      spriteId: ef5fa8cc9310cc04e85e27c18b0bb0bf
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -241,7 +228,7 @@ ScriptedImporter:
         y: 6
         width: 22
         height: 20
-      spriteId: 140fcd48476c6ae46945e36114cb48ef
+      spriteId: 206b9a19bf029f94cbfa0c6d90ee5c13
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -250,7 +237,7 @@ ScriptedImporter:
         y: 4
         width: 20
         height: 22
-      spriteId: c3d6ff91eef7b774e89ae4d7203aecc8
+      spriteId: a064f00eff56cb848982304b992a7c88
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -259,7 +246,7 @@ ScriptedImporter:
         y: 6
         width: 22
         height: 20
-      spriteId: 36cf1344cfeb4b1479b2a48841178ebe
+      spriteId: 9266785139213e54781f3a95cc02441f
     linkedCells: []
     parentIndex: -1
   platformSettings:

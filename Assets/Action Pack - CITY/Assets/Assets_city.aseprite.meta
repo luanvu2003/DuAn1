@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 272
       height: 224
-    spriteID: d237273c8be40b14ea9bc6d7af6b403b
+    spriteID: 13abec7218c82d440b82a3a5214bb47f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,21 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    uuid:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      value0: 0
-=======
-      value0: 4288798559
->>>>>>> Stashed changes
-=======
-      value0: 4288798559
->>>>>>> Stashed changes
-      value1: 0
-      value2: 0
-      value3: 0
-    guid: -6168737
-    name: Assets_city
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -172,7 +159,7 @@ ScriptedImporter:
         y: 0
         width: 272
         height: 224
-      spriteId: d237273c8be40b14ea9bc6d7af6b403b
+      spriteId: 13abec7218c82d440b82a3a5214bb47f
     linkedCells: []
     parentIndex: -1
   platformSettings:
