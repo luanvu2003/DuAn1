@@ -427,7 +427,11 @@ ScriptedImporter:
   - layerIndex: 0
     uuid:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       value0: 0
+=======
+      value0: 1066376132
+>>>>>>> Stashed changes
 =======
       value0: 1066376132
 >>>>>>> Stashed changes

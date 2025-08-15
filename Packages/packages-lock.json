@@ -99,8 +99,11 @@
     "com.unity.burst": {
       "version": "1.8.21",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "depth": 1,
 =======
+=======
+>>>>>>> Stashed changes
       "depth": 3,
 >>>>>>> Stashed changes
       "source": "registry",
