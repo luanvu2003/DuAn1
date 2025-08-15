@@ -6,14 +6,25 @@ public class OpenMisson : MonoBehaviour
     public GameObject MissonPanel;
 
     private bool isPlayerInRange = false;
-
+    private bool hasAcceptedMission = false;
     void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && !hasAcceptedMission && Input.GetKeyDown(KeyCode.E))
         {
-            Time.timeScale = 0f; // Dừng game khi mở shop
             MissonPanel.SetActive(true);
+
+            // NPCDanLang npc = MissonPanel.GetComponent<NPCDanLang>();
+            // if (npc != null)
+            //     npc.StartDialogue();
+
+            Time.timeScale = 0f;
         }
+    }
+
+    public void AcceptMission()
+    {
+        hasAcceptedMission = true;
+        TextOpenPanel.SetActive(false); 
     }
 
     void OnTriggerEnter2D(Collider2D collision)
