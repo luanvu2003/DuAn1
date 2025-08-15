@@ -2636,6 +2636,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 953005415}
     - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
+      propertyPath: bloodEffectPrefab
+      value: 
+      objectReference: {fileID: 1730739386719418010, guid: 526ab41bb2e8a8948b15b43f08ee577a, type: 3}
+    - target: {fileID: 1571062125372779860, guid: 9839f5bd235fc924895df37a66b34797, type: 3}
       propertyPath: skill1CooldownText
       value: 
       objectReference: {fileID: 1610932756}
@@ -9113,7 +9117,7 @@ MonoBehaviour:
   firePoint: {fileID: 134316096}
   skillCooldown: 2
   projectileDamage: 35
-  maxHealth: 350
+  maxHealth: 300
   healthBarOffset: {x: 0, y: 0.6, z: 0}
   jumpForce: 7
   groundCheck: {fileID: 916643556}
