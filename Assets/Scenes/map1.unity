@@ -19034,6 +19034,44 @@ PrefabInstance:
       propertyPath: ShowComfirmMisson
       value: 
       objectReference: {fileID: 80095314}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[1]
+      value: "Ng\xE0i kh\xF4ng bi\u1EBFt \u0111\xE2u\u2026 k\u1EC3 t\u1EEB khi Drak
+        King xu\u1EA5t hi\u1EC7n, b\xF3ng t\u1ED1i \u0111\xE3 nu\u1ED1t tr\u1ECDn
+        c\u1EA3 ng\xF4i l\xE0ng."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[2]
+      value: "Nh\u1EEFng c\xE1nh \u0111\u1ED3ng y\xEAn b\xECnh gi\u1EDD ch\u1EC9
+        c\xF2n l\u1EA1i s\u01B0\u01A1ng m\xF9 v\xE0 ti\u1EBFng g\u1EA7m r\xFA c\u1EE7a
+        nh\u1EEFng con th\xFA b\u1ECB h\u1EAFn ph\xF9 ph\xE9p."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[3]
+      value: "Gia s\xFAc, chim ch\xF3c, th\u1EADm ch\xED c\u1EA3 ch\xF3 m\xE8o trong
+        l\xE0ng\u2026 t\u1EA5t c\u1EA3 \u0111\u1EC1u tr\u1EDF th\xE0nh qu\xE1i v\u1EADt
+        hung t\u1EE3n."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[4]
+      value: "M\u1ED7i \u0111\xEAm, b\xF3ng \u0111en c\u1EE7a Drak King l\u1EA1i
+        xu\u1EA5t hi\u1EC7n g\u1EA7n h\u01A1n\u2026 v\xE0 ch\xFAng t\xF4i bi\u1EBFt,
+        ch\u1EB3ng bao l\xE2u n\u1EEFa\u2026 s\u1EBD kh\xF4ng c\xF2n ai s\u1ED1ng
+        s\xF3t."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[5]
+      value: "Xin Ng\xE0i!... H\xE3y gi\xFAp ch\xFAng t\xF4i l\u1EA5y l\u1EA1i s\u1EF1
+        b\xECnh y\xEAn v\u1ED1n c\xF3."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

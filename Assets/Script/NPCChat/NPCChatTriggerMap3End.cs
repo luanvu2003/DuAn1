@@ -14,8 +14,8 @@ public class NPCChatTriggerMap3End : MonoBehaviour
     // Danh sách câu thoại
     private string[] dialogueLines = new string[]
     {
-        "Cổng đã được mở, hãy đi vào để đi đến phòng Vua.",  
-        "Tên Vua đang ở trong đó, nếu bạn đánh bại hắn thì ngôi làng sẽ được giải thoát!",  
+        "Cổng đã được mở, hãy đi vào để đi đến phòng Drak King.",  
+        "Tên Drak King đang ở trong đó, nếu bạn đánh bại hắn thì ngôi làng sẽ được giải thoát!",  
         "Hãy giúp chúng tôi đánh bại hắn, chỉ có bạn làm được điều đó!",
         "Chúc bạn may mắn!"
     };

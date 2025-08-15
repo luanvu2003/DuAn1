@@ -7675,6 +7675,51 @@ PrefabInstance:
       propertyPath: ShowComfirmMisson
       value: 
       objectReference: {fileID: 880272447}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[1]
+      value: "Hi\u1EC7p s\u0129\u2026 cu\u1ED1i c\xF9ng ng\u01B0\u01A1i c\u0169ng
+        t\u1EDBi \u0111\u01B0\u1EE3c \u0111\xE2y.   L\xE2u \u0111\xE0i\u2026 \u0111\xE3
+        kh\xF4ng c\xF2n thu\u1ED9c v\u1EC1 ta n\u1EEFa."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[2]
+      value: "Ba \u0111\xEAm tr\u01B0\u1EDBc, qu\xE2n \u0111o\xE0n c\u1EE7a Drak
+        King \u0111\xE3 xuy\xEAn qua t\u01B0\u1EDDng th\xE0nh.   H\u1EAFn kh\xF4ng
+        \u0111\xE1nh t\u1EEB c\u1ED5ng ch\xEDnh\u2026 h\u1EAFn xu\u1EA5t hi\u1EC7n
+        ngay trong \u0111\u1EA1i s\u1EA3nh, nh\u01B0 th\u1EC3 b\xF3ng t\u1ED1i \u0111\u01B0a
+        h\u1EAFn t\u1EDBi."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[3]
+      value: "B\xE2y gi\u1EDD, to\xE0n b\u1ED9 l\xE2u \u0111\xE0i \u0111\xE3 b\u1ECB
+        phong t\u1ECFa b\u1EDFi k\u1EBFt gi\u1EDBi c\u1EE7a h\u1EAFn.   T\u1EEB \u0111\xF3,
+        h\u1EAFn \u0111i\u1EC1u khi\u1EC3n l\u0169 qu\xE1i th\xFA tr\xE0n xu\u1ED1ng
+        c\xE1c l\xE0ng v\xE0 khu r\u1EEBng."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[4]
+      value: "Ng\u01B0\u01A1i l\xE0 c\u01A1 h\u1ED9i cu\u1ED1i c\xF9ng c\u1EE7a ch\xFAng
+        ta. H\xE3y \u0111\u1ED9t nh\u1EADp v\xE0o l\xE2u \u0111\xE0i\u2026    V\xE0
+        k\u1EBFt li\u1EC5u Drak King tr\u01B0\u1EDBc khi h\u1EAFn nu\u1ED1t ch\u1EEDng
+        c\u1EA3 v\u01B0\u01A1ng qu\u1ED1c."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746451359588157072, guid: 2b3ac8981275d464a9d68b881fc2af65, type: 3}
+      propertyPath: dialogueParts.Array.data[5]
+      value: "Nh\u1EEFng chi\u1EBFc ch\xECa kh\xF3a \u1EDF r\u1EA3i r\xE1c trong
+        th\xE0nh v\xE0 \u0111\u01B0\u1EE3c nh\u1EEFng t\xEAn tay sai c\u1EE7a h\u1EAFn
+        canh gi\u1EEF. H\xE3y thu th\u1EADp ch\xFAng... sau khi thu th\u1EADp \u0111\u1EE7
+        s\u1EBD m\u1EDF c\xE1nh c\u1EEDa cu\u1ED1i c\xF9ng d\u1EABn v\xE0o \u0111\u1EA1i
+        s\u1EA3nh. \u0110\u1EEBng \u0111\u1EC3 linh h\u1ED3n nh\u1EEFng ng\u01B0\u1EDDi
+        \u0111\xE3 ng\xE3 xu\u1ED1ng ph\u1EA3i th\u1EA5t v\u1ECDng."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

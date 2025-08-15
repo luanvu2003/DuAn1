@@ -1324,8 +1324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45.14, y: 32.433}
-  m_SizeDelta: {x: 1336.04, y: 249.14}
+  m_AnchoredPosition: {x: -137.01, y: 31}
+  m_SizeDelta: {x: 1173.29, y: 249.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632885470
 MonoBehaviour:
@@ -1374,8 +1374,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1869,7 +1869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69.19, y: 29.932}
+  m_AnchoredPosition: {x: 126, y: 28}
   m_SizeDelta: {x: 1312.39, y: 244.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &981625882
@@ -1919,8 +1919,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 93.64337, w: 10.352982}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2003,8 +2003,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 610.81, y: 132}
-  m_SizeDelta: {x: 228.38, y: 50}
+  m_AnchoredPosition: {x: 592.73, y: 131.14}
+  m_SizeDelta: {x: 264.55, y: 51.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &983139894
 MonoBehaviour:
@@ -2026,7 +2026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Dark:'
+  m_text: 'Drak King:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -2053,8 +2053,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6608,8 +6608,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6708,25 +6708,45 @@ MonoBehaviour:
   enemyDialogueText: {fileID: 632885470}
   lines:
   - isPlayer: 1
-    text: dsadsadsadasdsadsa
-  - isPlayer: 1
-    text: dsadsadasdasdasdas
-  - isPlayer: 1
-    text: dsadsadasdasdasdas
+    text: "Drak\u2026 Ta \u0111\xE3 v\u01B0\u1EE3t qua \u0111\xE0n th\xFA b\u1ECB
+      ng\u01B0\u01A1i bi\u1EBFn th\xE0nh qu\xE1i v\u1EADt, xuy\xEAn qua m\xE0n s\u01B0\u01A1ng
+      \u0111\u1ED9c\u2026 ch\u1EC9 \u0111\u1EC3 g\u1EB7p ng\u01B0\u01A1i."
   - isPlayer: 0
-    text: dsadsadasdasdasdas
+    text: "Ng\u01B0\u01A1i th\u1EADt ki\xEAn c\u01B0\u1EDDng\u2026 nh\u01B0ng c\u0169ng
+      th\u1EADt ngu ng\u1ED1c. Ng\u01B0\u01A1i b\u01B0\u1EDBc v\xE0o \u0111\xE2y\u2026
+      ngh\u0129a l\xE0 ng\u01B0\u01A1i \u0111\xE3 t\u1EF1 \u0111\u01B0a m\u1EA1ng
+      m\xECnh cho Ta."
+  - isPlayer: 1
+    text: "Ng\u01B0\u01A1i \u0111\xE3 bi\u1EBFn ng\xF4i l\xE0ng n\xE0y th\xE0nh \u0111\u1ECBa
+      ng\u1EE5c. Ng\u01B0\u1EDDi d\xE2n s\u1ED1ng trong s\u1EE3 h\xE3i, v\xE0 nh\u1EEFng
+      sinh v\u1EADt v\xF4 t\u1ED9i b\u1ECB ng\u01B0\u01A1i l\u1EE3i d\u1EE5ng."
   - isPlayer: 0
-    text: dsadsadasdasdasdas
+    text: "V\xF4 t\u1ED9i? Trong b\xF3ng t\u1ED1i, ch\u1EB3ng c\xF3 g\xEC l\xE0 v\xF4
+      t\u1ED9i. T\u1EA5t c\u1EA3 s\u1EBD tr\u1EDF th\xE0nh c\xF4ng c\u1EE5 cho s\u1EE9c
+      m\u1EA1nh c\u1EE7a Ta. Ngay c\u1EA3 ng\u01B0\u01A1i\u2026 c\u0169ng s\u1EBD
+      kh\xF4ng ngo\u1EA1i l\u1EC7."
   - isPlayer: 1
-    text: dsadsadasdasdasdas
+    text: "Ta s\u1EBD ph\xE1 b\u1ECF l\u1EDDi nguy\u1EC1n n\xE0y, d\xF9 ph\u1EA3i
+      \u0111\xE1nh \u0111\u1ED5i m\u1EA1ng s\u1ED1ng."
   - isPlayer: 0
-    text: dsadsadasdasdasdas
+    text: "Ng\u01B0\u01A1i kh\xF4ng hi\u1EC3u sao, hi\u1EC7p s\u0129? \xC1nh s\xE1ng
+      \u0111\xE3 b\u1ECF r\u01A1i c\xE1c ng\u01B0\u01A1i. Ta ch\u1EC9 mang \u0111\u1EBFn
+      s\u1EF1 th\u1EADt\u2026 v\xE0 quy\u1EC1n l\u1EF1c."
   - isPlayer: 1
-    text: dsadsadasdasdasdas
+    text: "S\u1EF1 th\u1EADt c\u1EE7a ng\u01B0\u01A1i ch\u1EC9 l\xE0 d\u1ED1i tr\xE1.
+      Quy\u1EC1n l\u1EF1c c\u1EE7a ng\u01B0\u01A1i ch\u1EC9 \u0111\u1EC3 gieo s\u1EE3
+      h\xE3i v\xE0 h\u1EE7y di\u1EC7t."
+  - isPlayer: 0
+    text: "Ta s\u1EBD x\xE9 to\u1EA1c s\u1EF1 ki\xEAu ng\u1EA1o c\u1EE7a ng\u01B0\u01A1i
+      v\xE0 bi\u1EBFn ng\u01B0\u01A1i th\xE0nh m\u1ED9t trong s\u1ED1 nh\u1EEFng
+      con r\u1ED1i trung th\xE0nh c\u1EE7a Ta!"
   - isPlayer: 1
-    text: dsadsadasdasdasdas
-  - isPlayer: 1
-    text: dsadsadasdasdasdas
+    text: "Th\u1EED \u0111i, Drak. Nh\u01B0ng h\xE3y nh\u1EDB\u2026 ta kh\xF4ng chi\u1EBFn
+      \u0111\u1EA5u m\u1ED9t m\xECnh. C\u1EA3 ng\xF4i l\xE0ng\u2026 v\xE0 nh\u1EEFng
+      linh h\u1ED3n \u0111\xE3 ng\xE3 xu\u1ED1ng\u2026 \u0111ang \u1EDF b\xEAn ta."
+  - isPlayer: 0
+    text: "V\u1EADy th\xEC\u2026 \u0111\u1EC3 Ta nh\u1EA5n ch\xECm t\u1EA5t c\u1EA3
+      c\xE1c ng\u01B0\u01A1i trong b\xF3ng t\u1ED1i v\u0129nh h\u1EB1ng!"
   typeSpeed: 0.05
 --- !u!4 &1524240444
 Transform:
