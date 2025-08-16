@@ -10276,6 +10276,10 @@ PrefabInstance:
       propertyPath: healthItemPool
       value: 
       objectReference: {fileID: 1983775317}
+    - target: {fileID: 1720778166248812815, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2676499158414547082, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
       propertyPath: m_Name
       value: Soi (1)
@@ -18862,6 +18866,10 @@ PrefabInstance:
       propertyPath: healthItemPool
       value: 
       objectReference: {fileID: 1983775317}
+    - target: {fileID: 1720778166248812815, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 2676499158414547082, guid: 55ee8f16e254f864294f9a58a0035a54, type: 3}
       propertyPath: m_Name
       value: Soi

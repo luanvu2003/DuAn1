@@ -200,16 +200,19 @@ public class PlayerController : MonoBehaviour
             {
                 skill1LastTime = Time.time;
                 StartCoroutine(CastSkill(1));
+                GetComponent<PlayerAudio>()?.PlaySkill1Sound();
             }
             else if (canUseSkill2 && Time.time >= skill2LastTime + skillCooldown && Input.GetKeyDown(KeyCode.Y))
             {
                 skill2LastTime = Time.time;
                 StartCoroutine(CastSkill(2));
+                GetComponent<PlayerAudio>()?.PlaySkill2Sound();
             }
             else if (canUseSkill3 && Time.time >= skill3LastTime + skillCooldown && Input.GetKeyDown(KeyCode.U))
             {
                 skill3LastTime = Time.time;
                 StartCoroutine(CastSkill(3));
+                GetComponent<PlayerAudio>()?.PlaySkill3Sound();
             }
         }
     }
@@ -262,6 +265,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
         animator.SetTrigger("Attack");
+        GetComponent<PlayerAudio>()?.PlayAttackSound();
     }
     public void DealDamage()
     {
@@ -310,6 +314,7 @@ public class PlayerController : MonoBehaviour
                 ShowHitEffect(enemy.transform.position);
                 AddScore(200);
             }
+            GetComponent<PlayerAudio>()?.PlayHitSound();
         }
     }
 

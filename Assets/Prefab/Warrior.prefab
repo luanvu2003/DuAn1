@@ -79,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -814148415
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: -1945894931, guid: b12b3086df92e35419901ad7ed2da563, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 7
   maxHP: 100
   groundLayer:
     serializedVersion: 2
@@ -360,6 +360,14 @@ MonoBehaviour:
   spellPrefab2: {fileID: 1663610425956677321, guid: e3e37d5a004013742ab3d521f5a20bdc, type: 3}
   spellPrefab3: {fileID: 1042452958742751905, guid: 250754729c6fe2f458f19b90878e783a, type: 3}
   skillCooldown: 5
+  skill1Fill: {fileID: 0}
+  skill1CooldownText: {fileID: 0}
+  skill2Fill: {fileID: 0}
+  skill2CooldownText: {fileID: 0}
+  skill3Fill: {fileID: 0}
+  skill3CooldownText: {fileID: 0}
+  minDamage: 15
+  maxDamage: 30
   attackCooldown: 0.5
   attackPoint: {fileID: 1314997548600840780}
   attackRange: 1
@@ -368,6 +376,7 @@ MonoBehaviour:
     m_Bits: 512
   knockbackDuration: 0.2
   knockbackForce: 20
+  bloodEffectPrefab: {fileID: 1730739386719418010, guid: 526ab41bb2e8a8948b15b43f08ee577a, type: 3}
 --- !u!114 &1912550031473988834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +392,11 @@ MonoBehaviour:
   footstepSource: {fileID: 7180852284383712523}
   effectSource: {fileID: 4108647208513839719}
   footstepClip: {fileID: 8300000, guid: 4c51835a5bb397e4aa752ee7a9ec6903, type: 3}
-  swordSwingClip: {fileID: 8300000, guid: 7d76a021c4ad9e2448013b59508d0ace, type: 3}
+  swordSwingClip: {fileID: 8300000, guid: a323ca3ecc0262f41a1e4a374ed87437, type: 3}
+  swordHitClip: {fileID: 8300000, guid: ff885fa83c7c28f46aeb729d28bd5e3c, type: 3}
+  swordSkill1Clip: {fileID: 8300000, guid: 00010890ca44a7d4f9280248b389cdbf, type: 3}
+  swordSkill2Clip: {fileID: 8300000, guid: 746e8c88f86e3c94580fb2276fc6b230, type: 3}
+  swordSkill3Clip: {fileID: 8300000, guid: b1d70dc06a4de694a9483960a71f8069, type: 3}
 --- !u!61 &1128037936641015588
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -416,7 +429,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10221082, y: -0.09626818}
+  m_Offset: {x: 0.07957798, y: -0.09626818}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -427,7 +440,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3124114, y: 2.3074636}
+  m_Size: {x: 1.0860957, y: 2.3074636}
   m_EdgeRadius: 0
 --- !u!1 &7469345340778638211
 GameObject:
