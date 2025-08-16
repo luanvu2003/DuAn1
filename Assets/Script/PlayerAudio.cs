@@ -8,6 +8,10 @@ public class PlayerAudio : MonoBehaviour
     public AudioClip footstepClip;
     public AudioClip swordSwingClip;
     public AudioClip swordHitClip;
+    public AudioClip swordSkill1Clip;
+    public AudioClip swordSkill2Clip;
+    public AudioClip swordSkill3Clip;
+
     private Animator animator;
 
     void Start()
@@ -34,9 +38,10 @@ public class PlayerAudio : MonoBehaviour
         {
             footstepSource.Stop();
         }
-
-        // PHÁT tiếng chém khi click chuột trái
-        if (Input.GetMouseButtonDown(0))
+    }
+    public void PlayAttackSound()
+    {
+        if (swordSwingClip != null && effectSource != null)
         {
             effectSource.PlayOneShot(swordSwingClip);
         }
@@ -46,6 +51,27 @@ public class PlayerAudio : MonoBehaviour
         if (swordHitClip != null && effectSource != null)
         {
             effectSource.PlayOneShot(swordHitClip);
+        }
+    }
+    public void PlaySkill1Sound()
+    {
+        if (swordSkill1Clip != null && effectSource != null)
+        {
+            effectSource.PlayOneShot(swordSkill1Clip);
+        }
+    }
+    public void PlaySkill2Sound()
+    {
+        if (swordSkill2Clip != null && effectSource != null)
+        {
+            effectSource.PlayOneShot(swordSkill2Clip);
+        }
+    }
+    public void PlaySkill3Sound()
+    {
+        if (swordSkill3Clip != null && effectSource != null)
+        {
+            effectSource.PlayOneShot(swordSkill3Clip);
         }
     }
 }
