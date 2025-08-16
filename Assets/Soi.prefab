@@ -263,7 +263,7 @@ MonoBehaviour:
   obstacleCheckDistance: 0.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   healthItemPool: {fileID: 0}
   knockbackDuration: 0.2
   attackCooldown: 1
