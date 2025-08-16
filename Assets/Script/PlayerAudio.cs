@@ -7,7 +7,7 @@ public class PlayerAudio : MonoBehaviour
 
     public AudioClip footstepClip;
     public AudioClip swordSwingClip;
-
+    public AudioClip swordHitClip;
     private Animator animator;
 
     void Start()
@@ -39,6 +39,13 @@ public class PlayerAudio : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             effectSource.PlayOneShot(swordSwingClip);
+        }
+    }
+    public void PlayHitSound()
+    {
+        if (swordHitClip != null && effectSource != null)
+        {
+            effectSource.PlayOneShot(swordHitClip);
         }
     }
 }

@@ -310,6 +310,7 @@ public class PlayerController : MonoBehaviour
                 ShowHitEffect(enemy.transform.position);
                 AddScore(200);
             }
+            GetComponent<PlayerAudio>()?.PlayHitSound();
         }
     }
 
