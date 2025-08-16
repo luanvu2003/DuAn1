@@ -13,6 +13,7 @@ public class OpenShop : MonoBehaviour
         {
             Time.timeScale = 0f; // Dừng game khi mở shop
             ShopPanel.SetActive(true);
+            PlayerController.IsUIOpen = true; // Đánh dấu UI đang mở
         }
     }
 

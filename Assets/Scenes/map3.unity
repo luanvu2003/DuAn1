@@ -43964,6 +43964,116 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a768eb677bd7aa24e809ec8b749014df, type: 3}
+--- !u!1001 &2131622861
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 918006074112335614, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303213021172377839, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1377837079866353629, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_Name
+      value: PF Village Props - Elevator (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911947816680284969, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244979857600367825, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 110.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -23.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357402736154281772, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995091991858082460, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894285565288082534, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: platform
+      value: 
+      objectReference: {fileID: 2131622862}
+    - target: {fileID: 8894285565288082534, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: waitTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894285565288082534, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894285565288082534, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: startState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894285565288082534, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: lengthRange.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894285565288082534, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: lengthRange.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051993918450062273, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+--- !u!50 &2131622862 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 2380405304968266232, guid: beacd0ff21b993943a49028a81b5421f, type: 3}
+  m_PrefabInstance: {fileID: 2131622861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &867421292002891762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44516,6 +44626,7 @@ SceneRoots:
   - {fileID: 1054649180}
   - {fileID: 1470910208}
   - {fileID: 926545316}
+  - {fileID: 2131622861}
   - {fileID: 1603178374}
   - {fileID: 212989534}
   - {fileID: 927829320}
