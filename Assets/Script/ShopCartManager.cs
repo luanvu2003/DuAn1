@@ -133,6 +133,7 @@ public class ShopCartManager : MonoBehaviour
             notifyFail?.SetActive(true);
             notifySuccess?.SetActive(false);
         }
+        PlayerController.IsUIOpen = false; // Đánh dấu UI đã đóng
     }
 
     public void CloseBuy()
@@ -153,6 +154,7 @@ public class ShopCartManager : MonoBehaviour
         ShopPanel.SetActive(false);
         notifySuccess.SetActive(false);
         notifyFail.SetActive(false);
+        PlayerController.IsUIOpen = false; // Đánh dấu UI đã đóng
     }
 
 }

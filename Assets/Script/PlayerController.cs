@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
+using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -71,6 +71,8 @@ public class PlayerController : MonoBehaviour
     private bool nearLadder = false;   // Đang đứng gần thang
     private Collider2D currentLadder;  // Lưu lại collider thang hiện tại
     public GameObject bloodEffectPrefab;
+    public static bool IsUIOpen = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -102,6 +104,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
         if (isKnockedBack || isDead) return;
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
@@ -147,7 +151,6 @@ public class PlayerController : MonoBehaviour
 
         HandleAnimation();
         HandleSkills();
-
         if (Input.GetMouseButtonDown(0) && !isBlocking)
         {
             if (Time.time - lastAttackTime >= attackCooldown)
@@ -316,7 +319,7 @@ public class PlayerController : MonoBehaviour
         if (bloodEffectPrefab != null)
         {
             GameObject effect = Instantiate(bloodEffectPrefab, position, Quaternion.identity);
-            Destroy(effect, 1f); // Tự hủy sau 0.5s để tránh rác
+            Destroy(effect, 0.5f); // Tự hủy sau 0.5s để tránh rác
         }
     }
 
