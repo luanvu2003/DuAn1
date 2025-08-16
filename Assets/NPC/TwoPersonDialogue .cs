@@ -81,6 +81,7 @@ public class TwoPersonDialogue : MonoBehaviour
         dialogueStarted = true;
         currentIndex = 0;
         ShowLine(currentIndex);
+        PlayerController.IsUIOpen = true; // Đánh dấu UI đang mở
     }
 
     void ShowLine(int index)
@@ -128,5 +129,6 @@ public class TwoPersonDialogue : MonoBehaviour
         Time.timeScale = 1f; // Tiếp tục game
         playerPanel.SetActive(false);
         enemyPanel.SetActive(false);
+        PlayerController.IsUIOpen = false; // Đánh dấu UI đã đóng
     }
 }

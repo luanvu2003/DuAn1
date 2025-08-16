@@ -48,6 +48,7 @@ public class NPCDanLang : MonoBehaviour
             NPCTalk.SetActive(true);
             currentPart = 0;
             StartCoroutine(TypeText(dialogueParts[currentPart]));
+            PlayerController.IsUIOpen = true; // Đánh dấu UI đang mở
         }
 
         if (NPCTalk.activeSelf && Input.GetKeyDown(KeyCode.Space))
@@ -64,12 +65,14 @@ public class NPCDanLang : MonoBehaviour
                 if (currentPart < dialogueParts.Length)
                 {
                     StartCoroutine(TypeText(dialogueParts[currentPart]));
+                    PlayerController.IsUIOpen = true;
                 }
                 else
                 {
                     dialogueText.text = "";
                     NPCTalk.SetActive(false);
                     ShowComfirmMisson.SetActive(true);
+                    PlayerController.IsUIOpen = true;
                 }
             }
         }
@@ -96,11 +99,13 @@ public class NPCDanLang : MonoBehaviour
         Time.timeScale = 1f;
         ShowComfirmMisson.SetActive(false);
         ShowMisson.SetActive(true);
-
         FindObjectOfType<OpenMisson>()?.AcceptMission();
 
         missionRect.anchoredPosition = new Vector2(slideDistanceRight, missionRect.anchoredPosition.y);
-        StartCoroutine(SlideMission(slideDistanceRight, 0));
+        StartCoroutine(SlideMission(slideDistanceRight, 0, () =>
+        {
+            PlayerController.IsUIOpen = false; // Đánh dấu UI đã đóng
+        }));
     }
 
     // 🔹 Hàm gán cho Button Hide
@@ -117,7 +122,6 @@ public class NPCDanLang : MonoBehaviour
     public void OnClickShow()
     {
         btnShow.gameObject.SetActive(false);
-
         ShowMisson.SetActive(true);
         missionRect.anchoredPosition = new Vector2(slideDistanceRight, missionRect.anchoredPosition.y);
         StartCoroutine(SlideMission(slideDistanceRight, 0));

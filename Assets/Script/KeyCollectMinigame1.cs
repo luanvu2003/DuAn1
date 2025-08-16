@@ -99,6 +99,7 @@ public class ItemCollector : MonoBehaviour
     private void ShowWarning()
     {
         warningPanel.SetActive(true);
+        PlayerController.IsUIOpen = true; // Đóng các UI khác
         StopAllCoroutines();
         StartCoroutine(FadeCanvasGroup(warningCanvasGroup, 0, 1, fadeDuration));
         Time.timeScale = 0f;
@@ -108,6 +109,7 @@ public class ItemCollector : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(FadeOutAndDisable());
+        PlayerController.IsUIOpen = false;
     }
 
     private IEnumerator FadeOutAndDisable()
@@ -155,7 +157,7 @@ public class ItemCollector : MonoBehaviour
         if (infoPanel != null)
         {
             infoPanel.SetActive(true);
-
+            PlayerController.IsUIOpen = true;
             // Chạy hiệu ứng chữ
             if (infoText != null)
             {
@@ -171,6 +173,7 @@ public class ItemCollector : MonoBehaviour
                     infoPanel.SetActive(false);
                     GiveUp.SetActive(true);
                     Time.timeScale = 1f;
+                    PlayerController.IsUIOpen = false;
                 });
             }
         }

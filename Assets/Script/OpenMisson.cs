@@ -12,11 +12,7 @@ public class OpenMisson : MonoBehaviour
         if (isPlayerInRange && !hasAcceptedMission && Input.GetKeyDown(KeyCode.E))
         {
             MissonPanel.SetActive(true);
-
-            // NPCDanLang npc = MissonPanel.GetComponent<NPCDanLang>();
-            // if (npc != null)
-            //     npc.StartDialogue();
-
+            PlayerController.IsUIOpen = true; // Đánh dấu UI đang mở
             Time.timeScale = 0f;
         }
     }
