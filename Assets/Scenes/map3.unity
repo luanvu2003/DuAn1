@@ -9161,7 +9161,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7038129213477642953, guid: ad18bc9e92805574685865f2aaa0bbfd, type: 3}
   firePoint: {fileID: 134316096}
   skillCooldown: 2
-  projectileDamage: 35
+  projectileDamage: 20
   maxHealth: 300
   healthBarOffset: {x: 0, y: 0.6, z: 0}
   jumpForce: 7
