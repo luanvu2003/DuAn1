@@ -11,6 +11,9 @@ TagManager:
   - EnemyFirePoint
   - Attack
   - Ground
+  - Cong
+  - ScoreZone
+  - Cot
   layers:
   - Default
   - TransparentFX

@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 73
       width: 40
       height: 27
-    spriteID: c620cba714603ac45896eaf1efdd7e13
+    spriteID: f9201f9723bc7c14eb1da260aa702d77
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,7 +153,7 @@ ScriptedImporter:
       y: 39
       width: 42
       height: 26
-    spriteID: 962e8533f85c92045995ddde93145764
+    spriteID: f7a230cfe98237a4995356bf04917b35
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -173,7 +173,7 @@ ScriptedImporter:
       y: 4
       width: 42
       height: 27
-    spriteID: 4bddab33952335c4f9ccd6ffbc00c7db
+    spriteID: 0b00e7fba2e0ec649bced47c7ad256dd
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -193,7 +193,7 @@ ScriptedImporter:
       y: 4
       width: 41
       height: 27
-    spriteID: 798382b717c089543824379ffcd4c93d
+    spriteID: 780b1a037bb5f4046995f83fa3d68cf6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -205,8 +205,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1266177044
-    name: Idle
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -219,7 +219,7 @@ ScriptedImporter:
         y: 0
         width: 40
         height: 27
-      spriteId: c620cba714603ac45896eaf1efdd7e13
+      spriteId: f9201f9723bc7c14eb1da260aa702d77
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -228,7 +228,7 @@ ScriptedImporter:
         y: 0
         width: 42
         height: 26
-      spriteId: 962e8533f85c92045995ddde93145764
+      spriteId: f7a230cfe98237a4995356bf04917b35
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -237,7 +237,7 @@ ScriptedImporter:
         y: 0
         width: 42
         height: 27
-      spriteId: 4bddab33952335c4f9ccd6ffbc00c7db
+      spriteId: 0b00e7fba2e0ec649bced47c7ad256dd
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -246,7 +246,7 @@ ScriptedImporter:
         y: 0
         width: 41
         height: 27
-      spriteId: 798382b717c089543824379ffcd4c93d
+      spriteId: 780b1a037bb5f4046995f83fa3d68cf6
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -262,31 +262,7 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 16384
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  generatePhysicsShape: 1
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 48, y: 32}

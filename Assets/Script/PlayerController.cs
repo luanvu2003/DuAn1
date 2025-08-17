@@ -3,14 +3,16 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
+using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 20f;
+    public float jumpForce = 7f;
     public int maxHP = 200;
     public LayerMask groundLayer;
+    private int groundLayerIndex;
     public LayerMask ladderLayer;
+    private int playerLayer;
     private string currentScene;
 
     public Image healthBarImage;
@@ -25,11 +27,24 @@ public class PlayerController : MonoBehaviour
 
     private float lastSkillTime = -999f;
     private bool isCastingSkill = false;
+    [Header("Skill UI")]
+    public Image skill1Fill;
+    public TMP_Text skill1CooldownText;
 
+    public Image skill2Fill;
+    public TMP_Text skill2CooldownText;
+
+    public Image skill3Fill;
+    public TMP_Text skill3CooldownText;
+
+    private float skill1LastTime = -999f;
+    private float skill2LastTime = -999f;
+    private float skill3LastTime = -999f;
     private int currentHP;
     private int score = 0;
     private int coin = 0;
-
+    public float minDamage = 15f;
+    public float maxDamage = 30f;
     private Rigidbody2D rb;
     private Animator animator;
     private BoxCollider2D boxCollider;
@@ -53,6 +68,10 @@ public class PlayerController : MonoBehaviour
     public float knockbackDuration = 0.2f;
     public float knockbackForce = 20f;
     private bool isKnockedBack = false;
+    private bool nearLadder = false;   // Đang đứng gần thang
+    private Collider2D currentLadder;  // Lưu lại collider thang hiện tại
+    public GameObject bloodEffectPrefab;
+    public static bool IsUIOpen = false;
 
     void Start()
     {
@@ -60,7 +79,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         currentScene = SceneManager.GetActiveScene().name;
-
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayerIndex = LayerMask.NameToLayer("Ground");
         if (PlayerPrefs.HasKey("player_hp"))
         {
             currentHP = PlayerPrefs.GetInt("player_hp");
@@ -82,20 +102,55 @@ public class PlayerController : MonoBehaviour
         }
         UpdateUI();
     }
-
     void Update()
     {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return;
         if (isKnockedBack || isDead) return;
 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         inputVertical = Input.GetAxisRaw("Vertical");
 
-        Move();
-        Jump();
-        Climb();
+        // Xử lý bật/tắt leo thang khi bấm E
+        if (nearLadder && Input.GetKeyDown(KeyCode.E))
+        {
+            isClimbing = !isClimbing;
+
+            if (isClimbing)
+            {
+                float ladderX = currentLadder.bounds.center.x;
+                if (Mathf.Abs(transform.position.x - ladderX) < 0.5f)
+                {
+                    transform.position = new Vector3(ladderX, transform.position.y, transform.position.z);
+                }
+
+                rb.gravityScale = 0f;
+                rb.velocity = Vector2.zero;
+                animator.SetBool("isClimbing", true);
+
+                Physics2D.IgnoreLayerCollision(playerLayer, groundLayerIndex, true); // tắt va chạm
+            }
+            else
+            {
+                rb.gravityScale = 1f;
+                animator.SetBool("isClimbing", false);
+
+                Physics2D.IgnoreLayerCollision(playerLayer, groundLayerIndex, false); // bật lại va chạm
+            }
+        }
+
+        if (!isClimbing)
+        {
+            Move();
+            Jump();
+        }
+        else
+        {
+            ClimbLadder();
+        }
+
         HandleAnimation();
         HandleSkills();
-
         if (Input.GetMouseButtonDown(0) && !isBlocking)
         {
             if (Time.time - lastAttackTime >= attackCooldown)
@@ -105,11 +160,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TakeDamage(10, this.transform);
-        }
+        UpdateSkillUI(skill1Fill, skill1CooldownText, skill1LastTime);
+        UpdateSkillUI(skill2Fill, skill2CooldownText, skill2LastTime);
+        UpdateSkillUI(skill3Fill, skill3CooldownText, skill3LastTime);
+    }
+    void ClimbLadder()
+    {
+        float v = Input.GetAxisRaw("Vertical");
+        rb.velocity = new Vector2(0, v * moveSpeed);
     }
     void HandleSkills()
     {
@@ -136,14 +194,26 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (!isCastingSkill && Time.time >= lastSkillTime + skillCooldown)
+        if (!isCastingSkill)
         {
-            if (canUseSkill1 && Input.GetKeyDown(KeyCode.T))
+            if (canUseSkill1 && Time.time >= skill1LastTime + skillCooldown && Input.GetKeyDown(KeyCode.T))
+            {
+                skill1LastTime = Time.time;
                 StartCoroutine(CastSkill(1));
-            else if (canUseSkill2 && Input.GetKeyDown(KeyCode.Y))
+                GetComponent<PlayerAudio>()?.PlaySkill1Sound();
+            }
+            else if (canUseSkill2 && Time.time >= skill2LastTime + skillCooldown && Input.GetKeyDown(KeyCode.Y))
+            {
+                skill2LastTime = Time.time;
                 StartCoroutine(CastSkill(2));
-            else if (canUseSkill3 && Input.GetKeyDown(KeyCode.U))
+                GetComponent<PlayerAudio>()?.PlaySkill2Sound();
+            }
+            else if (canUseSkill3 && Time.time >= skill3LastTime + skillCooldown && Input.GetKeyDown(KeyCode.U))
+            {
+                skill3LastTime = Time.time;
                 StartCoroutine(CastSkill(3));
+                GetComponent<PlayerAudio>()?.PlaySkill3Sound();
+            }
         }
     }
 
@@ -183,66 +253,78 @@ public class PlayerController : MonoBehaviour
     void HandleAnimation()
     {
         bool grounded = IsGrounded();
-        bool running = inputHorizontal != 0;
+        bool running = grounded && inputHorizontal != 0 && !isClimbing;
 
         animator.SetBool("isClimbing", isClimbing);
-
-        if (!grounded)
-        {
-            animator.SetBool("isJumping", true);
-            animator.SetBool("isRunning", false);
-        }
-        else
-        {
-            animator.SetBool("isJumping", false);
-            animator.SetBool("isRunning", running);
-        }
+        animator.SetBool("isJumping", !grounded);
+        animator.SetBool("isRunning", running);
     }
+
 
     void Attack()
     {
         if (isDead) return;
-
         animator.SetTrigger("Attack");
-
+        GetComponent<PlayerAudio>()?.PlayAttackSound();
+    }
+    public void DealDamage()
+    {
+        // Xác định hướng đánh dựa trên facing
         Vector2 attackDir = isFacingRight ? Vector2.right : Vector2.left;
-        Vector3 attackOrigin = attackPoint.position;
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackOrigin + (Vector3)(attackDir * attackRange), attackRange, enemyLayers);
+        // Tìm tất cả enemy trong phạm vi attackRange
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
+            attackPoint.position + (Vector3)(attackDir * attackRange * 0.5f),
+            attackRange,
+            enemyLayers
+        );
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            float damage = Random.Range(15f, 30f);
-            float knockbackForce = 500f;
+            float damage = Random.Range(minDamage, maxDamage);
             Vector2 knockbackDirection = (enemy.transform.position - transform.position).normalized;
 
-            // ✅ Gây damage cho EnemyNormal
+            // EnemyNormal
             if (enemy.TryGetComponent<EnemyNormal>(out var normal))
             {
                 normal.TakeDamage(damage);
-                normal.Knockback(knockbackDirection, knockbackForce);
+                normal.Knockback(knockbackDirection, 500f);
+                ShowHitEffect(enemy.transform.position);
                 AddScore(50);
             }
-            // ✅ Gây damage cho EnemyPatrol
+            // EnemyStrong
             else if (enemy.TryGetComponent<EnemyPatrol>(out var patrol))
             {
                 patrol.TakeDamage(damage);
-                patrol.Knockback(knockbackDirection, knockbackForce);
-                AddScore(50);
+                patrol.Knockback(knockbackDirection, 500f);
+                ShowHitEffect(enemy.transform.position);
+                AddScore(100);
             }
-            // ✅ Gây damage cho Enemy (base)
             else if (enemy.TryGetComponent<Enemy>(out var baseEnemy))
             {
                 baseEnemy.TakeDamage(damage);
-                baseEnemy.Knockback(knockbackDirection, knockbackForce);
+                baseEnemy.Knockback(knockbackDirection, 500f);
+                ShowHitEffect(enemy.transform.position);
                 AddScore(50);
             }
-            // ✅ Gây damage cho BossEnemy (không knockback)
+            // EnemyBoss
             else if (enemy.TryGetComponent<BossEnemy>(out var boss))
             {
                 boss.TakeDamage(damage);
-                AddScore(100);
+                ShowHitEffect(enemy.transform.position);
+                AddScore(200);
             }
+            GetComponent<PlayerAudio>()?.PlayHitSound();
+        }
+    }
+
+    // Tạo hiệu ứng máu tại vị trí va chạm
+    private void ShowHitEffect(Vector3 position)
+    {
+        if (bloodEffectPrefab != null)
+        {
+            GameObject effect = Instantiate(bloodEffectPrefab, position, Quaternion.identity);
+            Destroy(effect, 0.5f); // Tự hủy sau 0.5s để tránh rác
         }
     }
 
@@ -296,9 +378,17 @@ public class PlayerController : MonoBehaviour
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(
+            boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            0f,
+            Vector2.down,
+            0.1f,
+            groundLayer
+        );
         return hit.collider != null;
     }
+
 
     void UpdateUI()
     {
@@ -335,24 +425,42 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (((1 << other.gameObject.layer) & ladderLayer) != 0)
+        {
+            nearLadder = true;
+            currentLadder = other;
+        }
+
         if (other.CompareTag("Coin"))
         {
             AddCoin(1);
             Destroy(other.gameObject);
         }
-
         if (other.CompareTag("Trap"))
         {
             Die();
         }
-
         if (other.CompareTag("EnemyFirePoint"))
         {
             TakeDamage(2, this.transform);
         }
     }
 
-    void OnDrawGizmosSelected()
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (((1 << other.gameObject.layer) & ladderLayer) != 0)
+        {
+            nearLadder = false;
+            currentLadder = null;
+            if (isClimbing)
+            {
+                isClimbing = false;
+                rb.gravityScale = 1f;
+                Physics2D.IgnoreLayerCollision(playerLayer, groundLayerIndex, false); // luôn bật lại
+            }
+        }
+    }
+    private void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
         Gizmos.color = Color.red;
@@ -474,5 +582,21 @@ public class PlayerController : MonoBehaviour
         score = 0;
         coin = 0;
         UpdateUI();
+    }
+    void UpdateSkillUI(Image fillImg, TMP_Text cdText, float lastTime)
+    {
+        if (fillImg == null || cdText == null) return;
+
+        float remaining = (lastTime + skillCooldown) - Time.time;
+        if (remaining > 0)
+        {
+            fillImg.fillAmount = remaining / skillCooldown;
+            cdText.text = Mathf.CeilToInt(remaining).ToString();
+        }
+        else
+        {
+            fillImg.fillAmount = 0;
+            cdText.text = "";
+        }
     }
 }

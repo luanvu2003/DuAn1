@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 35
       height: 34
-    spriteID: 969a45ad1b13faf4f80be7b386091ebd
+    spriteID: 42c0e8488a1c5fe4eae6f1a26dd7553b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,7 +153,7 @@ ScriptedImporter:
       y: 4
       width: 35
       height: 40
-    spriteID: f4d042d289fcc0b46a83cf67f20620af
+    spriteID: 8fb6546f04ff9f5478828b10825200b5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -173,7 +173,7 @@ ScriptedImporter:
       y: 52
       width: 23
       height: 57
-    spriteID: 49548bfd57e41674aa79c0e0885019f8
+    spriteID: a2287c6bca38f664e94e4ab3426e6741
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -193,7 +193,7 @@ ScriptedImporter:
       y: 4
       width: 33
       height: 59
-    spriteID: ad16db007d72a0c46873e0849aa5282d
+    spriteID: cdf903b19e83fb2449bbb01ce316f17c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -205,8 +205,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1280562777
-    name: Jump-Start
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -219,7 +219,7 @@ ScriptedImporter:
         y: 0
         width: 35
         height: 34
-      spriteId: 969a45ad1b13faf4f80be7b386091ebd
+      spriteId: 42c0e8488a1c5fe4eae6f1a26dd7553b
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -228,7 +228,7 @@ ScriptedImporter:
         y: 0
         width: 35
         height: 40
-      spriteId: f4d042d289fcc0b46a83cf67f20620af
+      spriteId: 8fb6546f04ff9f5478828b10825200b5
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -237,7 +237,7 @@ ScriptedImporter:
         y: 1
         width: 23
         height: 57
-      spriteId: 49548bfd57e41674aa79c0e0885019f8
+      spriteId: a2287c6bca38f664e94e4ab3426e6741
     - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
@@ -246,7 +246,7 @@ ScriptedImporter:
         y: 2
         width: 33
         height: 59
-      spriteId: ad16db007d72a0c46873e0849aa5282d
+      spriteId: cdf903b19e83fb2449bbb01ce316f17c
     linkedCells: []
     parentIndex: -1
   platformSettings:

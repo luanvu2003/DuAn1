@@ -13,7 +13,7 @@ public class GoNextMap2 : MonoBehaviour
             {
                 player.SavePlayerProgress(); 
             }
-            PlayerPrefs.SetString("NextScene", "map2");
+            PlayerPrefs.SetString("NextScene", "minigame2");
             SceneManager.LoadScene("Loading");
         }
     }

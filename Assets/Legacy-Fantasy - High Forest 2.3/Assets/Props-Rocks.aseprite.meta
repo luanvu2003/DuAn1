@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 284
       height: 329
-    spriteID: 93508ca58daa67c4b8814ab416cf4c2d
+    spriteID: abf424210a7826e4195e57e057fbe735
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,8 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 2139806385
-    name: Props-Rocks
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -159,7 +159,7 @@ ScriptedImporter:
         y: 7
         width: 284
         height: 329
-      spriteId: 93508ca58daa67c4b8814ab416cf4c2d
+      spriteId: abf424210a7826e4195e57e057fbe735
     linkedCells: []
     parentIndex: -1
   platformSettings:

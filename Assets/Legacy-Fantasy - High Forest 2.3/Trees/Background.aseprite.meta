@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 896
       height: 256
-    spriteID: c52c924763c6daf4a82c920a7f53df75
+    spriteID: c20f536d31a9f084489c11ea57afa732
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,8 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 332801758
-    name: Background
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -159,7 +159,7 @@ ScriptedImporter:
         y: 0
         width: 896
         height: 256
-      spriteId: c52c924763c6daf4a82c920a7f53df75
+      spriteId: c20f536d31a9f084489c11ea57afa732
     linkedCells: []
     parentIndex: -1
   platformSettings:

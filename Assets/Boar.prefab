@@ -151,7 +151,6 @@ GameObject:
   - component: {fileID: 7858025967036474659}
   - component: {fileID: 4508176803392196299}
   - component: {fileID: 5896362429162719559}
-  - component: {fileID: 3098625509946783947}
   m_Layer: 9
   m_Name: Boar
   m_TagString: Enemy
@@ -216,7 +215,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1277457133
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 28112193, guid: 2acc65c3d65e8394494f5837228f6a03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -365,18 +364,6 @@ PolygonCollider2D:
       - {x: 1.2075317, y: -0.12272857}
       - {x: 0.68351704, y: 0.81466377}
   m_UseDelaunayMesh: 0
---- !u!114 &3098625509946783947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6991047286252849550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d67a89e47a1a94ab10025339410001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7247133136050856814
 GameObject:
   m_ObjectHideFlags: 0

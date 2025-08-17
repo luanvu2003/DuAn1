@@ -133,7 +133,7 @@ ScriptedImporter:
       y: 4
       width: 496
       height: 272
-    spriteID: 9b222331211586c46a096ed5fb5e763c
+    spriteID: a885420a59a89464ca958772aec56b75
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -145,8 +145,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -314905845
-    name: Test_city_2
+    guid: 0
+    name: 
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -159,7 +159,7 @@ ScriptedImporter:
         y: 0
         width: 496
         height: 272
-      spriteId: 9b222331211586c46a096ed5fb5e763c
+      spriteId: a885420a59a89464ca958772aec56b75
     linkedCells: []
     parentIndex: -1
   platformSettings:
